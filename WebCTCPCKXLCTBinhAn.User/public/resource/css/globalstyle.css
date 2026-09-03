@@ -1,0 +1,400 @@
+.chantrang {
+    background: #000000;
+    position: relative;
+    padding: 50px 50px;
+    overflow: hidden;
+}
+
+.trang-tri {
+    position: absolute;
+    width: 1053px;
+    height: 390px;
+    bottom: 0;
+    right: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.gradient-a,
+.gradient-b {
+    opacity: 0.3;
+    background: linear-gradient(45deg, #0100ff, #00e1ff);
+    background-size: cover;
+    width: 50%;
+    height: 40%;
+    position: absolute;
+    filter: blur(70px);
+    transform: rotate(-21deg);
+}
+
+.chantrang-item {
+    margin: 50px 0;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgb(55 52 52), transparent);
+    margin: 24px 0;
+}
+
+.gradient-a {
+    top: 346px;
+    right: -309px;
+    height: 46%;
+}
+
+.gradient-b {
+    left: -45px;
+    bottom: -45px;
+}
+
+.chu-chan-trang {
+    margin: 5px 0;
+}
+
+.tieu-de-chan-trang {
+    color: #adaebd;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.noi-dung-chan-trang {
+    font-weight: 200;
+}
+
+.card-item {
+    width: 323px;
+    height: 605px;
+    margin: 0 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.card-item:hover {
+    transform: translateY(-10px) scale(1.01);
+    transition: all .3s linear;
+}
+
+
+
+
+
+.card-item-content {
+    position: absolute;
+    bottom: 50px;
+    margin: 0 50px;
+    color: white;
+    z-index: 2;
+}
+
+.icon-muiten {
+    color: white;
+    margin-left: 10px;
+}
+
+.card-direction {
+    display: flex;
+    align-items: center;
+}
+
+.card-title {
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+
+
+.card-container .card-item:nth-child(odd) {
+    clip-path: polygon(0 0, 100% 5%, 100% 95%, 0 100%);
+}
+
+.card-container .card-item:nth-child(even) {
+    clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 95%);
+}
+
+/*ẩn thanh cuộn */
+.no-scrollbar {
+
+    /* Cho Chrome, Safari, Edge mới */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Cho Firefox */
+    scrollbar-width: none;
+
+    /* Cho IE và Edge cũ (tùy chọn) */
+    -ms-overflow-style: none;
+}
+
+.nangluc-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.nangluc-container {
+    background: #faf4ec;
+    padding: 50px 0;
+}
+
+.title {
+    font-size: 45px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+.logo-footer {
+    margin: 10px;
+}
+
+.chantrang-lien-he {
+    display: flex;
+    justify-content: end;
+}
+
+/* <!-- các cột mốc phát triển --> */
+.cot-moc-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 50px 0;
+}
+
+.cot-moc-item {
+    padding: 50px;
+    background: #00000057;
+    border-radius: 5px;
+    margin: 0px 50px 50px 50px;
+    backdrop-filter: blur(5px);
+}
+
+.cot-moc-item-title {
+    position: relative;
+}
+
+.l-6:nth-child(odd) .cot-moc-item-title {
+    text-align: right;
+    margin-right: 50px;
+}
+
+.l-6:nth-child(even) .cot-moc-item-title {
+    text-align: left;
+    margin-left: 50px;
+}
+
+.cot-moc-item-title::before {
+    content: '';
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 3px solid white;
+    background: blue;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.l-6:nth-child(odd) .cot-moc-item-title::before {
+    right: -59.5px;
+    left: auto;
+}
+
+.l-6:nth-child(even) .cot-moc-item-title::before {
+    left: -59.5px;
+    right: auto;
+}
+
+
+.cot-moc-container {
+    background: url(../images/cotmoc.png) center / cover no-repeat;
+    color: white;
+}
+
+.time-stream-container {
+    position: relative;
+}
+
+.time-stream-container::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    background: white;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+
+/* <!-- hết các cột mốc phát triển --> */
+
+/* Phần menu */
+.header {
+    position: fixed;
+    z-index: 10;
+    background: linear-gradient(45deg, #ffffff12, #ffffff17);
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(3px);
+    border: 1px solid #fff6f652;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50px;
+    color: white;
+    width: 95%;
+}
+
+.header-between li a {
+    color: white;
+}
+
+.header-between li:hover a {
+    background: rgba(0, 0, 0, 0.262);
+    color: white;
+    border-radius: 5px;
+}
+
+/* hết Phần menu */
+
+
+
+
+
+
+
+/* dùng chung */
+.chu-tieude {
+    font-size: 30px;
+}
+
+.chu-noidung {
+    font-size: 16px;
+}
+
+.chu-lon {
+    font-size: 35px;
+}
+
+.chu-trang {
+    color: white;
+}
+
+.d-flex-d {
+    display: flex;
+    flex-direction: column;
+}
+
+.d-flex-n {
+    display: flex;
+}
+
+.style-a {
+    text-decoration: none;
+}
+
+.flex-footer {
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.button {
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    background: linear-gradient(45deg, #0004ff, #00ffd7);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: linear-gradient(45deg, #ff0000, #ff00ee);
+
+}
+
+.center-d {
+    display: flex;
+    align-items: center;
+}
+
+.margin-left {
+    margin-left: 20px;
+}
+
+.text-truncate-2,
+.text-truncate-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.text-truncate-2 {
+    -webkit-line-clamp: 2;
+}
+
+.chu-den {
+    color: black;
+}
+
+/* responsive */
+
+/* 1113px */
+@media (min-width: 69.5625em) {}
+
+/* pc low 1024px - 1239px*/
+@media (min-width: 64em) and (max-width: 77.4375em) {}
+
+/* tablet 740px - 1023px*/
+@media (min-width: 46.25em) and (max-width: 63.9375em) {}
+
+/* <= 740px*/
+@media (max-width: 46.25em) {
+    .time-stream-container::before {
+        left: 10px;
+    }
+
+    .l-6:nth-child(odd) .cot-moc-item-title::before {
+        right: auto;
+        left: -50px;
+    }
+
+    .l-6:nth-child(even) .cot-moc-item-title::before {
+        left: -49px;
+        right: 0px;
+    }
+
+    .l-6:nth-child(odd) .cot-moc-item-title {
+        margin-left: 50px;
+        text-align: left;
+    }
+
+    .cot-moc-item-title {
+        margin: 10px 0;
+    }
+}
+
+
+
+/* hết responsive */

@@ -1,0 +1,50 @@
+{
+    "MAIN_LAYOUT": {
+        "NAV": {
+            "HOME": "Home",
+            "ABOUT": "About",
+            "SERVICES": "Services",
+            "PROJECTS": "Projects",
+            "CONTACT": "Contact",
+            "CAREERS": "Careers"
+        },
+        "SEARCH_PLACEHOLDER": "Search...",
+        "FOOTER": {
+            "TAGLINE": "Construction experts since 2017",
+            "CONTACT": "Contact",
+            "SLOGAN": "Building for life",
+            "COPYRIGHT": "© 2026 Binh An Construction Mechanical Installation Joint Stock Company",
+            "ADDRESS": "Address",
+            "EMAIL": "Email",
+            "SOLUTIONS": "Our Main Solutions"
+        }
+    },
+    "SELECT_LANG": "Select Language",
+    "HEADER": {
+        "HOME": "Home",
+        "ABOUT_US": "About Us",
+        "CORE_SERVICES": "Core Services",
+        "PROJECTS": "Projects",
+        "CONTACT": "Contact",
+        "CAREERS": "Careers"
+    },
+    "PROJECTS": {
+        "TITLE": "Projects",
+        "VIEW_ALL": "View All",
+        "SEE_MORE": "See More",
+        "KEY_PROJECTS": "KEY PROJECTS OF Binh An",
+        "DESCRIPTION": "Our company boasts a team of highly experienced engineers and mechanical specialists, supported by modern machinery, to effectively meet requirements for machining, fabrication, installation, and equipment maintenance. We are committed to delivering quality, adhering to schedules, and providing optimal solutions for our clients.",
+        "NO_PROJECTS": "No projects found."
+    },
+    "ABOUT_US": {
+        "BRIEF_HISTORY": "Brief History",
+        "DEVELOPMENT_MILESTONES": "Development Milestones"
+    },
+    "HOME": {
+        "INTRODUCTION": "Introduction",
+        "SOLUTIONS": "Our Main Solutions",
+        "SCHEDULE_AND_SAFETY": "Schedule & Absolute Safety",
+        "EXPERIENCE": "Years of Experience",
+        "KEY_PROJECTS": "Key Projects"
+    }
+}

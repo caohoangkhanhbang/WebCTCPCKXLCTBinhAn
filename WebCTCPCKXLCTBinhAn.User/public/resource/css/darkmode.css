@@ -1,0 +1,11 @@
+:root {
+    --background-color: white;
+    --text-color: black;
+    color-scheme: light;
+}
+
+html.dark {
+    --background-color: black;
+    --text-color: white;
+    color-scheme: dark;
+}

@@ -1,0 +1,24 @@
+.select-language {
+    background: none;
+    padding: 10px;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+/* (Tùy chọn) Quy định màu sắc cho các chữ hiển thị bên trong menu danh sách xổ xuống */
+.select-language option {
+    color: black;
+}
+
+.icon-language {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+}
+
+.language-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,1 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('../public/resource/css/base.css');
+@import url('../public/resource/css/kbstyle.css');
+@import url('../public/resource/css/globalstyle.css');
+@import url('../public/resource/css/darkmode.css');

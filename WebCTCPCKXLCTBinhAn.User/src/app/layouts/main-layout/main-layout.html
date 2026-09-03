@@ -1,0 +1,88 @@
+<header class="header">
+    <div class="header-left">
+        <img [src]="cdnUrl + '/' + thongTinCty()?.logo" [alt]="thongTinCty()?.ten_cong_ty" class="logo-header">
+    </div>
+    <div>
+        <ul class="header-between">
+            <li><a routerLink="/">{{'HEADER.HOME' | translate}}</a></li>
+            <li><a routerLink="/gioi-thieu">{{'HEADER.ABOUT_US' | translate}}</a></li>
+            <li><a routerLink="/linh-vuc-hoat-dong">{{'HEADER.CORE_SERVICES' | translate}}</a></li>
+            <li><a routerLink="/du-an">{{'HEADER.PROJECTS' | translate}}</a></li>
+            <li><a routerLink="/lien-he">{{'HEADER.CONTACT' | translate}}</a></li>
+            <li><a routerLink="/tuyen-dung">{{'HEADER.CAREERS' | translate}}</a></li>
+        </ul>
+    </div>
+    <div class="header-right">
+        <input class="header-search" type="text" placeholder="{{'MAIN_LAYOUT.SEARCH_PLACEHOLDER' | translate}}"
+            (keyup.enter)="onSearch()" [ngModel]="searchQuery()" (ngModelChange)="searchQuery.set($event)" />
+
+        <a (click)="onSearch()" class="style-a noi-dung-chan-trang header-search-button kbcenter">
+            <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="lucide lucide-search-icon lucide-search">
+                <path d="m21 21-4.34-4.34" />
+                <circle cx="11" cy="11" r="8" />
+            </svg>
+        </a>
+    </div>
+    <app-language-selector></app-language-selector>
+</header>
+
+<main class="content"></main>
+
+<router-outlet></router-outlet>
+
+
+<!-- Phần chân trang -->
+<div class="chantrang">
+    <div class="gradient-a" style="z-index: 1;"></div>
+    <div class="gradient-b" style="z-index: 1;"></div>
+    <div class="trang-tri" style="background: url('./resource/images/chantrang.svg');"></div>
+    <div class="d-flex-n flex-footer row">
+        <div class="l-6 m-6 c-12">
+            <h1 class="chu-noidung chu-trang bold chu-lon">{{'MAIN_LAYOUT.FOOTER.TAGLINE'|translate}}</h1>
+        </div>
+        <div class="l-6 m-6 c-12 chantrang-lien-he">
+            <button type="submit" class="button" style="z-index: 2;">{{'MAIN_LAYOUT.FOOTER.CONTACT'|translate}}</button>
+        </div>
+    </div>
+    <hr>
+    <div class="d-flex-n">
+
+        <div class="row">
+
+            @for(group of groupGiaiPhap(); track $index){
+            <div class="col l-3 m-4 c-12">
+                <div class="d-flex-d chantrang-item">
+                    <h4 class="tieu-de-chan-trang chu-noidung">{{'MAIN_LAYOUT.FOOTER.SOLUTIONS'|translate}}</h4>
+                    @for(item of group; track $index){
+                    <p class="style-a noi-dung-chan-trang chu-noidung chu-trang chu-chan-trang">{{item.giai_phap}}</p>
+                    }
+                </div>
+            </div>
+            }
+
+            <div class="col l-3 m-4 c-12">
+                <div class="d-flex-d chantrang-item">
+                    <h4 class="tieu-de-chan-trang chu-noidung">{{'MAIN_LAYOUT.FOOTER.CONTACT' | translate}}</h4>
+                    <div class="style-a noi-dung-chan-trang chu-noidung chu-trang chu-chan-trang">
+                        {{'MAIN_LAYOUT.FOOTER.ADDRESS' | translate}}: {{thongTinCty()?.dia_chi}}</div>
+                    <a href="mailto:binhanxlct@gmail.com"
+                        class="style-a noi-dung-chan-trang chu-noidung chu-trang chu-chan-trang">{{'MAIN_LAYOUT.FOOTER.EMAIL'
+                        | translate}}:
+                        {{thongTinCty()?.email}}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <hr>
+    <div class="d-flex-n flex-footer" style="z-index: 2;">
+        <img [src]="cdnUrl + '/' + thongTinCty()?.logo" [alt]="thongTinCty()?.ten_cong_ty" class="logo-footer">
+        <h1 class="chu-noidung chu-trang chu-lon bold">{{'MAIN_LAYOUT.FOOTER.SLOGAN' | translate}}</h1>
+    </div>
+    <h6 class="chu-noidung chu-trang">{{'MAIN_LAYOUT.FOOTER.COPYRIGHT' | translate}}</h6>
+
+</div>
+
+<!-- Hết chân trang -->

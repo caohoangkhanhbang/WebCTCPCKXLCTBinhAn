@@ -1,0 +1,33 @@
+<div class=""></div>
+<!-- các cột mốc phát triển -->
+<div class="cot-moc-container">
+    <div class="grid wide">
+        <div class="row">
+            <div class="l-12 m-12 c-12 cot-moc-title">
+                <h4 style="margin-bottom: 20px;">{{'ABOUT_US.BRIEF_HISTORY' | translate}} {{thongTinCty()?.ten_cty}}
+                </h4>
+                <h1>{{'ABOUT_US.DEVELOPMENT_MILESTONES' | translate}}</h1>
+            </div>
+            <div class="time-stream-container row">
+                @for(item of cacCotMoc(); track item.id || $index; let i = $index){
+                @if(i % 2 === 0){
+                <div class="l-6 m-6 c-12">
+                    <h2 class="cot-moc-item-title">{{item.thoi_gian}}</h2>
+                </div>
+                <div class="l-6 m-6 c-12">
+                    <div class="cot-moc-item" [innerHtml]="item.noi_dung"></div>
+                </div>
+                } @else {
+                <div class="l-6 m-6 c-12">
+                    <div class="cot-moc-item" [innerHtml]="item.noi_dung"></div>
+                </div>
+                <div class="l-6 m-6 c-12">
+                    <h2 class="cot-moc-item-title">{{item.thoi_gian}}</h2>
+                </div>
+                }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- hết các cột mốc phát triển -->

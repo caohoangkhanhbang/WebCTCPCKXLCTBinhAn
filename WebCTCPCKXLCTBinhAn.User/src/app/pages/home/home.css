@@ -1,0 +1,226 @@
+.image-du-an {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.gioi-thieu-container {
+    padding: 100px 0;
+    color: #181717;
+    text-align: justify;
+    line-height: 1.5;
+}
+
+.font-bold {
+    font-weight: 1000;
+}
+
+.gioi-thieu-image {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.gioi-thieu-image-item {
+    height: 50vh;
+    object-fit: cover;
+    object-position: center;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.card-container {
+    background: rgb(223, 223, 223);
+    position: relative;
+    overflow: hidden;
+}
+
+.blur-container {
+    position: relative;
+    overflow-x: scroll;
+    width: 100%;
+    padding: 100px 50px;
+    z-index: 2;
+}
+
+.box-b,
+.box-a {
+    position: absolute;
+
+    width: 37%;
+    height: 66%;
+    background: linear-gradient(45deg, #0016ff, #d800ff);
+    filter: blur(55px);
+    border-radius: 50%;
+}
+
+.box-a {
+    top: -27%;
+    left: -8%;
+}
+
+.box-b {
+    background: linear-gradient(45deg, #0016ff, #00ff2a);
+    bottom: 0;
+    right: -8%;
+}
+
+.nangluc-item-img {
+    height: 233px;
+    width: 100%;
+    object-fit: cover;
+    background: #93939385;
+}
+
+.nangluc-item-conten {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nangluc-item {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+
+.nangluc-item-container {
+    padding: 20px;
+    min-height: 243px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nangluc-direction {
+    font-weight: bold;
+}
+
+.button-xem-them {
+    width: 100%;
+    background: linear-gradient(45deg, #00e3ff, #6400ff, #00e3ff);
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
+    border-radius: 5px;
+    color: white;
+}
+
+.button-xem-all {
+    background: linear-gradient(45deg, #ff0000, #ff00d1);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    min-width: 155px;
+}
+
+.button-xem-all:hover {
+    background: linear-gradient(45deg, #00e3ff, #6400ff, #00e3ff);
+    transition: all 0.2s linear;
+    color: white;
+}
+
+.nangluc-content {
+    font-weight: 300;
+}
+
+.nangluc-item:hover .nangluc-item-img {
+    transform: scale(1.01);
+    transition: all 0.2s linear;
+}
+
+.card-background-blur {
+    background: linear-gradient(180deg, #00000000, #000000);
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    z-index: 1;
+}
+
+.giai-phap-titile-top {
+    text-align: center;
+    padding: 50px 0 13px;
+    font-size: 48px;
+    font-weight: bold;
+    font-style: oblique;
+    background: linear-gradient(45deg, #05ffb2, #003cff, #ff00ee);
+    background-clip: text;
+    color: transparent;
+    position: absolute;
+    left: 50%;
+    top: -20px;
+    transform: translateX(-50%);
+}
+
+/* phần slide */
+.slide-container {
+    height: 100vh;
+    background: rgb(60, 0, 255);
+    position: relative;
+    color: white;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.slide-container::before {
+    content: "";
+    background: linear-gradient(90deg, #000000, transparent);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+
+
+.slide-container .row {
+    height: 100%;
+}
+
+.slide-content {
+    width: 100%;
+    height: 100%;
+    padding: 20%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+    flex-direction: column;
+    position: relative;
+}
+
+.slide-company {
+    font-size: 50px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #0033ff, #00ffd9);
+    background-clip: text;
+    color: transparent;
+}
+
+.slide-glogan {
+    font-size: 22px;
+    margin: 15px 0;
+
+}
+
+.slide-sumary {}
+
+.slide-number {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.slide-number-container {
+    margin: 20px 0;
+}
+
+/* hết phần slide */

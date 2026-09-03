@@ -1,0 +1,8 @@
+.theme-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--text-color);
+    background: var(--background-color);
+    color: var(--text-color);
+    cursor: pointer;
+}

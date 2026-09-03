@@ -1,0 +1,7 @@
+<button (click)="themeService.toggleTheme()" class="theme-btn">
+    @if (themeService.currentTheme() === 'light') {
+    <span>🌙 Chuyển sang Dark Mode</span>
+    } @else {
+    <span>☀️ Chuyển sang Light Mode</span>
+    }
+</button>

@@ -1,0 +1,21 @@
+<div class="slider-container" (mouseenter)="stopAutoPlay()" (mouseleave)="startAutoPlay()">
+
+    <div class="slider-track" [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'"
+        [style.transition]="isTransitioning ? 'transform 0.5s ease-in-out' : 'none'"
+        (transitionend)="onTransitionEnd()">
+
+        @for(slide of extendedSlides; track slide.id){
+        <div class="slide-item">
+            <img [src]="cdnUrl + '/' + slide.hinh" [alt]="slide.noi_dung" />
+            <div class="slide-modify-container">
+                <div class="title">{{ slide.noi_dung }}</div>
+                <div class="modify">{{ slide.bo_nghia }}</div>
+            </div>
+
+        </div>
+        }
+    </div>
+
+    <button class="nav-btn prev" (click)="onManualPrev()">&#10094;</button>
+    <button class="nav-btn next" (click)="onManualNext()">&#10095;</button>
+</div>

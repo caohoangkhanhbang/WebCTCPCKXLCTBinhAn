@@ -1,0 +1,51 @@
+<div class="nangluc-container ">
+    <div class="grid wide">
+        <div class="row">
+            <div class="nangluc-top l-12 m-12 c-12">
+                <div class=" title">{{'PROJECTS.TITLE' | translate}}</div>
+            </div>
+
+            <div class="nangluc-bottom l-12 m-12 c-12">
+                <div class="row">
+
+                    @for(item of data(); track item.id){
+                    <div class="col l-3 m-3 c-12">
+                        <div class="nangluc-item ">
+                            <a class="style-a nangluc-item-conten" [routerLink]="['/du-an', item.id]">
+                                <img class="nangluc-item-img" [src]="cdnUrl + '/' + item.hinh"
+                                    alt="{{item.ten_du_an}}" />
+                                <div class="nangluc-item-container">
+                                    <h2 class="nangluc-title text-truncate-2">{{item.ten_du_an}}</h2>
+                                    <h4 class="nangluc-content text-truncate-4 ">{{item.bo_nghia}}</h4>
+                                    <h4 class="nangluc-direction center-d button-xem-them">{{'PROJECTS.SEE_MORE' |
+                                        translate}}
+                                        <svg class="margin-left" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-arrow-right-icon lucide-arrow-right">
+                                            <path d="M5 12h14" />
+                                            <path d="m12 5 7 7-7 7" />
+                                        </svg>
+                                    </h4>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    }
+                    @empty {
+                    <div class="col l-12 m-12 c-12">
+                        <div class="nangluc-item ">
+                            <div class="nangluc-item-conten">
+                                <h2 class="nangluc-title text-truncate-2">{{'PROJECTS.NO_PROJECTS' | translate}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hết Phần content -->

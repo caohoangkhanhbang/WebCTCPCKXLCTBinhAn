@@ -1,0 +1,50 @@
+{
+    "MAIN_LAYOUT": {
+        "NAV": {
+            "HOME": "Trang chủ",
+            "ABOUT": "Giới thiệu",
+            "SERVICES": "Lĩnh vực hoạt động",
+            "PROJECTS": "Dự án",
+            "CONTACT": "Liên hệ",
+            "CAREERS": "Tuyển dụng"
+        },
+        "SEARCH_PLACEHOLDER": "Tìm kiếm...",
+        "FOOTER": {
+            "TAGLINE": "CHUYÊN GIA XÂY DỰNG TỪ NĂM 2017",
+            "CONTACT": "Liên hệ",
+            "SLOGAN": "XÂY DỰNG CHO CUỘC SỐNG",
+            "COPYRIGHT": "© 2026 CÔNG TY CỔ PHẦN CƠ KHÍ XÂY LẮP CÔNG TRÌNH BÌNH AN",
+            "ADDRESS": "Địa chỉ",
+            "EMAIL": "Email",
+            "SOLUTIONS": "Giải pháp chính của chúng tôi"
+        }
+    },
+    "SELECT_LANG": "Chọn Ngôn ngữ",
+    "HEADER": {
+        "HOME": "Trang chủ",
+        "ABOUT_US": "Giới thiệu",
+        "CORE_SERVICES": "Lĩnh vực hoạt động",
+        "PROJECTS": "Dự án",
+        "CONTACT": "Liên hệ",
+        "CAREERS": "Tuyển dụng"
+    },
+    "PROJECTS": {
+        "TITLE": "Các dự án",
+        "VIEW_ALL": "Xem tất cả",
+        "SEE_MORE": "Xem thêm",
+        "KEY_PROJECTS": "CÁC DỰ ÁN TIÊU BIỂU CỦA BÌNH AN",
+        "DESCRIPTION": "Công ty chúng tôi sở hữu đội ngũ kỹ sư và chuyên gia cơ khí giàu kinh nghiệm, cùng hệ thống máy móc hiện đại, đáp ứng hiệu quả các yêu cầu về gia công, chế tạo, lắp đặt và bảo trì thiết bị. Chúng tôi cam kết chất lượng, tiến độ và giải pháp tối ưu cho khách hàng.",
+        "NO_PROJECTS": "Không tìm thấy dự án nào."
+    },
+    "ABOUT_US": {
+        "BRIEF_HISTORY": "Lược sử",
+        "DEVELOPMENT_MILESTONES": "Các cột mốc phát triển"
+    },
+    "HOME": {
+        "INTRODUCTION": "Giới thiệu",
+        "SOLUTIONS": "Giải pháp chính của chúng tôi",
+        "SCHEDULE_AND_SAFETY": "Tiến độ & An toàn tuyệt đối",
+        "EXPERIENCE": "Năm kinh nghiệm",
+        "KEY_PROJECTS": "Dự án trọng điểm"
+    }
+}

@@ -1,0 +1,115 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-thin);
+    font-weight: 500;
+}
+
+:root {
+    --font-bold: 'Calsans';
+    --font-thin: 'RobotoFlex';
+}
+
+@font-face {
+    font-family: 'Calsans';
+    src: url('../font/Cal_Sans/CalSans-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'RobotoFlex';
+    src: url('../font/Roboto_Flex/RobotoFlex-VariableFont_GRAD\,XOPQ\,XTRA\,YOPQ\,YTAS\,YTDE\,YTFI\,YTLC\,YTUC\,opsz\,slnt\,wdth\,wght.ttf');
+}
+
+.kbcenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-header {
+    /* width: 43px; */
+    height: 43px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(0, 0, 0, 0.073);
+    padding: 10px 3vw;
+}
+
+.header-between {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.header-between a {
+    text-decoration: none;
+    color: black;
+    padding: 15px;
+}
+
+.header-search {
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #ffffff;
+    padding: 0 17px;
+    padding-right: 40px;
+    background: linear-gradient(45deg, #ffffff26, #ffffff30);
+}
+
+.header-search:focus {
+    outline: none;
+}
+
+.header-right {
+    position: relative;
+}
+
+.header-search-icon {
+    font-size: 16px;
+}
+
+.header-search-button {
+    position: absolute;
+    top: 50%;
+    right: 3px;
+    transform: translateY(-50%);
+    border-radius: 100px;
+    width: 33px;
+    height: 33px;
+    display: flex;
+    color: white;
+    background: linear-gradient(45deg, #0100ff, #00e1ff);
+}
+
+.company-logo,
+.company-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.company-name-items {
+    flex-direction: column;
+    display: flex;
+}
+
+
+
+.company-logo {}
+
+.company-logo-ba {
+    background: url('../images/logoCHKB.png') no-repeat center/contain;
+    width: 200px;
+    padding-top: 100px;
+}
+
+.footer {
+    /* background: url(); */
+}
