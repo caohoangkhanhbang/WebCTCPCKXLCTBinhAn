@@ -1,0 +1,106 @@
+.du-an-ct-top {
+    background: #9f00ff no-repeat center / cover;
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+.du-an-ct-content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.duan-modifier-createddate,
+.duan-title,
+.duan-modifier {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.duan-title {
+    font-size: 50px;
+}
+
+.duan-modifier {
+    text-align: justify;
+    font-style: italic;
+}
+
+.duan-item-img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+    margin: 50px 0;
+}
+
+.duan-content-main {
+    width: 100%;
+    text-align: justify;
+}
+
+.title-general-detail {
+    font-size: 45px;
+    color: white;
+    font-weight: bold;
+}
+
+.title-general {
+    font-size: 14px;
+    color: white;
+}
+
+.navigate-duan {
+    color: blue;
+    cursor: pointer;
+}
+
+.duan-content-main-getway {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0;
+    align-items: center;
+}
+
+.duan-content-main-getway {
+    margin: 50px 0;
+
+}
+
+.icon-share-duan {
+    margin-left: 10px;
+}
+
+.share-duan {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.duan-info-container {
+    margin: 20px 0 20px 20px;
+    padding-left: 20px;
+    /* border-left: 3px solid #ff00f0; */
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.duan-contact {
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #ff00af, #ff0000);
+    color: white;
+    border-radius: 79px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.style-hr {
+    background: #c4c4c4;
+    border: none;
+    height: 2px;
+    width: 100%;
+    margin: 60px 0;
+}

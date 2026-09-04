@@ -1,3 +1,10 @@
 .header-search-button:hover {
     cursor: pointer;
 }
+
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, transparent, rgb(55 52 52), transparent);
+    margin: 24px 0;
+}

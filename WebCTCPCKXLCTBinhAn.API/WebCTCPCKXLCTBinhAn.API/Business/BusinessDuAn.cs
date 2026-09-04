@@ -7,7 +7,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
     public class BusinessDuAn(IConnectionService connectionService)
     {
         private readonly IConnectionService _connectionService = connectionService;
-        public async Task<List<DuAn>> GetDuAn(string? query)
+        public async Task<List<DuAn>> GetDuAn(string? query)//thêm phân trang
         {
             List<DuAn> lst = new List<DuAn>();
             string whereClause = "";
@@ -15,13 +15,12 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
             {
                 whereClause = "and ten_du_an ilike @query or noi_dung ilike @query or bo_nghia ilike @query or ten_du_an_ta ilike @query or noi_dung_ta ilike @query or bo_nghia_ta ilike @query";
             }
-            string sql = @"SELECT da.id, ten_du_an, bo_nghia,
+            string sql = @"SELECT id, ten_du_an, bo_nghia,
                                     noi_dung, hinh, ten_du_an_ta,
-                                    bo_nghia_ta, noi_dung_ta, da.loai_du_an
-                            FROM public.du_an da    
-                            inner join loai_du_an lda on da.loai_du_an = lda.id 
-                            where  da.hien_thi = true "+ whereClause + @"
-                            ORDER BY da.id desc LIMIT 10";
+                                    bo_nghia_ta, noi_dung_ta, loai_du_an
+                            FROM public.du_an  
+                            where  hien_thi = true "+ whereClause + @"
+                            ORDER BY id desc LIMIT 10";
             await using var con = new NpgsqlConnection(_connectionService.GetConnectionString());
             await using var cmd = new NpgsqlCommand(sql, con);
             cmd.Parameters.AddWithValue("@query", $"%{query}%");
@@ -46,13 +45,12 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
 
         public async Task<DuAn> GetDuAnChiTiet(int id)
         {
-            string sql = @"SELECT da.id, ten_du_an, bo_nghia,
+            string sql = @"SELECT id, ten_du_an, bo_nghia,
                                     noi_dung, hinh, ten_du_an_ta,
-                                    bo_nghia_ta, noi_dung_ta, da.loai_du_an
-                            FROM public.du_an da    
-                            inner join loai_du_an lda on da.loai_du_an = lda.id 
-                            where  da.hien_thi = true and da.id = @id 
-                            ORDER BY da.id desc LIMIT 1";
+                                    bo_nghia_ta, noi_dung_ta, loai_du_an, created_date
+                            FROM public.du_an 
+                            where  hien_thi = true and id = @id 
+                            ORDER BY id desc LIMIT 1";
             await using var con = new NpgsqlConnection(_connectionService.GetConnectionString());
             await using var cmd = new NpgsqlCommand(sql, con);
             cmd.Parameters.AddWithValue("@id", id);
@@ -69,7 +67,8 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
                     hinh = reader["hinh"] != DBNull.Value ? reader["hinh"].ToString() : string.Empty,
                     ten_du_an_ta = reader["ten_du_an_ta"] != DBNull.Value ? reader["ten_du_an_ta"].ToString() : string.Empty,
                     bo_nghia_ta = reader["bo_nghia_ta"] != DBNull.Value ? reader["bo_nghia_ta"].ToString() : string.Empty,
-                    noi_dung_ta = reader["noi_dung_ta"] != DBNull.Value ? reader["noi_dung_ta"].ToString() : string.Empty
+                    noi_dung_ta = reader["noi_dung_ta"] != DBNull.Value ? reader["noi_dung_ta"].ToString() : string.Empty,
+                    created_date = reader["created_date"] != DBNull.Value ? (DateOnly?)reader["created_date"] : null
                 };
             }
             return new DuAn();

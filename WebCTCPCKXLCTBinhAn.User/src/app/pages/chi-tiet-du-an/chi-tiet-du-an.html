@@ -1,1 +1,70 @@
-<h1>Mai làm</h1>
+<div class="du-an-ct-container">
+    <div class="du-an-ct-top" [style.background-image]="'url(' + cdnUrl + '/' + data()?.hinh + ')'">
+        <div class="grid wide">
+            <div class="du-an-ct-content">
+                <div class="title-general">{{'PROJECT_DETAILS.PROJECT' | translate}}</div>
+                <div class="title-general-detail">{{'PROJECT_DETAILS.PROJECT_DETAILS' | translate}}</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="grid wide">
+    <div class="row">
+        <div class="l-12 m-12 c-12">
+            <div class="du-an-content-title">
+                <h4 class="duan-modifier-createddate">{{'PROJECT_DETAILS.DATE_POSTED' | translate}}:
+                    {{data()?.created_date | date:'dd/MM/yyyy'}}</h4>
+                <h2 class="duan-title">{{data()?.ten_du_an}}</h2>
+                <h4 class="duan-modifier">{{data()?.bo_nghia}}</h4>
+            </div>
+        </div>
+        <div class="l-12 m-12 c-12">
+            <img class="duan-item-img" width="80%" [src]="cdnUrl + '/' + data()?.hinh" alt="{{data()?.ten_du_an}}" />
+        </div>
+        <div class="l-8 m-8 c-12">
+            <div class="duan-content-main" [innerHTML]="data()?.noi_dung"></div>
+            <div class="duan-content-main-getway">
+                <div class="navigate-duan" routerLink="/du-an">&#10094; {{'PROJECT_DETAILS.BACK_TO_PROJECTS' |
+                    translate}}</div>
+                <div class="share-duan">
+                    <span class="share-duan-title">{{'PROJECT_DETAILS.SHARE_PROJECT' | translate}}:</span>
+                    <a class="icon-share-duan" [href]="facebookUrl()" target="_blank">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="30px" />
+                    </a>
+                    <a class="icon-share-duan" [href]="zaloShareUrl()" target="_blank">
+                        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="30px" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="l-4 m-4 c-12">
+            <div class="duan-info-container">
+                <!-- //xóa -->
+                <div class="duan-info-item">
+                    <div class="duan-info-item-title">{{'PROJECT_DETAILS.CONSTRUCTION_SCOPE' | translate}}:</div>
+                    <div class="duan-info-item-content">{{data()?.hang_muc_thi_cong}}</div>
+                </div>
+                <div class="duan-info-item">
+                    <div class="duan-info-item-title">{{'PROJECT_DETAILS.PROJECT_OWNER' | translate}}:</div>
+                    <div class="duan-info-item-content">{{data()?.chu_dau_tu}}</div>
+                </div>
+                <div class="duan-info-item">
+                    <div class="duan-info-item-title">{{'PROJECT_DETAILS.TIME_LINE' | translate}}:</div>
+                    <div class="duan-info-item-content">{{data()?.thoi_gian}}</div>
+                </div>
+                <a class="duan-contact" [routerLink]="['/lien-he']" target="_blank">
+                    {{'PROJECT_DETAILS.CONTACT' | translate}}
+                </a>
+            </div>
+        </div>
+
+        <hr class="style-hr">
+
+
+    </div>
+    <div class="row">
+        <div class="l-12 m-12 c-12">
+           
+        </div>
+    </div>
+</div>

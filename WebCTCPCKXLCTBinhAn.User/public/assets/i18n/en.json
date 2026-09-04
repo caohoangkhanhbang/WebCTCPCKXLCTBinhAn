@@ -46,5 +46,17 @@
         "SCHEDULE_AND_SAFETY": "Schedule & Absolute Safety",
         "EXPERIENCE": "Years of Experience",
         "KEY_PROJECTS": "Key Projects"
+    },
+    "PROJECT_DETAILS": {
+        "PROJECT_DETAILS": "Project Details",
+        "PROJECT": "Project",
+        "SHARE": "Share",
+        "DATE_POSTED": "Date Posted",
+        "SHARE_PROJECT": "Share Project",
+        "BACK_TO_PROJECTS": "Back to Projects",
+        "CONTACT": "Contact",
+        "CONSTRUCTION_SCOPE": "Construction Scope",
+        "PROJECT_OWNER": "Project Owner",
+        "TIME_LINE": "Time Line"
     }
 }

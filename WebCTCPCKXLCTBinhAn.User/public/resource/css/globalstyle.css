@@ -31,12 +31,7 @@
     margin: 50px 0;
 }
 
-hr {
-    border: none;
-    height: 2px;
-    background: linear-gradient(to right, transparent, rgb(55 52 52), transparent);
-    margin: 24px 0;
-}
+
 
 .gradient-a {
     top: 346px;

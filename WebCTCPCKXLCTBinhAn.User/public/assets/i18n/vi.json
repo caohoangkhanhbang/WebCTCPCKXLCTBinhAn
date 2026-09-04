@@ -46,5 +46,17 @@
         "SCHEDULE_AND_SAFETY": "Tiến độ & An toàn tuyệt đối",
         "EXPERIENCE": "Năm kinh nghiệm",
         "KEY_PROJECTS": "Dự án trọng điểm"
+    },
+    "PROJECT_DETAILS": {
+        "PROJECT_DETAILS": "Chi tiết dự án",
+        "PROJECT": "Dự án",
+        "SHARE": "Chia sẻ",
+        "DATE_POSTED": "Ngày đăng",
+        "SHARE_PROJECT": "Chia sẻ dự án",
+        "BACK_TO_PROJECTS": "Trở về trang dự án",
+        "CONTACT": "Liên hệ",
+        "CONSTRUCTION_SCOPE": "Hạng mục thi công",
+        "PROJECT_OWNER": "Chủ đầu tư",
+        "TIME_LINE": "Thời gian"
     }
 }

@@ -10,5 +10,6 @@
         public string ten_du_an_ta { get; set; }
         public string bo_nghia_ta { get; set; }
         public string noi_dung_ta { get; set; }
+        public DateOnly? created_date { get; set; }
     }
 }
