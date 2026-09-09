@@ -17,6 +17,11 @@ export const routes: Routes = [
                 loadComponent: () => import('./pages/gioi-thieu/gioi-thieu').then(m => m.GioiThieu)
             },
             {
+                path: 'linh-vuc-hoat-dong',
+                title: 'Lĩnh vực hoạt động',
+                loadComponent: () => import('./pages/linh-vuc-hoat-dong/linh-vuc-hoat-dong').then(m => m.LinhVucHoatDong)
+            },
+            {
                 path: 'du-an',
                 children: [
                     {

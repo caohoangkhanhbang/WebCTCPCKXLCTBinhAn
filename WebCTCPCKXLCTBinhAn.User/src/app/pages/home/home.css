@@ -224,3 +224,20 @@
 }
 
 /* hết phần slide */
+
+/* mobile */
+@media (max-width: 46.25em) {
+    .slide-content-container {
+        max-width: 90%;
+    }
+
+    .icon-right {
+        left: 25%;
+    }
+
+    .icon-right,
+    .icon-left {
+        bottom: 1%;
+
+    }
+}

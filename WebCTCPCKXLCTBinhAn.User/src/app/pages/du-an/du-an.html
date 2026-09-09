@@ -42,6 +42,16 @@
                         </div>
                     </div>
                     }
+
+                    @if(hasNextPage()) {
+                        <div
+                        class="loading-centinel"
+                        appScrollNearEnd
+                        (nearEnd)="loadMore()">
+                        @if(loading()){
+                            Loading...
+                        }</div>
+                    }
                 </div>
 
             </div>

@@ -1,0 +1,24 @@
+.top-image {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.top-image-title {
+    font-size: 53px;
+    font-family: var(--font-dacbiet);
+    text-align: center;
+}
+
+.top-image-title-modified {
+    font-size: 17px;
+    font-weight: 300;
+}

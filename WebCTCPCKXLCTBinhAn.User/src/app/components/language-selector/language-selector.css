@@ -1,16 +1,3 @@
-.select-language {
-    background: none;
-    padding: 10px;
-    border: none;
-    outline: none;
-    color: white;
-}
-
-/* (Tùy chọn) Quy định màu sắc cho các chữ hiển thị bên trong menu danh sách xổ xuống */
-.select-language option {
-    color: black;
-}
-
 .icon-language {
     width: 24px;
     height: 24px;
@@ -21,4 +8,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+/* custom */
+.language-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 134px;
+    padding: 10px;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    background: linear-gradient(45deg, #0000006b, #00000080);
+    border-radius: 4px;
+}
+
+.language-item:hover {
+    background: linear-gradient(45deg, #bbbbbb80, #00643b);
+}
+
+.language-dropdown {
+    position: absolute;
+    top: 150%;
+    right: 0;
+    border: 1px solid white;
+    padding: 10px;
+    backdrop-filter: blur(31px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+.icon-language {
+    cursor: pointer;
 }

@@ -10,9 +10,9 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
     {
         private readonly BusinessDuAn _businessDuAn = businessDuAn;
         [HttpGet("get-du-an")]
-        public async Task<IActionResult> GetDuAn([FromQuery] string? query)
+        public async Task<IActionResult> GetDuAn([FromQuery] string? query, [FromQuery] int? lastId, [FromQuery] int pageSize = 10)
         {
-            var data = await _businessDuAn.GetDuAn(query);
+            var data = await _businessDuAn.GetDuAn(query, lastId, pageSize);
             return Ok(data);
         }
         [HttpGet("get-du-an/{id}")]

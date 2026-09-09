@@ -1,10 +1,14 @@
 <div class="language-container">
-<img class="icon-language" for="lang-select" [src]="'/resource/images/' + selectedLang() + '.svg'" />
-<select class="select-language" id="lang-select" [ngModel]="selectedLang()" (ngModelChange)="changeLanguage($event)">
-    @for(lang of languages; track lang.code) {
-    <option [value]="lang.code">
-        {{ lang.name }}
-    </option>
+    <img (click)="toggleLanguageDropdown()" class="icon-language" for="lang-select"
+        [src]="'/resource/images/' + selectedLang() + '.svg'" />
+    @if(isDropdownOpen()) {
+    <ul class="language-dropdown">
+        @for(lang of languages; track lang.code) {
+        <li class="language-item" (click)="changeLanguage(lang.code)" [class.active]="lang.code === selectedLang()">
+            <img class="icon-language" [src]="'/resource/images/' + lang.code + '.svg'" [alt]="lang.name">
+            <span>{{ lang.name }}</span>
+        </li>
+        }
+    </ul>
     }
-</select>
 </div>

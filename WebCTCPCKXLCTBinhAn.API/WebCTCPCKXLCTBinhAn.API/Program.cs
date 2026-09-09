@@ -17,6 +17,7 @@ builder.Services.AddSingleton<IConnectionService, ConnectionService>();
 builder.Services.AddScoped<BusinessHome>();
 builder.Services.AddScoped<BusinessGioiThieu>();
 builder.Services.AddScoped<BusinessDuAn>();
+builder.Services.AddScoped<BusinessLinhVucHoatDong>();
 
 //1. Dòng này giúp giữ nguyên tên thuộc tính (Property) của class như lúc khai báo để truyền api
 builder.Services.AddControllers()

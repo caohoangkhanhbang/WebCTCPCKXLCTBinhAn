@@ -9,6 +9,8 @@
 :root {
     --font-bold: 'Calsans';
     --font-thin: 'RobotoFlex';
+    --font-tieude: 'tieude';
+    --font-dacbiet: 'dacbiet';
 }
 
 @font-face {
@@ -19,6 +21,16 @@
 @font-face {
     font-family: 'RobotoFlex';
     src: url('../font/Roboto_Flex/RobotoFlex-VariableFont_GRAD\,XOPQ\,XTRA\,YOPQ\,YTAS\,YTDE\,YTFI\,YTLC\,YTUC\,opsz\,slnt\,wdth\,wght.ttf');
+}
+
+@font-face {
+    font-family: 'dacbiet';
+    src: url('../font/Goldman/Goldman-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'tieude';
+    src: url('../font/Momo_Trust_Display/MomoTrustDisplay-Regular.ttf');
 }
 
 .kbcenter {

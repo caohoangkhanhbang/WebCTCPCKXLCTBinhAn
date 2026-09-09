@@ -38,7 +38,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
             string sql = @"SELECT id, ten_du_an, bo_nghia,
                                     noi_dung, hinh, ten_du_an_ta,
                                     bo_nghia_ta, noi_dung_ta
-                         FROM du_an where hien_thi = true order by id desc";
+                         FROM du_an where hien_thi = true order by id desc limit 4";
             await using var con = new NpgsqlConnection(_connectionService.GetConnectionString());
             await con.OpenAsync();
             await using var cmd = new NpgsqlCommand(sql, con);
@@ -145,7 +145,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
         public async Task<List<GiaiPhap>> GetGiaiPhap()
         {
             List<GiaiPhap> lst = new List<GiaiPhap>();
-            string sql = "SELECT id, giai_phap, hinh, hien_thi FROM giai_phap where hien_thi = true order by id asc limit 30";
+            string sql = "SELECT id, giai_phap, hinh, hien_thi, noi_dung FROM giai_phap where hien_thi = true order by id asc limit 30";
             await using var con = new NpgsqlConnection(_connectionService.GetConnectionString());
             await using var cmd = new NpgsqlCommand(sql, con);
             await con.OpenAsync();
@@ -159,7 +159,8 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
                         id = reader["id"] != DBNull.Value ? Convert.ToInt32(reader["id"]) : 0,
                         giai_phap = reader["giai_phap"] != DBNull.Value ? reader["giai_phap"].ToString() : string.Empty,
                         hinh = reader["hinh"] != DBNull.Value ? reader["hinh"].ToString() : string.Empty,
-                        hien_thi = reader["hien_thi"] != DBNull.Value ? Convert.ToBoolean(reader["hien_thi"]) : false
+                        hien_thi = reader["hien_thi"] != DBNull.Value ? Convert.ToBoolean(reader["hien_thi"]) : false,
+                        noi_dung = reader["noi_dung"] != DBNull.Value ? reader["noi_dung"].ToString() : String.Empty,
                     });
                 }
             }

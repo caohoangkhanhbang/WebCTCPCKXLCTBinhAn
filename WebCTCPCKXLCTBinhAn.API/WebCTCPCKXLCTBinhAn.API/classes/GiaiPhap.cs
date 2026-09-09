@@ -6,5 +6,6 @@
         public string giai_phap { get; set; }
         public string hinh { get; set; }
         public bool hien_thi { get; set; }
+        public string noi_dung { get; set; }
     }
 }

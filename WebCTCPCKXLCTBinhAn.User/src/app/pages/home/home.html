@@ -139,7 +139,7 @@
     <div class="blur-container d-flex-n no-scrollbar">
 
         @for(item of giaiPhap(); track item.id){
-        <div class="card-item" style="background-image: url('{{ item.hinh }}');">
+        <div class="card-item" [style.background-image]="'url(' + cdnUrl + '/' + item.hinh + ')'">
             <div class="card-item-content">
                 <div class="card-title chu-trang text-truncate-4">{{item.giai_phap}}</div>
                 <a class="style-a card-direction chu-trang" routerLink="/giai-phap/{{item.id}}">Tìm hiểu thêm

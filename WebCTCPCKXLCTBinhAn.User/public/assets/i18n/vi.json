@@ -58,5 +58,8 @@
         "CONSTRUCTION_SCOPE": "Hạng mục thi công",
         "PROJECT_OWNER": "Chủ đầu tư",
         "TIME_LINE": "Thời gian"
+    },
+    "CORE_SERVICES":{
+        "LEARN_MORE": "Tìm hiểu thêm"
     }
 }

@@ -58,5 +58,8 @@
         "CONSTRUCTION_SCOPE": "Construction Scope",
         "PROJECT_OWNER": "Project Owner",
         "TIME_LINE": "Time Line"
+    },
+    "CORE_SERVICES": {
+        "LEARN_MORE": "Learn more"
     }
 }

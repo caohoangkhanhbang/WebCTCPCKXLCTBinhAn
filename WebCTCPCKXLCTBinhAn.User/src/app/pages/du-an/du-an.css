@@ -42,3 +42,11 @@
     border-radius: 5px;
     color: white;
 }
+
+.loading-centinel {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}

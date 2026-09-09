@@ -10,4 +10,8 @@ export class DuAnServices {
         return this.http.get<any[]>(`${this.apiUrl}/get-du-an`, { params: { query: query } });
     }
 
+    getData(query: string, lastId: number, pageSize: number) {
+        return this.http.get<any[]>(`${this.apiUrl}/get-du-an`, { params: { query, lastId, pageSize } });
+    }
+
 }

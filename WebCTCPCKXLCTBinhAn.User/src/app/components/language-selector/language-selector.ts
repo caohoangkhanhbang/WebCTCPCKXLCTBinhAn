@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, inject, OnInit, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-language-selector',
   standalone: true,
-  imports: [FormsModule],
+  imports: [],
   templateUrl: './language-selector.html',
   styleUrl: './language-selector.css',
 })
@@ -15,6 +16,7 @@ export class LanguageSelector implements OnInit {
 
   private readonly STORAGE_KEY = 'app_lang';
   private readonly DEFAULT_LANG = 'vi';
+  isDropdownOpen = signal<boolean>(false);
 
   languages = [
     { code: 'vi', name: 'Tiếng Việt' },
@@ -24,13 +26,11 @@ export class LanguageSelector implements OnInit {
   selectedLang = signal<string>(this.DEFAULT_LANG);
 
   ngOnInit(): void {
-    // 1. Kiểm tra localStorage, nếu chưa có thì lấy ngôn ngữ mặc định
     const savedLang = this.getSavedLanguage();
 
     this.selectedLang.set(savedLang);
     this.translate.setFallbackLang(this.DEFAULT_LANG);
 
-    // 2. Chuyển đổi sang ngôn ngữ đã chọn/lưu
     this.translate.use(savedLang).subscribe({
       next: () => this.cdr.markForCheck(),
       error: (err) => console.error('Lỗi load i18n ban đầu:', err)
@@ -39,7 +39,7 @@ export class LanguageSelector implements OnInit {
 
   changeLanguage(langCode: string): void {
     this.selectedLang.set(langCode);
-
+    this.toggleLanguageDropdown();
     this.translate.use(langCode).subscribe({
       next: () => {
         this.saveLanguage(langCode);
@@ -49,10 +49,10 @@ export class LanguageSelector implements OnInit {
     });
   }
 
-  /**
-   * Lấy ngôn ngữ đã lưu từ localStorage.
-   * Nếu chưa có hoặc xảy ra lỗi (ví dụ: SSR / Privacy mode), trả về DEFAULT_LANG.
-   */
+  toggleLanguageDropdown(): void {
+    this.isDropdownOpen.update(prev => !prev);
+  }
+
   private getSavedLanguage(): string {
     try {
       if (typeof window !== 'undefined' && window.localStorage) {
@@ -67,9 +67,6 @@ export class LanguageSelector implements OnInit {
     return this.DEFAULT_LANG;
   }
 
-  /**
-   * Lưu ngôn ngữ mới vào localStorage an toàn.
-   */
   private saveLanguage(langCode: string): void {
     try {
       if (typeof window !== 'undefined' && window.localStorage) {

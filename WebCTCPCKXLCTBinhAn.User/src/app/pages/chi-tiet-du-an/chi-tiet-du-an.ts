@@ -21,6 +21,7 @@ export class ChiTietDuAn {
     service = inject(ChiTietDuAnServices);
     readonly cdnUrl = environment.cdnUrl;
     id = input.required<string>();
+
     data = toSignal(
         toObservable(this.id).pipe(
             switchMap(idValue => this.service.getChiTietDuAn(idValue))

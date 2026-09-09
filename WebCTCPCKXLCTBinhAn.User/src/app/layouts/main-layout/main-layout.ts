@@ -20,6 +20,20 @@ export class MainLayout {
     companyInfo = inject(CompanyInfo);
     thongTinCty = this.companyInfo.thongTinCty;
     giaiPhap = toSignal(this.service.getGiaiPhap(), { initialValue: [] as any[] });
+    isOpenMenu = signal<boolean>(true);
+
+    toogleMenu(): void {
+        this.isOpenMenu.update(prev => !prev);
+    }
+
+    closeMenuOnSelect(event: MouseEvent) {
+        const isMobile = window.innerWidth <= 768;
+        if (!isMobile) return;
+        const target = event.target as HTMLElement;
+        if (target.tagName === 'A') {
+            this.isOpenMenu.set(false);
+        }
+    }
 
     groupGiaiPhap = computed(() => {
         const item = this.giaiPhap();
@@ -39,5 +53,6 @@ export class MainLayout {
         if (query) {
             this.router.navigate(["/du-an"], { queryParams: { query } })
         }
+        this.searchQuery.set('');
     }
 }

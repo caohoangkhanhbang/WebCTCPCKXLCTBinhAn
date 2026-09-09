@@ -14,7 +14,7 @@
         <div class="l-12 m-12 c-12">
             <div class="du-an-content-title">
                 <h4 class="duan-modifier-createddate">{{'PROJECT_DETAILS.DATE_POSTED' | translate}}:
-                    {{data()?.created_date | date:'dd/MM/yyyy'}}</h4>
+                    {{data()?.ngay_dang | date:'dd/MM/yyyy'}}</h4>
                 <h2 class="duan-title">{{data()?.ten_du_an}}</h2>
                 <h4 class="duan-modifier">{{data()?.bo_nghia}}</h4>
             </div>
@@ -50,9 +50,9 @@
                 </div>
                 <div class="duan-info-item">
                     <div class="duan-info-item-title">{{'PROJECT_DETAILS.TIME_LINE' | translate}}:</div>
-                    <div class="duan-info-item-content">{{data()?.thoi_gian}}</div>
+                    <div class="duan-info-item-content">{{data()?.thoi_gian| date:'dd/MM/yyyy'}}</div>
                 </div>
-                <a class="duan-contact" [routerLink]="['/lien-he']" target="_blank">
+                <a class="duan-contact" [routerLink]="['/lien-he']">
                     {{'PROJECT_DETAILS.CONTACT' | translate}}
                 </a>
             </div>
@@ -64,7 +64,7 @@
     </div>
     <div class="row">
         <div class="l-12 m-12 c-12">
-           
+
         </div>
     </div>
 </div>
