@@ -52,32 +52,36 @@
         <div class="trang-tri" style="background: url('./resource/images/chantrang.svg');"></div>
         <div class="d-flex-n flex-footer row">
             <div class="l-6 m-6 c-12">
-                <h1 class="chu-noidung chu-trang bold chu-lon title-chan-trang">{{'MAIN_LAYOUT.FOOTER.TAGLINE'|translate}}
+                <h1 class="chu-noidung chu-trang bold chu-lon title-chan-trang">
+                    {{'MAIN_LAYOUT.FOOTER.TAGLINE'|translate}}
                 </h1>
             </div>
             <div class="l-6 m-6 c-12 chantrang-lien-he">
-                <button type="submit" class="button" style="z-index: 2;">{{'MAIN_LAYOUT.FOOTER.CONTACT'|translate}}</button>
+                <button routerLink="/lien-he" class="button"
+                    style="z-index: 2;">{{'MAIN_LAYOUT.FOOTER.CONTACT'|translate}}</button>
             </div>
         </div>
         <hr>
         <div class="d-flex-n">
-    
+
             <div class="row">
-    
+
                 @for(group of groupGiaiPhap(); track $index){
                 <div class="col l-3 m-4 c-12">
                     <div class="d-flex-d chantrang-item">
                         <h4 class="tieu-de-chan-trang chu-noidung">{{'MAIN_LAYOUT.FOOTER.SOLUTIONS'|translate}}</h4>
                         @for(item of group; track $index){
-                        <p class="style-a noi-dung-chan-trang chu-noidung chu-trang chu-chan-trang">{{item.giai_phap}}</p>
+                        <p class="style-a noi-dung-chan-trang chu-noidung chu-trang chu-chan-trang">{{item.giai_phap}}
+                        </p>
                         }
                     </div>
                 </div>
                 }
-    
+
                 <div class="col l-3 m-4 c-12">
                     <div class="d-flex-d chantrang-item">
-                        <h4 class="tieu-de-chan-trang chu-noidung">{{'MAIN_LAYOUT.FOOTER.CONTACT' | translate}}</h4>
+                        <h4 class="tieu-de-chan-trang chu-noidung">{{'MAIN_LAYOUT.FOOTER.CONTACT'
+                            | translate}}</h4>
                         <div class="style-a noi-dung-chan-trang chu-noidung chu-trang chu-chan-trang">
                             {{'MAIN_LAYOUT.FOOTER.ADDRESS' | translate}}: {{thongTinCty()?.dia_chi}}</div>
                         <a href="mailto:binhanxlct@gmail.com"
@@ -86,7 +90,7 @@
                             {{thongTinCty()?.email}}</a>
                     </div>
                 </div>
-    
+
             </div>
         </div>
         <hr>

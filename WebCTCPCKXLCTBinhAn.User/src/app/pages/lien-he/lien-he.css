@@ -1,0 +1,85 @@
+.lien-he-container {
+    background: url(https://cdn.pixabay.com/photo/2023/03/03/20/15/science-fiction-7828391_1280.jpg) no-repeat center / cover;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 105px 0;
+}
+
+.lien-he-form {
+    padding: 50px;
+    width: 80%;
+    border-radius: 19px;
+    margin: auto;
+    border: 2px solid #ffffff38;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    color: white;
+}
+
+.lien-he-tieude {
+    margin-right: 20px;
+    font-family: var(--font-tieude);
+}
+
+.lien-he-input {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 31px;
+    border: 1px solid #ffffff54;
+    margin: 10px 0;
+    background: transparent;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.lien-he-input::placeholder {
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+.lien-he-input:focus {
+    outline: none;
+    border: 2px solid #007bff;
+}
+
+.input-container {
+    margin: 10px 0;
+}
+
+.input-container textarea {
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff1c transparent;
+    height: 150px;
+}
+
+.lien-he-title {
+    text-align: center;
+    font-size: 50px;
+    font-family: var(--font-dacbiet);
+    margin: 20px 0;
+}
+
+.lien-he-button {
+    padding: 10px 20px;
+    min-width: 100%;
+    border-radius: 31px;
+    background: linear-gradient(90deg, #ff00f1, #ff0000);
+    border: none;
+    color: white;
+    font-family: var(--font-dacbiet);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.lien-he-button:hover {
+    background: linear-gradient(90deg, #ff0000, #ff00f1);
+
+}
+
+.error-message {
+    color: yellow;
+    font-size: 14px;
+    margin-top: 5px;
+}

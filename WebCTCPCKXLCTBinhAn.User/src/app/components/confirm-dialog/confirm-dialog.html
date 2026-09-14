@@ -1,0 +1,14 @@
+<div class="overlay" (click)="onOverlayClick()">
+    <div class="dialog-box" (click)="$event.stopPropagation()">
+        <div class="dialog-message">{{ message() | translate }}</div>
+
+        <div class="dialog-actions">
+            @for(button of buttons(); track button.value){
+            <button type="button" [class]="'btn btn-'+ (button.style || 'primary')"
+                (click)="onButtonClick(button.value)">
+                {{ button.label | translate }}
+            </button>
+            }
+        </div>
+    </div>
+</div>

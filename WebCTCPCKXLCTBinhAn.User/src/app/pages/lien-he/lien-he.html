@@ -1,0 +1,47 @@
+<div class="lien-he-container">
+    <form [formGroup]="data" (ngSubmit)="onSubmit()" class="lien-he-form">
+        <h2 class="lien-he-title">{{'MAIN_LAYOUT.NAV.CONTACT' | translate}}</h2>
+        <div class="input-container">
+            <label for="name" class="lien-he-tieude">{{'CONTACT.FULL_NAME' | translate}} *</label>
+            <input formControlName="ten" type="text" class="lien-he-input" id="name"
+                placeholder="{{'CONTACT.PLACEHOLDER' | translate}}">
+            @if(data.get('ten')?.invalid && data.get('ten')?.touched){
+            <div class="error-message">{{'CONTACT.PLACEHOLDER' | translate}}</div>
+            }
+        </div>
+        <div class="input-container">
+            <label for="mail" class="lien-he-tieude">{{'CONTACT.EMAIL' | translate}} *</label>
+            <input formControlName="email" type="text" class="lien-he-input" id="mail"
+                placeholder="{{'CONTACT.PLACEHOLDER' | translate}}">
+            @if(data.get('email')?.invalid && data.get('email')?.touched){
+            <div class="error-message">{{'CONTACT.PLACEHOLDER' | translate}}</div>
+            }
+        </div>
+        <div class="input-container">
+            <label for="phone" class="lien-he-tieude">{{'CONTACT.PHONE_NUMBER' | translate}} *</label>
+            <input formControlName="sdt" type="text" class="lien-he-input" id="phone"
+                placeholder="{{'CONTACT.PLACEHOLDER' | translate}}">
+            @if(data.get('sdt')?.invalid && data.get('sdt')?.touched){
+            <div class="error-message">{{'CONTACT.PLACEHOLDER' | translate}}</div>
+            }
+        </div>
+        <div class="input-container">
+            <label for="id" class="lien-he-tieude">{{'CONTACT.NATIONAL_ID' | translate}}</label>
+            <input formControlName="cccd" type="text" class="lien-he-input" id="id"
+                placeholder="{{'CONTACT.PLACEHOLDER' | translate}}">
+        </div>
+        <div class="input-container">
+            <label for="name" class="lien-he-tieude">{{'CONTACT.MESSAGE' | translate}} *</label>
+            <textarea formControlName="noi_dung" type="text" class="lien-he-input" id="name"
+                placeholder="{{'CONTACT.PLACEHOLDER' | translate}}"></textarea>
+            @if(data.get('noi_dung')?.invalid && data.get('noi_dung')?.touched){
+            <div class="error-message">{{'CONTACT.PLACEHOLDER' | translate}}</div>
+            }
+        </div>
+        <button type="submit" class="lien-he-button">{{'CONTACT.SUBMIT' | translate}}</button>
+    </form>
+</div>
+
+@if(showDialog()){
+    <app-confirm-dialog [message]="message" [buttons]="buttomsInfo" (action)="handleDialogAction($event)"></app-confirm-dialog>
+}

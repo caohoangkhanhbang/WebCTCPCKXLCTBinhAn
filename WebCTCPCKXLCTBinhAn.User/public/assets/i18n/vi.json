@@ -59,7 +59,20 @@
         "PROJECT_OWNER": "Chủ đầu tư",
         "TIME_LINE": "Thời gian"
     },
-    "CORE_SERVICES":{
+    "CORE_SERVICES": {
         "LEARN_MORE": "Tìm hiểu thêm"
+    },
+    "CONTACT": {
+        "FULL_NAME": "Họ và tên",
+        "EMAIL": "Email",
+        "PHONE_NUMBER": "Số điện thoại",
+        "MESSAGE": "Nội dung",
+        "NATIONAL_ID": "Số CMND/CCCD",
+        "SUBMIT": "Gửi",
+        "PLACEHOLDER": "Vui lòng cung cấp thông tin của bạn",
+        "SUBMITED_SUCCESSFULLY": "Gửi thông tin thành công",
+        "SUBMIT_ERROR": "Gửi thông tin thất bại, vui lòng thử lại",
+        "CONFIRM": "Xác nhận",
+        "CLOSE": "Đóng"
     }
 }

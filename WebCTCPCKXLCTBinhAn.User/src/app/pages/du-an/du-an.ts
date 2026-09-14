@@ -8,6 +8,7 @@ import { RouterLink } from "@angular/router";
 import { switchMap } from "rxjs/internal/operators/switchMap";
 import { ScrollNearEndDirective } from "./scroll-near-end.directive";
 import { tap } from "rxjs/internal/operators/tap";
+import { CompanyInfo } from "../../Services/company-info";
 @Component({
     selector: "app-du-an",
     templateUrl: "./du-an.html",
@@ -27,6 +28,8 @@ export class DuAn {
     loading = signal<boolean>(false);
     readonly pageSize = 10;
     currentQuery = signal<string>("");
+    companyInfo = inject(CompanyInfo);
+    thongTinCty = this.companyInfo.thongTinCty;
 
     private routerParamsSignal = toSignal(
         this.router.queryParamMap.pipe(

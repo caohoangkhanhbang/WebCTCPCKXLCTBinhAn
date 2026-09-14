@@ -61,5 +61,18 @@
     },
     "CORE_SERVICES": {
         "LEARN_MORE": "Learn more"
+    },
+    "CONTACT": {
+        "FULL_NAME": "Full Name",
+        "EMAIL": "Email",
+        "PHONE_NUMBER": "Phone Number",
+        "MESSAGE": "Message",
+        "NATIONAL_ID": "National ID",
+        "SUBMIT": "Submit",
+        "PLACEHOLDER": "Please provide your information",
+        "SUBMITED_SUCCESSFULLY": "Submit information successfully",
+        "SUBMIT_ERROR": "Submit information failed, please try again",
+        "CONFIRM": "Confirm",
+        "CLOSE": "Close"
     }
 }

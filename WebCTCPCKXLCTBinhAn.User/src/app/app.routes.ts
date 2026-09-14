@@ -22,6 +22,16 @@ export const routes: Routes = [
                 loadComponent: () => import('./pages/linh-vuc-hoat-dong/linh-vuc-hoat-dong').then(m => m.LinhVucHoatDong)
             },
             {
+                path: 'lien-he',
+                title: 'Liên hệ',
+                loadComponent: () => import('./pages/lien-he/lien-he').then(m => m.LienHe)
+            },
+            {
+                path: 'tuyen-dung',
+                title: 'Tuyển dụng',
+                loadComponent: () => import('./pages/tuyen-dung/tuyen-dung').then(m => m.TuyenDung)
+            },
+            {
                 path: 'du-an',
                 children: [
                     {
