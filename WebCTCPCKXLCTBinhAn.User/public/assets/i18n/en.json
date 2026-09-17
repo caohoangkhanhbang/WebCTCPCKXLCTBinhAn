@@ -74,5 +74,20 @@
         "SUBMIT_ERROR": "Submit information failed, please try again",
         "CONFIRM": "Confirm",
         "CLOSE": "Close"
+    },
+    "CAREERS": {
+        "CAREER_OPPOTUNITIES": "Career Opportunities",
+        "APPLY": "Apply",
+        "CV_FILE": "Please select your CV file",
+        "SUCCESS": "Application successful. Your profile will be reviewed, and we will contact you later.",
+        "CANCEL": "Cancel",
+        "LOCATION": "Location",
+        "JOB_DESCRIPTION": "Job Description",
+        "POST_DATE": "Post Date",
+        "EXPIRATION_DATE": "Expiration Date",
+        "SALARY": "Salary",
+        "REQUIREMENTS": "Requirements",
+        "SELECT_FILE": "Select CV File",
+        "NO_INFO": "No job information available"
     }
 }

@@ -49,7 +49,6 @@ export class LienHe {
 
   handleDialogAction(action: string) {
     this.showDialog.set(false);
-    console.log('Dialog action:', action);
   }
 }
 

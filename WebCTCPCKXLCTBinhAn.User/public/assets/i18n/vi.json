@@ -74,5 +74,20 @@
         "SUBMIT_ERROR": "Gửi thông tin thất bại, vui lòng thử lại",
         "CONFIRM": "Xác nhận",
         "CLOSE": "Đóng"
+    },
+    "CAREERS":{
+        "CAREER_OPPOTUNITIES": "Cơ hội nghề nghiệp",
+        "APPLY": "Ứng tuyển",
+        "CV_FILE": "Vui lòng chọn tệp CV của bạn!",
+        "SUCCESS": "Đã gửi đơn đăng ký thành công. Hồ sơ của bạn sẽ được xem xét và chúng tôi sẽ liên hệ với bạn sau.",
+        "CANCEL": "Hủy",
+        "LOCATION": "Địa điểm",
+        "JOB_DESCRIPTION": "Mô tả công việc",
+        "POST_DATE": "Ngày đăng tuyển",
+        "EXPIRATION_DATE": "Ngày hết hạn",
+        "SALARY": "Mức lương",
+        "REQUIREMENTS": "Yêu cầu công việc",
+        "SELECT_FILE": "Chọn file CV",
+        "NO_INFO": "Chưa có thông tin tuyển dụng"
     }
 }

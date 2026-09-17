@@ -19,6 +19,8 @@ builder.Services.AddScoped<BusinessGioiThieu>();
 builder.Services.AddScoped<BusinessDuAn>();
 builder.Services.AddScoped<BusinessLinhVucHoatDong>();
 builder.Services.AddScoped<BussinessLienHe>();
+builder.Services.AddScoped<BusinessTuyenDung>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 //1. Dòng này giúp giữ nguyên tên thuộc tính (Property) của class như lúc khai báo để truyền api
 builder.Services.AddControllers()

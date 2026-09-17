@@ -1,0 +1,95 @@
+<div class="trang-tri">
+    {{'CAREERS.CAREER_OPPOTUNITIES' | translate}}
+</div>
+<div class="tuyen-dung-container">
+    <div class="grid wide">
+        <div class="row">
+            @for(item of tinTuyenDung(); track item.id){
+            <div class="col l-6 m-12 c-12">
+                <div class="tuyen-dung-item">
+                    <img [src]="cdnUrl+'/'+item.hinh" alt="" class="tuyen-dung-item-img">
+                    <div class="div">
+                        <div class="ten-cong-viec">{{item?.ten_cong_viec}}</div>
+                        <div class="dia-diem">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                <path
+                                    d="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z" />
+                            </svg>
+                            {{'CAREERS.LOCATION' | translate}}: {{item?.dia_diem}}
+                        </div>
+                        <div class="luong">
+                            <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                                <path
+                                    d="M392 176L248 176L210.7 101.5C208.9 97.9 208 93.9 208 89.9C208 75.6 219.6 64 233.9 64L406.1 64C420.4 64 432 75.6 432 89.9C432 93.9 431.1 97.9 429.3 101.5L392 176zM233.6 224L406.4 224L455.1 264.6C521.6 320 560 402 560 488.5C560 536.8 520.8 576 472.5 576L167.4 576C119.2 576 80 536.8 80 488.5C80 402 118.4 320 184.9 264.6L233.6 224zM324 288C313 288 304 297 304 308L304 312C275.2 312.3 252 335.7 252 364.5C252 390.2 270.5 412.1 295.9 416.3L337.6 423.3C343.6 424.3 348 429.5 348 435.6C348 442.5 342.4 448.1 335.5 448.1L280 448C269 448 260 457 260 468C260 479 269 488 280 488L304 488L304 492C304 503 313 512 324 512C335 512 344 503 344 492L344 487.3C369 483.2 388 461.6 388 435.5C388 409.8 369.5 387.9 344.1 383.7L302.4 376.7C296.4 375.7 292 370.5 292 364.4C292 357.5 297.6 351.9 304.5 351.9L352 351.9C363 351.9 372 342.9 372 331.9C372 320.9 363 311.9 352 311.9L344 311.9L344 307.9C344 296.9 335 287.9 324 287.9z" />
+                            </svg>
+                            {{'CAREERS.SALARY' | translate}}: {{item?.luong}}
+                        </div>
+                        <div class="yeu-cau-cong-viec">
+                            <div class="mo-ta">
+                                <p class="tieu-de">{{'CAREERS.JOB_DESCRIPTION' | translate}}:</p>
+                                <div [innerHtml]="item?.mo_ta"></div>
+                            </div>
+                            <div class="noi-dung">
+                                <p class="tieu-de">{{'CAREERS.REQUIREMENTS' | translate}}: </p>
+                                <div [innerHtml]="item?.noi_dung"></div>
+                            </div>
+                        </div>
+                        <div class="ngay-tuyen">{{'CAREERS.POST_DATE' | translate}}:
+                            {{item?.ngay_bd_tuyen | date:'dd/MM/yyyy'}}
+                            |
+                            {{'CAREERS.EXPIRATION_DATE' | translate}}: {{item?.ngay_kt_tuyen | date:'dd/MM/yyyy'}}</div>
+                        <button (click)="UngTuyen(item.id)" class="button pos">{{'CAREERS.APPLY' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+            }
+            @empty {
+            <div class="col l-6 m-12 c-12">
+                <h1>{{'CAREERS.NO_INFO' | translate}}</h1>
+            </div>
+            }
+        </div>
+    </div>
+
+    @if(chooseFile()){
+    <div class="overlay">
+        <form [formGroup]="data" (ngSubmit)="onSubmit()" class="cv-container">
+            <p class="tieu-de">{{'CAREERS.SELECT_FILE' | translate}}</p>
+            <div class="input-container">
+                <label for="name" class="lien-he-tieude">{{'CONTACT.FULL_NAME' | translate}} *</label>
+                <input formControlName="ten" type="text" class="lien-he-input" id="name"
+                    placeholder="{{'CONTACT.PLACEHOLDER' | translate}}">
+                @if(data.get('ten')?.invalid && data.get('ten')?.touched){
+                <div class="error-message">{{'CONTACT.PLACEHOLDER' | translate}}</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="mail" class="lien-he-tieude">{{'CONTACT.EMAIL' | translate}} *</label>
+                <input formControlName="email" type="text" class="lien-he-input" id="mail"
+                    placeholder="{{'CONTACT.PLACEHOLDER' | translate}}">
+                @if(data.get('email')?.invalid && data.get('email')?.touched){
+                <div class="error-message">{{'CONTACT.PLACEHOLDER' | translate}}</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="phone" class="lien-he-tieude">{{'CONTACT.PHONE_NUMBER' | translate}} *</label>
+                <input formControlName="sdt" type="text" class="lien-he-input" id="phone"
+                    placeholder="{{'CONTACT.PLACEHOLDER' | translate}}">
+                @if(data.get('sdt')?.invalid && data.get('sdt')?.touched){
+                <div class="error-message">{{'CONTACT.PLACEHOLDER' | translate}}</div>
+                }
+            </div>
+            <input type="file" id="cvInput" accept=".pdf" (change)="onFileSelected($event)" />
+            <div class="center">
+                <button type="submit" class="button pos">{{'CAREERS.APPLY' | translate}}</button>
+                <button (click)="chooseFile.set(false)" type="button" class="button neg">{{'CAREERS.CANCEL' |
+                    translate}}</button>
+            </div>
+        </form>
+    </div>
+    }
+
+    @if(showDialog()){
+    <app-confirm-dialog [message]="message" [buttons]="buttomsInfo"
+        (action)="handleDialogAction($event)"></app-confirm-dialog>
+    }
