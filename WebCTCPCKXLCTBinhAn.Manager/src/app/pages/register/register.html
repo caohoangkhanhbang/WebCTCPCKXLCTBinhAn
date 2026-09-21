@@ -1,0 +1,13 @@
+<form (ngSubmit)="register()">
+
+    <input type="text" name="fullName" [(ngModel)]="fullName" placeholder="Họ tên" />
+
+    <input type="email" name="email" [(ngModel)]="email" placeholder="Email" />
+
+    <input type="password" name="password" [(ngModel)]="password" placeholder="Mật khẩu" />
+
+    <button type="submit">
+        Đăng ký
+    </button>
+
+</form>

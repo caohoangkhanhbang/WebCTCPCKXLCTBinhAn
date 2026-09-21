@@ -1,0 +1,43 @@
+<div class="login-container">
+
+    <h1>Đăng nhập</h1>
+
+    <form (ngSubmit)="login()">
+
+        <div>
+            <label>Email</label>
+
+            <input type="email" name="email" [(ngModel)]="email" required autocomplete="email">
+        </div>
+
+
+        <div>
+            <label>Mật khẩu</label>
+
+            <input type="password" name="password" [(ngModel)]="password" required autocomplete="current-password">
+        </div>
+
+
+        @if (errorMessage) {
+
+        <p class="error">
+            {{ errorMessage }}
+        </p>
+
+        }
+
+
+        <button type="submit" [disabled]="isLoading">
+
+            @if (isLoading) {
+            Đang đăng nhập...
+            }
+            @else {
+            Đăng nhập
+            }
+
+        </button>
+
+    </form>
+
+</div>

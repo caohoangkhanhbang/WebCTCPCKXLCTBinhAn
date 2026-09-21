@@ -1,0 +1,31 @@
+<h1>Dashboard</h1>
+
+@if (profile) {
+
+<div>
+
+    <p>
+        User ID:
+        {{ profile.userId }}
+    </p>
+
+    <p>
+        Họ tên:
+        {{ profile.fullName }}
+    </p>
+
+    <p>
+        Role:
+        {{ profile.role }}
+    </p>
+
+</div>
+
+}
+
+
+<button type="button" (click)="logout()">
+
+    Đăng xuất
+
+</button>
