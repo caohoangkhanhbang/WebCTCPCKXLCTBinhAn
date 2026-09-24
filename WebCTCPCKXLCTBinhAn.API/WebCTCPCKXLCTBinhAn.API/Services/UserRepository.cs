@@ -1,5 +1,4 @@
 ﻿using Npgsql;
-using System.Data.Common;
 using WebCTCPCKXLCTBinhAn.API.Models;
 
 namespace WebCTCPCKXLCTBinhAn.API.Services

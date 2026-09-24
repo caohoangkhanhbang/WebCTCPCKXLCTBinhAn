@@ -37,6 +37,7 @@ builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<ICacCotMocRepository, CacCotMocRepository>();
 
 //1. Dòng này giúp giữ nguyên tên thuộc tính (Property) của class như lúc khai báo để truyền api
 builder.Services.AddControllers()

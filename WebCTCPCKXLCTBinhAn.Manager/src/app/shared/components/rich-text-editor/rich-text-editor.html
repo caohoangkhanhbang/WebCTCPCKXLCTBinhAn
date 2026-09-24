@@ -1,0 +1,267 @@
+<div class="editor-container">
+
+    <!-- ================================================= -->
+    <!-- TOOLBAR -->
+    <!-- ================================================= -->
+
+    <div class="toolbar">
+
+        <!-- UNDO -->
+
+        <button type="button" title="Undo" (mousedown)="$event.preventDefault()" (click)="undo()">
+            ↶
+        </button>
+
+
+        <!-- REDO -->
+
+        <button type="button" title="Redo" (mousedown)="$event.preventDefault()" (click)="redo()">
+            ↷
+        </button>
+
+
+        <span class="separator"></span>
+
+
+        <!-- HEADING -->
+
+        <select (change)="formatBlock($event)">
+
+            <option value="">
+                Normal
+            </option>
+
+            <option value="h1">
+                H1
+            </option>
+
+            <option value="h2">
+                H2
+            </option>
+
+            <option value="h3">
+                H3
+            </option>
+
+        </select>
+
+
+        <!-- FONT SIZE -->
+
+        <select (change)="fontSize($event)">
+
+            <option value="">
+                Size
+            </option>
+
+            <option value="1">
+                Small
+            </option>
+
+            <option value="3">
+                Normal
+            </option>
+
+            <option value="5">
+                Large
+            </option>
+
+            <option value="7">
+                Huge
+            </option>
+
+        </select>
+
+
+        <span class="separator"></span>
+
+
+        <!-- BOLD -->
+
+        <button type="button" title="Bold" (mousedown)="$event.preventDefault()" (click)="exec('bold')">
+
+            <strong>B</strong>
+
+        </button>
+
+
+        <!-- ITALIC -->
+
+        <button type="button" title="Italic" (mousedown)="$event.preventDefault()" (click)="exec('italic')">
+
+            <em>I</em>
+
+        </button>
+
+
+        <!-- UNDERLINE -->
+
+        <button type="button" title="Underline" (mousedown)="$event.preventDefault()" (click)="exec('underline')">
+
+            <u>U</u>
+        </button>
+
+        <!-- COLOR -->
+        <input #colorInput type="color" title="Text color" (change)="foreColor(colorInput.value)">
+
+
+        <span class="separator"></span>
+
+
+        <!-- ALIGN LEFT -->
+
+        <button type="button" title="Align left" (mousedown)="$event.preventDefault()" (click)="alignLeft()">
+
+            ⬅
+
+        </button>
+
+
+        <!-- ALIGN CENTER -->
+
+        <button type="button" title="Align center" (mousedown)="$event.preventDefault()" (click)="alignCenter()">
+
+            ↔
+
+        </button>
+
+
+        <!-- ALIGN RIGHT -->
+
+        <button type="button" title="Align right" (mousedown)="$event.preventDefault()" (click)="alignRight()">
+
+            ➡
+
+        </button>
+
+
+        <!-- JUSTIFY -->
+
+        <button type="button" title="Justify" (mousedown)="$event.preventDefault()" (click)="alignJustify()">
+
+            ☰
+
+        </button>
+
+
+        <span class="separator"></span>
+
+
+        <!-- BULLET LIST -->
+
+        <button type="button" title="Bullet list" (mousedown)="$event.preventDefault()"
+            (click)="exec('insertUnorderedList')">
+
+            • List
+
+        </button>
+
+
+        <!-- NUMBER LIST -->
+
+        <button type="button" title="Number list" (mousedown)="$event.preventDefault()"
+            (click)="exec('insertOrderedList')">
+
+            1. List
+
+        </button>
+
+
+        <span class="separator"></span>
+
+
+        <!-- LINK -->
+
+        <button type="button" title="Insert link" (mousedown)="$event.preventDefault()" (click)="insertLink()">
+
+            Thêm Link🔗
+
+        </button>
+
+
+        <!-- REMOVE LINK -->
+
+        <button type="button" title="Remove link" (mousedown)="$event.preventDefault()" (click)="removeLink()">
+
+            Gỡ Link 🔗×
+
+        </button>
+
+
+        <!-- IMAGE -->
+
+        <button type="button" title="Insert image" (mousedown)="$event.preventDefault()" (click)="selectImage()">
+
+            🖼️
+
+        </button>
+
+
+        <!-- IMAGE SIZE -->
+
+        <select title="Image size" (change)="resizeImage($event)">
+
+            <option value="">
+                Image size
+            </option>
+
+            <option value="25">
+                25%
+            </option>
+
+            <option value="50">
+                50%
+            </option>
+
+            <option value="75">
+                75%
+            </option>
+
+            <option value="100">
+                100%
+            </option>
+
+        </select>
+
+
+        <!-- IMAGE INPUT -->
+
+        <input #imageInput type="file" hidden accept="
+                image/jpeg,
+                image/png,
+                image/webp,
+                image/gif,
+                image/svg+xml
+            " multiple (change)="onImageSelected($event)">
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- EDITOR -->
+    <!-- ================================================= -->
+
+    <div #editor class="editor-content" contenteditable="true" spellcheck="true" (input)="onInput()"
+        (blur)="onEditorBlur()" (keydown)="onKeyDown($event)" (paste)="onPaste($event)" (dragover)="onDragOver($event)"
+        (drop)="onDrop($event)"></div>
+
+
+    <!-- ================================================= -->
+    <!-- HELP -->
+    <!-- ================================================= -->
+
+    <div class="editor-help">
+
+        Bạn có thể nhập văn bản,
+        <strong>Ctrl + V</strong> để dán
+        text hoặc ảnh,
+        kéo ảnh trực tiếp vào editor,
+        hoặc sử dụng nút 🖼️ để chọn ảnh.
+
+        <br>
+
+        Click vào ảnh để chọn kích thước.
+
+    </div>
+
+</div>
