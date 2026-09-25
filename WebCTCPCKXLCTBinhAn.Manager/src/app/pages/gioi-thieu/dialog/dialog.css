@@ -1,0 +1,79 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    backdrop-filter: blur(7px);
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cv-container {
+    padding: 40px;
+    border: 1px solid white;
+    border-radius: 15px;
+    color: white;
+    background: linear-gradient(45deg, #000000d4, #00000054);
+    min-width: 500px;
+}
+
+.tieu-de {
+    font-size: 20px;
+    font-family: var(--font-tieude);
+    margin: 10px 0;
+    background: linear-gradient(45deg, #00e1ff, #00ff49, #00e1ff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.input-container {
+    margin: 10px 0;
+}
+
+.lien-he-tieude {
+    /* margin-right: 20px; */
+    font-family: var(--font-tieude);
+}
+
+.lien-he-input {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 31px;
+    border: 1px solid #ffffff54;
+    margin: 10px 0;
+    background: transparent;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.error-message {
+    color: yellow;
+    font-size: 14px;
+}
+
+.button {
+    padding: 10px 35px;
+    border-radius: 5px;
+    margin-top: 20px;
+    font-family: var(--font-dacbiet);
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.button.pos {
+    background: linear-gradient(45deg, #00e1ff, #00ff49, #00e1ff);
+}
+
+.button.neg {
+    background: linear-gradient(45deg, #ff0bee, #ff0b0b, #ff0bee);
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

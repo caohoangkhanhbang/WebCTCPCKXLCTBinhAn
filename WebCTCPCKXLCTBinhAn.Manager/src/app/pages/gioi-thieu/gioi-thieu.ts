@@ -3,11 +3,12 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
 
 import { GioiThieuService } from './gioi-thieu-service';
+import { Dialog } from './dialog/dialog';
 
 @Component({
   selector: 'app-gioi-thieu',
   standalone: true,
-  imports: [],
+  imports: [Dialog],
   templateUrl: './gioi-thieu.html',
   styleUrl: './gioi-thieu.css',
   providers: [GioiThieuService]
@@ -98,4 +99,39 @@ export class GioiThieu {
     this.searchTerm.set(input.value.trim());
     this.currentPage.set(1);
   }
+
+  isOpen = signal(false);
+  selectedId = signal<number | null>(null);
+  mode = signal<'create' | 'view' | 'edit'>('create');
+
+
+  onView(id: number): void {
+    this.selectedId.set(id);
+    this.mode.set('view');
+    this.isOpen.set(true);
+  }
+
+  onEdit(id: number | null): void {
+    this.selectedId.set(id);
+    this.mode.set('edit');
+    this.isOpen.set(true);
+  }
+
+  onDelete(id: number): void {
+    if (!confirm('Bạn có chắc chắn muốn xóa mục này?')) {
+      return;
+    }
+
+    this.service.delete(id).subscribe({
+      next: () => {
+        console.log(`Item with ID ${id} deleted successfully.`);
+        // Refresh the data after deletion
+        this.currentPage.set(this.currentPage());
+      },
+      error: err => {
+        console.error(`Error deleting item with ID ${id}:`, err);
+      }
+    });
+  }
+
 }

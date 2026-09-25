@@ -2,13 +2,14 @@
 <div class="container">
     <div class="search-container">
         <input type="text" placeholder="🔍 Tìm kiếm..." class="search-input" (input)="onSearch($event)" />
-        <div class="nut-them">Thêm mới</div>
+        <div class="nut-them" (click)="onEdit(null)">Thêm mới</div>
     </div>
 
     <div class="table-container">
         <table>
             <thead>
                 <tr>
+                    <th>STT</th>
                     <th class="title">Nội dung</th>
                     <th class="content">Thời gian</th>
                     <th class="title">Hiển thị</th>
@@ -19,6 +20,7 @@
             <tbody>
                 @for(item of data().Items; track $index){
                 <tr>
+                    <td>{{ $index + 1 + (data()?.Page - 1) * data()?.PageSize }}</td>
                     <td class="title">{{item.noi_dung}}</td>
                     <td class="content">{{item.thoi_gian}}</td>
                     <td>
@@ -29,13 +31,13 @@
                     </td>
                     <td>
                         <div class="action">
-                            <div title="Xem chi tiết" class="btn them">
+                            <div (click)="onView(item.id)" title="Xem chi tiết" class="btn them">
                                 <div class="icon" style="mask: url('/public/resource/icons/xem.svg');"></div>
                             </div>
-                            <div title="Sửa" class="btn sua">
+                            <div (click)="onEdit(item.id)" title="Sửa" class="btn sua">
                                 <div class="icon" style="mask: url('/public/resource/icons/sua.svg');"></div>
                             </div>
-                            <div title="Xóa" class="btn xoa">
+                            <div (click)="onDelete(item.id)" title="Xóa" class="btn xoa">
                                 <div class="icon" style="mask: url('/public/resource/icons/thungrac.svg');"></div>
                             </div>
                         </div>
@@ -60,37 +62,39 @@
         Dòng {{data()?.Page}} đến {{data()?.PageSize}} của {{data()?.TotalPages}} trang
 
         <div class="nut-trang">
-        
+
             <!-- TRANG ĐẦU -->
             <button type="button" class="nhay-den" (click)="goToFirstPage()" [disabled]="currentPage() === 1">
                 |&lt;
             </button>
-        
-        
+
+
             <!-- TRANG TRƯỚC -->
             <button type="button" class="nhay-den" (click)="goToPreviousPage()" [disabled]="currentPage() === 1">
                 &lt;
             </button>
-        
-        
+
+
             <!-- TRANG HIỆN TẠI -->
             <span class="trang-hien-tai">
-                {{ currentPage() }} / {{ totalPages() }}
+                {{data()?.Page}} / {{data()?.TotalPages}}
             </span>
-        
-        
+
+
             <!-- TRANG SAU -->
             <button type="button" class="nhay-den" (click)="goToNextPage()" [disabled]="currentPage() === totalPages()">
                 &gt;
             </button>
-        
-        
+
+
             <!-- TRANG CUỐI -->
             <button type="button" class="nhay-den" (click)="goToLastPage()" [disabled]="currentPage() === totalPages()">
                 &gt;|
             </button>
-        
+
         </div>
 
     </div>
 </div>
+
+<app-dialog [(isOpen)]="isOpen" [selectedId]="selectedId()" [(mode)]="mode"></app-dialog>

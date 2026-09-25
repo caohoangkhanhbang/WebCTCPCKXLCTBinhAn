@@ -1,12 +1,11 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Tokens;
 using Npgsql;
-using WebCTCPCKXLCTBinhAn.API.Business;
-using WebCTCPCKXLCTBinhAn.API.Services;
-
 //Cấu hình xác thực
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using WebCTCPCKXLCTBinhAn.API.Business;
+using WebCTCPCKXLCTBinhAn.API.Services;
 //hết cấu hình xác thực
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +37,7 @@ builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<ICacCotMocRepository, CacCotMocRepository>();
+builder.Services.AddScoped<IManipulationDB, ManipulationDB>();
 
 //1. Dòng này giúp giữ nguyên tên thuộc tính (Property) của class như lúc khai báo để truyền api
 builder.Services.AddControllers()

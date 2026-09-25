@@ -1,0 +1,47 @@
+@if(isOpen()){
+<div class="overlay">
+    <form [formGroup]="formData" (ngSubmit)="onSubmit()" class="cv-container">
+        <p class="tieu-de">{{mode() === 'edit' ? 'Chỉnh sửa' : mode() === 'view' ? 'Xem chi tiết' : 'Thêm mới'}}</p>
+        <div class="input-container">
+            <label for="noi_dung" class="lien-he-tieude">Nội dung *</label>
+            <textarea name="noi_dung" id="noi_dung" formControlName="noi_dung" class="lien-he-input"
+                placeholder="vui lòng"></textarea>
+            <!-- <input formControlName="noi_dung" type="text" class="lien-he-input" id="noi_dung" placeholder="vui lòng"> -->
+            @if(formData.get('noi_dung')?.invalid && formData.get('noi_dung')?.touched){
+            <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+            }
+        </div>
+        <div class="input-container">
+            <label for="thoi_gian" class="lien-he-tieude">Thời gian *</label>
+            <input formControlName="thoi_gian" type="text" class="lien-he-input" id="thoi_gian"
+                placeholder="vui lòng nhập đầy đủ thông tin">
+            @if(formData.get('thoi_gian')?.invalid && formData.get('thoi_gian')?.touched){
+            <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+            }
+        </div>
+        <div class="input-container">
+            <div class="center">
+                <label for="is_delete" class="lien-he-tieude">Đã xóa *</label>
+                <input formControlName="is_delete" type="checkbox" id="is_delete"
+                    placeholder="vui lòng nhập đầy đủ thông tin">
+            </div>
+        </div>
+        <div class="input-container">
+            <div class="center">
+                <label for="hien_thi" class="lien-he-tieude">Hiển thị *</label>
+                <input formControlName="hien_thi" type="checkbox" id="hien_thi"
+                    placeholder="vui lòng nhập đầy đủ thông tin">
+            </div>
+            @if(formData.get('hien_thi')?.invalid && formData.get('hien_thi')?.touched){
+            <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+            }
+        </div>
+        <div class="center">
+            @if(mode() !== 'view'){
+            <button type="submit" class="button pos">Lưu</button>
+            }
+            <button (click)="onClose()" type="button" class="button neg">Hủy</button>
+        </div>
+    </form>
+</div>
+}

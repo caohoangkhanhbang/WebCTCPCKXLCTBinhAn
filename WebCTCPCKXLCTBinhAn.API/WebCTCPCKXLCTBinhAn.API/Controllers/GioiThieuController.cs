@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebCTCPCKXLCTBinhAn.API.Business;
 using WebCTCPCKXLCTBinhAn.API.classes;
-using WebCTCPCKXLCTBinhAn.API.DTOs;
 using WebCTCPCKXLCTBinhAn.API.Services;
 
 namespace WebCTCPCKXLCTBinhAn.API.Controllers
@@ -27,6 +26,49 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
             return Ok(data);
         }
 
+        [HttpGet("cac-cot-moc/{id}")]
+        public async Task<IActionResult> getCacCotMocById(int id)
+        {
+            var data = await _cacCotMocRepository.GetById(id);
+            if (data == null)
+            {
+                return NotFound();
+            }
+            return Ok(data);
+        }
+
+        [HttpPost("insert")]
+        public async Task<IActionResult> insertCacCotMoc([FromBody] CacCotMoc data)
+        {
+            var result = await _cacCotMocRepository.Insert(data);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> updateCacCotMoc(int id, [FromBody] CacCotMoc data)
+        {
+            var result = await _cacCotMocRepository.Update(id, data);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> deleteCacCotMoc(int id)
+        {
+            var result = await _cacCotMocRepository.Delete(id);
+            if (!result)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
 
     }
 }
