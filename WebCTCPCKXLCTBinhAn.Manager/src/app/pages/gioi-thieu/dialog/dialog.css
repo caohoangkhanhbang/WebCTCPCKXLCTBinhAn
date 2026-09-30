@@ -17,7 +17,8 @@
     border-radius: 15px;
     color: white;
     background: linear-gradient(45deg, #000000d4, #00000054);
-    min-width: 500px;
+    min-width: 90vw;
+    max-width: 90vw;
 }
 
 .tieu-de {

@@ -29,6 +29,12 @@ export const routes: Routes = [
                 canActivate: [authGuard]
             },
             {
+                path: 'linh-vuc-hoat-dong',
+                title: 'Lĩnh vực hoạt động',
+                loadComponent: () => import('./pages/linh-vuc-hoat-dong/linh-vuc-hoat-dong').then(m => m.LinhVucHoatDong),
+                canActivate: [authGuard]
+            },
+            {
                 path: 'register',
                 title: 'Đăng ký',
                 loadComponent: () => import('./pages/register/register').then(m => m.RegisterComponent),

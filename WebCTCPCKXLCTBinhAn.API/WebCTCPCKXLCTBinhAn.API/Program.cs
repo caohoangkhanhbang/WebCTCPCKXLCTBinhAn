@@ -6,6 +6,8 @@ using Npgsql;
 using System.Text;
 using WebCTCPCKXLCTBinhAn.API.Business;
 using WebCTCPCKXLCTBinhAn.API.Services;
+using WebCTCPCKXLCTBinhAn.API.Services.IRepositorise;
+using WebCTCPCKXLCTBinhAn.API.Services.Repositories;
 //hết cấu hình xác thực
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +40,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<ICacCotMocRepository, CacCotMocRepository>();
 builder.Services.AddScoped<IManipulationDB, ManipulationDB>();
+builder.Services.AddScoped<ILinhVucHoatDongRepository, LinhVucHoatDongRepository>();
 
 //1. Dòng này giúp giữ nguyên tên thuộc tính (Property) của class như lúc khai báo để truyền api
 builder.Services.AddControllers()

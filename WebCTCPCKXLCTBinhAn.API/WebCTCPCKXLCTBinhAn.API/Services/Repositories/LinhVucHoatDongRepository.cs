@@ -2,14 +2,15 @@
 using System.Data;
 using WebCTCPCKXLCTBinhAn.API.classes;
 using WebCTCPCKXLCTBinhAn.API.DTOs;
+using WebCTCPCKXLCTBinhAn.API.Services.IRepositorise;
 
-namespace WebCTCPCKXLCTBinhAn.API.Services
+namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
 {
-    public class CacCotMocRepository(NpgsqlDataSource dataSource, IManipulationDB manipulationDB) : ICacCotMocRepository
+    public class LinhVucHoatDongRepository(NpgsqlDataSource dataSource, IManipulationDB manipulationDB) : ILinhVucHoatDongRepository
     {
         private readonly NpgsqlDataSource _dataSource = dataSource;
         private readonly IManipulationDB _manipulationDB = manipulationDB;
-        public async Task<PaginationResponse<CacCotMoc>> GetPagedAsync(int page = 1, int pageSize = 10, string? search = "")
+        public async Task<PaginationResponse<GiaiPhap>> GetPagedAsync(int page, int pageSize, string? search = "")
         {
             page = Math.Max(page, 1);
             pageSize = Math.Clamp(pageSize, 10, 100);
@@ -21,13 +22,12 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
                 search = search.Trim();
                 whereClause += @"
                 where
-                      noi_dung ILIKE @search     
-                      OR thoi_gian ILIKE @search 
-                  
+                      noi_dung ILIKE @search  
+                      OR giai_phap ILIKE @search
                 ";
             }
 
-            var result = new PaginationResponse<CacCotMoc>
+            var result = new PaginationResponse<GiaiPhap>
             {
                 Page = page,
                 PageSize = pageSize,
@@ -35,7 +35,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
 
 
             string countSql = $@"SELECT COUNT(*)
-                FROM cac_cot_moc {whereClause}";
+                FROM giai_phap {whereClause}";
 
             await using var cmd = _dataSource.CreateCommand(countSql);
             if (!string.IsNullOrEmpty(search))
@@ -51,10 +51,10 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
             SELECT
                 id,
                 noi_dung,
-                is_delete,
-                hien_thi,
-                thoi_gian
-            FROM cac_cot_moc
+                giai_phap,
+                hinh,
+                hien_thi
+            FROM giai_phap
             {whereClause}
             ORDER BY id DESC
             LIMIT @pageSize
@@ -71,24 +71,24 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
             await using var dataReader = await reader.ExecuteReaderAsync();
             while (await dataReader.ReadAsync())
             {
-                result.Items.Add(new CacCotMoc
+                result.Items.Add(new GiaiPhap
                 {
                     id = dataReader.GetInt32(0),
                     noi_dung = dataReader["noi_dung"] != DBNull.Value ? dataReader.GetString(1) : null,
-                    is_delete = dataReader["is_delete"] != DBNull.Value ? dataReader.GetBoolean(2) : (bool?)null,
-                    hien_thi = dataReader["hien_thi"] != DBNull.Value ? dataReader.GetBoolean(3) : (bool?)null,
-                    thoi_gian = dataReader["thoi_gian"] != DBNull.Value ? dataReader.GetString(4) : null
+                    giai_phap = dataReader["giai_phap"] != DBNull.Value ? dataReader.GetString(2) : null,
+                    hinh = dataReader["hinh"] != DBNull.Value ? dataReader.GetString(3) : null,
+                    hien_thi = dataReader["hien_thi"] != DBNull.Value ? dataReader.GetBoolean(4) : (bool?)null
                 });
             }
             result.TotalPages = (int)Math.Ceiling((double)result.TotalItems / pageSize);
             return result;
         }
 
-        public async Task<CacCotMoc?> GetById(int id)
+        public async Task<GiaiPhap?> GetById(int id)
         {
             const string sql = """
-                                SELECT id, noi_dung, is_delete, hien_thi, thoi_gian
-                                FROM cac_cot_moc
+                                SELECT id, noi_dung, giai_phap, hien_thi, hinh
+                                FROM giai_phap
                                 WHERE id = @id
                                 LIMIT 1;
                                 """;
@@ -102,47 +102,47 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
             if (!await reader.ReadAsync())
                 return null;
 
-            return new CacCotMoc
+            return new GiaiPhap
             {
                 id = reader.GetInt32(0),
                 noi_dung = reader.IsDBNull(1) ? null : reader.GetString(1),
-                is_delete = reader.IsDBNull(2) ? null : reader.GetBoolean(2),
+                hinh = reader.IsDBNull(2) ? null : reader.GetString(2),
                 hien_thi = reader.IsDBNull(3) ? null : reader.GetBoolean(3),
-                thoi_gian = reader.IsDBNull(4) ? null : reader.GetString(4)
+                giai_phap = reader.IsDBNull(4) ? null : reader.GetString(4)
             };
         }
 
-        public async Task<bool> Insert(CacCotMoc data)
+        public async Task<bool> Insert(GiaiPhap data)
         {
             var dataToInsert = new Dictionary<string, object?>
             {
                 ["noi_dung"] = data.noi_dung,
-                ["is_delete"] = data.is_delete,
+                ["giai_phap"] = data.giai_phap,
                 ["hien_thi"] = data.hien_thi,
-                ["thoi_gian"] = data.thoi_gian,
+                ["hinh"] = data.hinh,
                 ["created_date"] = DateOnly.FromDateTime(DateTime.UtcNow)
             };
             return await _manipulationDB.InsertDynamicAsync(
-                "cac_cot_moc",
+                "giai_phap",
                 dataToInsert
             );
         }
 
-        public async Task<bool> Update(int id, CacCotMoc data)
+        public async Task<bool> Update(int id, GiaiPhap data)
         {
             var dataToUpdate = new Dictionary<string, object?>
             {
                 ["noi_dung"] = data.noi_dung,
-                ["is_delete"] = data.is_delete,
+                ["giai_phap"] = data.giai_phap,
                 ["hien_thi"] = data.hien_thi,
-                ["thoi_gian"] = data.thoi_gian,
+                ["hinh"] = data.hinh,
             };
             var whereConditions = new Dictionary<string, object?>
             {
                 ["id"] = id
             };
             return await _manipulationDB.UpdateDynamicAsync(
-                "cac_cot_moc",
+                "giai_phap",
                 dataToUpdate,
                 whereConditions
             );
@@ -155,10 +155,9 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
                 ["id"] = id
             };
             return await _manipulationDB.DeleteDynamicAsync(
-                "cac_cot_moc",
+                "giai_phap",
                 whereConditions
             );
         }
-
     }
 }

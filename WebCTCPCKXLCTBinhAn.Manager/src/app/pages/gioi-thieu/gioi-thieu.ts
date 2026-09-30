@@ -4,11 +4,13 @@ import { switchMap } from 'rxjs';
 
 import { GioiThieuService } from './gioi-thieu-service';
 import { Dialog } from './dialog/dialog';
+import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
+
 
 @Component({
   selector: 'app-gioi-thieu',
   standalone: true,
-  imports: [Dialog],
+  imports: [Dialog, ConfirmDialog],
   templateUrl: './gioi-thieu.html',
   styleUrl: './gioi-thieu.css',
   providers: [GioiThieuService]
@@ -19,12 +21,19 @@ export class GioiThieu {
   readonly currentPage = signal(1);
   readonly pageSize = signal(10);
   readonly searchTerm = signal('');
+  readonly reload = signal(true);
 
   private readonly query = computed(() => ({
     page: this.currentPage(),
     pageSize: this.pageSize(),
-    search: this.searchTerm()
+    search: this.searchTerm(),
+    reload: this.reload()
   }));
+
+  showDialog = signal<boolean>(false);
+  message = '';
+  buttomsInfo = [{ label: 'Thoát', value: 'thoat', style: 'secondary' }];
+
 
   readonly data = toSignal(
     toObservable(this.query).pipe(
@@ -113,25 +122,53 @@ export class GioiThieu {
 
   onEdit(id: number | null): void {
     this.selectedId.set(id);
-    this.mode.set('edit');
+    if (id === null) {
+      this.mode.set('create');
+    }
+    else {
+      this.mode.set('edit');
+    }
     this.isOpen.set(true);
   }
 
-  onDelete(id: number): void {
-    if (!confirm('Bạn có chắc chắn muốn xóa mục này?')) {
-      return;
-    }
+  onDelete(id: number, name: string): void {
+    this.resetDialog();
+    this.showDialog.set(true);
+    this.selectedId.set(id);
+    this.message = `Bạn có chắn chắn muốn xóa '${name}'?`;
+  }
 
-    this.service.delete(id).subscribe({
-      next: () => {
-        console.log(`Item with ID ${id} deleted successfully.`);
-        // Refresh the data after deletion
-        this.currentPage.set(this.currentPage());
-      },
-      error: err => {
-        console.error(`Error deleting item with ID ${id}:`, err);
-      }
-    });
+  resetDialog() {
+    this.buttomsInfo = [
+      { label: 'Xóa', value: 'xoa', style: 'primary' },
+      { label: 'Thoát', value: 'thoat', style: 'secondary' }
+    ];
+  }
+
+  handleDialogAction(action: string) {
+    if (action === 'xoa') {
+      this.delete(this.selectedId());
+    }
+    this.showDialog.set(false);
+  }
+
+  delete(id: number | null): void {
+    if (id !== null) {
+      this.service.delete(id).subscribe({
+        next: () => {
+          this.message = 'Xóa thành công!';
+          this.buttomsInfo = [
+            { label: 'Thoát', value: 'thoat', style: 'secondary' }
+          ];
+          this.showDialog.set(true);
+          this.currentPage.set(this.currentPage());
+          this.reload.set(!this.reload());
+        },
+        error: err => {
+          console.error(`Error deleting item with ID ${id}:`, err);
+        }
+      });
+    }
   }
 
 }

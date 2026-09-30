@@ -1,7 +1,7 @@
 ﻿using WebCTCPCKXLCTBinhAn.API.classes;
 using WebCTCPCKXLCTBinhAn.API.DTOs;
 
-namespace WebCTCPCKXLCTBinhAn.API.Services
+namespace WebCTCPCKXLCTBinhAn.API.Services.IRepositorise
 {
     public interface ICacCotMocRepository
     {

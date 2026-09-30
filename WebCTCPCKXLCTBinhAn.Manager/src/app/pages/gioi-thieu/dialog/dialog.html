@@ -6,7 +6,6 @@
             <label for="noi_dung" class="lien-he-tieude">Nội dung *</label>
             <textarea name="noi_dung" id="noi_dung" formControlName="noi_dung" class="lien-he-input"
                 placeholder="vui lòng"></textarea>
-            <!-- <input formControlName="noi_dung" type="text" class="lien-he-input" id="noi_dung" placeholder="vui lòng"> -->
             @if(formData.get('noi_dung')?.invalid && formData.get('noi_dung')?.touched){
             <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
             }
@@ -21,26 +20,23 @@
         </div>
         <div class="input-container">
             <div class="center">
-                <label for="is_delete" class="lien-he-tieude">Đã xóa *</label>
+                <label for="is_delete" class="lien-he-tieude">Đã xóa</label>
                 <input formControlName="is_delete" type="checkbox" id="is_delete"
                     placeholder="vui lòng nhập đầy đủ thông tin">
             </div>
         </div>
         <div class="input-container">
             <div class="center">
-                <label for="hien_thi" class="lien-he-tieude">Hiển thị *</label>
+                <label for="hien_thi" class="lien-he-tieude">Hiển thị</label>
                 <input formControlName="hien_thi" type="checkbox" id="hien_thi"
                     placeholder="vui lòng nhập đầy đủ thông tin">
             </div>
-            @if(formData.get('hien_thi')?.invalid && formData.get('hien_thi')?.touched){
-            <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
-            }
         </div>
         <div class="center">
             @if(mode() !== 'view'){
             <button type="submit" class="button pos">Lưu</button>
             }
-            <button (click)="onClose()" type="button" class="button neg">Hủy</button>
+            <button (click)="onClose()" type="button" class="button neg">Thoát</button>
         </div>
     </form>
 </div>

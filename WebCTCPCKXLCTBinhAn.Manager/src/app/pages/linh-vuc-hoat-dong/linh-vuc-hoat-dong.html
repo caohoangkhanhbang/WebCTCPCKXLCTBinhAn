@@ -1,33 +1,30 @@
-<div class="">Giới thiệu</div>
+<div class="">Lĩnh vực hoạt động</div>
 <div class="container">
     <div class="search-container">
         <input type="text" placeholder="🔍 Tìm kiếm..." class="search-input" (input)="onSearch($event)" />
-        <div class="nut-them" (click)="onEdit(null)">Thêm mới</div>
+        <div class="nut-them" (click)="onEdit(1)">Thêm mới</div>
     </div>
 
     <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>STT</th>
-                    <th class="title">Nội dung</th>
-                    <th class="content">Thời gian</th>
-                    <th class="title">Hiển thị</th>
-                    <th class="content">Đã xóa</th>
-                    <th class="title">Hành động</th>
+                    @for(item of columns; track item.name){
+                    <td>{{item.name}}</td>
+                    }
                 </tr>
             </thead>
             <tbody>
                 @for(item of data().Items; track $index){
                 <tr>
                     <td>{{ $index + 1 + (data()?.Page - 1) * data()?.PageSize }}</td>
-                    <td (click)="onView(item.id)" class="title">{{item.noi_dung}}</td>
-                    <td class="content">{{item.thoi_gian}}</td>
+                    <td (click)="onView(item.id)" class="title">{{item.giai_phap}}</td>
+                    <td class="title">{{item.noi_dung}}</td>
                     <td>
-                        <input readonly type="checkbox" [checked]="item.hien_thi" />
+                        <img class="image-list" [src]="cdnUrl + '/' + item.hinh" [alt]="item.giai_phap">
                     </td>
                     <td>
-                        <input readonly type="checkbox" [checked]="item.is_delete" />
+                        <input readonly type="checkbox" [checked]="item.hien_thi" />
                     </td>
                     <td>
                         <div class="action">
@@ -61,44 +58,32 @@
 
         Dòng {{data()?.Page}} đến {{data()?.PageSize}} của {{data()?.TotalPages}} trang
 
-        <div class="nut-trang">
+        <!-- <div class="nut-trang">
 
-            <!-- TRANG ĐẦU -->
+            TRANG ĐẦU
             <button type="button" class="nhay-den" (click)="goToFirstPage()" [disabled]="currentPage() === 1">
                 |&lt;
             </button>
-
-
-            <!-- TRANG TRƯỚC -->
             <button type="button" class="nhay-den" (click)="goToPreviousPage()" [disabled]="currentPage() === 1">
                 &lt;
             </button>
-
-
-            <!-- TRANG HIỆN TẠI -->
             <span class="trang-hien-tai">
                 {{data()?.Page}} / {{data()?.TotalPages}}
             </span>
-
-
-            <!-- TRANG SAU -->
             <button type="button" class="nhay-den" (click)="goToNextPage()" [disabled]="currentPage() === totalPages()">
                 &gt;
             </button>
-
-
-            <!-- TRANG CUỐI -->
             <button type="button" class="nhay-den" (click)="goToLastPage()" [disabled]="currentPage() === totalPages()">
                 &gt;|
             </button>
 
-        </div>
+        </div> -->
 
     </div>
 </div>
 
-<app-dialog [(isOpen)]="isOpen" [selectedId]="selectedId()" [(mode)]="mode"></app-dialog>
-@if(showDialog()){
+<app-dialog [(isOpen)]="isOpen" [id]="selectedId()" [hanhDong]="hanhDong()"></app-dialog>
+<!-- @if(showDialog()){
 <app-confirm-dialog [message]="message" [buttons]="buttomsInfo"
     (action)="handleDialogAction($event)"></app-confirm-dialog>
-}
+} -->

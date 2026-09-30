@@ -41,11 +41,9 @@ export class Dialog {
       const id = this.selectedId();
       if (id === null) {
         this.formData.enable();
-        this.mode.set('create');
         this.resetForm();
         return;
       }
-      // this.isEdit = true;
       this.loadData(id);
     });
   }
