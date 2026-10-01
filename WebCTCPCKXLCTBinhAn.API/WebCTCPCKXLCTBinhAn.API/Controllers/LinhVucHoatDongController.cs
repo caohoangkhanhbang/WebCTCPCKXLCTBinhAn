@@ -37,7 +37,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
         }
 
         [HttpPost("insert")]
-        public async Task<IActionResult> insertCacCotMoc([FromBody] GiaiPhap data)
+        public async Task<IActionResult> insertCacCotMoc([FromForm] GiaiPhap data)
         {
             var result = await _linhVucHoatDongRepository.Insert(data);
             if (!result)

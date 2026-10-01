@@ -1,0 +1,3 @@
+@if(dialog.isOpen()){
+    <kb-dialog [title]="dialog.title()" [message]="dialog.message()" [buttons]="dialog.buttons()" (action)="handleAction($event)"></kb-dialog>
+}

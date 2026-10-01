@@ -2,7 +2,7 @@
 <div class="container">
     <div class="search-container">
         <input type="text" placeholder="🔍 Tìm kiếm..." class="search-input" (input)="onSearch($event)" />
-        <div class="nut-them" (click)="onEdit(1)">Thêm mới</div>
+        <div class="nut-them" (click)="onCreate()">Thêm mới</div>
     </div>
 
     <div class="table-container">
@@ -34,7 +34,7 @@
                             <div (click)="onEdit(item.id)" title="Sửa" class="btn sua">
                                 <div class="icon" style="mask: url('/public/resource/icons/sua.svg');"></div>
                             </div>
-                            <div (click)="onDelete(item.id, item.noi_dung)" title="Xóa" class="btn xoa">
+                            <div (click)="onDelete(item.id, item.giai_phap)" title="Xóa" class="btn xoa">
                                 <div class="icon" style="mask: url('/public/resource/icons/thungrac.svg');"></div>
                             </div>
                         </div>
@@ -58,32 +58,26 @@
 
         Dòng {{data()?.Page}} đến {{data()?.PageSize}} của {{data()?.TotalPages}} trang
 
-        <!-- <div class="nut-trang">
-
-            TRANG ĐẦU
-            <button type="button" class="nhay-den" (click)="goToFirstPage()" [disabled]="currentPage() === 1">
+        <div class="nut-trang">
+            <button type="button" class="nhay-den" (click)="goToFirstPage()" [disabled]="page() === 1">
                 |&lt;
             </button>
-            <button type="button" class="nhay-den" (click)="goToPreviousPage()" [disabled]="currentPage() === 1">
+            <button type="button" class="nhay-den" (click)="goToPreviousPage()" [disabled]="page() === 1">
                 &lt;
             </button>
             <span class="trang-hien-tai">
                 {{data()?.Page}} / {{data()?.TotalPages}}
             </span>
-            <button type="button" class="nhay-den" (click)="goToNextPage()" [disabled]="currentPage() === totalPages()">
+            <button type="button" class="nhay-den" (click)="goToNextPage()" [disabled]="page() === totalPages()">
                 &gt;
             </button>
-            <button type="button" class="nhay-den" (click)="goToLastPage()" [disabled]="currentPage() === totalPages()">
+            <button type="button" class="nhay-den" (click)="goToLastPage()" [disabled]="page() === totalPages()">
                 &gt;|
             </button>
 
-        </div> -->
+        </div>
 
     </div>
 </div>
 
-<app-dialog [(isOpen)]="isOpen" [id]="selectedId()" [hanhDong]="hanhDong()"></app-dialog>
-<!-- @if(showDialog()){
-<app-confirm-dialog [message]="message" [buttons]="buttomsInfo"
-    (action)="handleDialogAction($event)"></app-confirm-dialog>
-} -->
+<app-dialog [(isOpen)]="isOpen" [id]="selectedId()" [hanhDong]="hanhDong()" (finish)="reloadData()"></app-dialog>

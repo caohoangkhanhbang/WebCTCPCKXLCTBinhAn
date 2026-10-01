@@ -6,10 +6,11 @@ using WebCTCPCKXLCTBinhAn.API.Services.IRepositorise;
 
 namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
 {
-    public class LinhVucHoatDongRepository(NpgsqlDataSource dataSource, IManipulationDB manipulationDB) : ILinhVucHoatDongRepository
+    public class LinhVucHoatDongRepository(NpgsqlDataSource dataSource, IManipulationDB manipulationDB, IFileService fileService) : ILinhVucHoatDongRepository
     {
         private readonly NpgsqlDataSource _dataSource = dataSource;
         private readonly IManipulationDB _manipulationDB = manipulationDB;
+        private readonly IFileService _fileService = fileService;
         public async Task<PaginationResponse<GiaiPhap>> GetPagedAsync(int page, int pageSize, string? search = "")
         {
             page = Math.Max(page, 1);
@@ -56,7 +57,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                 hien_thi
             FROM giai_phap
             {whereClause}
-            ORDER BY id DESC
+            ORDER BY id desc
             LIMIT @pageSize
             OFFSET @offset
             ";
@@ -106,14 +107,19 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
             {
                 id = reader.GetInt32(0),
                 noi_dung = reader.IsDBNull(1) ? null : reader.GetString(1),
-                hinh = reader.IsDBNull(2) ? null : reader.GetString(2),
+                giai_phap = reader.IsDBNull(2) ? null : reader.GetString(2),
                 hien_thi = reader.IsDBNull(3) ? null : reader.GetBoolean(3),
-                giai_phap = reader.IsDBNull(4) ? null : reader.GetString(4)
+                hinh = reader.IsDBNull(4) ? null : reader.GetString(4)
             };
         }
 
         public async Task<bool> Insert(GiaiPhap data)
         {
+            if (data.file != null && data.file.Length > 0)
+            {
+                data.hinh = await _fileService.SaveFileAsync(data.file, $"GiaiPhap/{DateTime.Now:yyyy/MM/dd}");
+            }
+
             var dataToInsert = new Dictionary<string, object?>
             {
                 ["noi_dung"] = data.noi_dung,
@@ -130,6 +136,10 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
 
         public async Task<bool> Update(int id, GiaiPhap data)
         {
+            if (data.file != null && data.file.Length > 0)
+            {
+                data.hinh = await _fileService.SaveFileAsync(data.file, $"GiaiPhap/{DateTime.Now:yyyy/MM/dd}");
+            }
             var dataToUpdate = new Dictionary<string, object?>
             {
                 ["noi_dung"] = data.noi_dung,

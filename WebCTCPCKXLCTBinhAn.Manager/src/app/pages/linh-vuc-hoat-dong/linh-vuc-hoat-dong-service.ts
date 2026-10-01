@@ -10,7 +10,7 @@ export class LinhVucHoatDongService {
     }
 
     getById(id: number | null) {
-        return this.http.get(`${this.apiUrl}/linh-vuc-hoat-dong/${id}`);
+        return this.http.get<any>(`${this.apiUrl}/linh-vuc-hoat-dong/${id}`);
     }
 
     insert(data: any) {

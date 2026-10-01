@@ -1,4 +1,9 @@
 /* hiển thị dialog */
+.image-review {
+    height: 200px;
+    border-radius: 5px;
+}
+
 .overlay {
     position: fixed;
     top: 0;

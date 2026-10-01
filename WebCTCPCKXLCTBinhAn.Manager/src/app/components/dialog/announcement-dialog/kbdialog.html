@@ -1,0 +1,14 @@
+<div class="overlay" (click)="onOverlayClick()">
+    <div class="dialog-box" (click)="$event.stopPropagation()">
+        <div class="title">{{ title() }}</div>
+        <div class="dialog-message">{{ message() }}</div>
+
+        <div class="dialog-actions">
+            @for(button of buttons(); track button.value){
+            <button type="button" [class]="'btn btn-'+ (button.style || 'maudo')" (click)="onButtonClick(button.value)">
+                {{ button.label }}
+            </button>
+            }
+        </div>
+    </div>
+</div>

@@ -75,7 +75,6 @@ export class Dialog {
       return;
     }
     const data = this.formData.getRawValue();
-    console.log('Form submitted:', this.mode());
     if (this.mode() === 'create') {
       this.service.insert(data).subscribe({
         next: response => {
