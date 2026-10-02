@@ -1,7 +1,11 @@
-﻿namespace WebCTCPCKXLCTBinhAn.API.Services
+﻿using Npgsql;
+using System.Text.RegularExpressions;
+
+namespace WebCTCPCKXLCTBinhAn.API.Services
 {
-    public class FileService : IFileService
+    public class FileService(IConfiguration configuration, NpgsqlDataSource dataSource) : IFileService
     {
+        private readonly string thuMucLuuFile = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), configuration["ThuMucLuuFile:DiaChi"] ?? "../uploads-folder"));
         private static readonly HashSet<string> BlockedExtensions = new(StringComparer.OrdinalIgnoreCase)
         {
             ".exe", ".msi", ".bat", ".cmd", ".sh", ".php", ".asp", ".aspx",
@@ -21,7 +25,8 @@
                 throw new InvalidOperationException("Phát hiện nội dung file bất thường hoặc có nguy cơ chứa mã độc.");
 
             var fileName = $"{Guid.NewGuid()}{extension}";
-            var baseFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "uploads-folder");
+            //var baseFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "uploads-folder");
+            var baseFolderPath = Path.Combine(Directory.GetCurrentDirectory(), thuMucLuuFile);
             var folderPath = string.IsNullOrWhiteSpace(subFolder)
                 ? baseFolderPath
                 : Path.Combine(baseFolderPath, subFolder);
@@ -30,7 +35,7 @@
                 Directory.CreateDirectory(folderPath);
             var filePath = Path.Combine(folderPath, fileName);
 
-            using(var stream = new FileStream(filePath,FileMode.Create))
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
@@ -39,6 +44,32 @@
                 return fileName;
 
             return Path.Combine(subFolder, fileName).Replace('\\', '/');
+        }
+
+        public void DeleteFile(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+                return;
+            var baseFolderPath = Path.Combine(Directory.GetCurrentDirectory(), thuMucLuuFile);
+            var fullPath = Path.Combine(baseFolderPath, fileName);
+            if (File.Exists(fullPath))
+                File.Delete(fullPath);
+        }
+
+        public string GetFileName(string tenBang, string tenCot, int id)
+        {
+            if (string.IsNullOrWhiteSpace(tenBang) || string.IsNullOrWhiteSpace(tenCot) || id == null)
+                return null;
+            if (!Regex.IsMatch(tenBang, @"^[a-zA-Z_][a-zA-Z0-9_]*$") || !Regex.IsMatch(tenCot, @"^[a-zA-Z_][a-zA-Z0-9_]*$"))
+                throw new ArgumentException("Tên bảng hoặc tên cột không hợp lệ.");
+
+            string sql = @$"
+            select {tenCot} from {tenBang} where id = @id limit 1
+            ";
+            var cmd = dataSource.CreateCommand(sql);
+            cmd.Parameters.AddWithValue("id", id);
+            var result = cmd.ExecuteScalar();
+            return result?.ToString() ?? "";
         }
 
         private async Task<bool> IsDangerousFileContentAsync(IFormFile file)

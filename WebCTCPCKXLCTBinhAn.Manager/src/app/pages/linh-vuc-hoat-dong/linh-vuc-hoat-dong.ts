@@ -86,9 +86,8 @@ export class LinhVucHoatDong {
     if (result !== 'dongy') return;
     this.service.delete(id).subscribe({
       next: () => {
-        this.page.set(1);
-        this.reloadData();
         this.thongbao.hienThi(`Xóa thành công!`);
+        this.reloadData();
       },
       error: (err) => {
         console.error(err);
@@ -96,6 +95,7 @@ export class LinhVucHoatDong {
       }
     });
   }
+
   onEdit(id: number) {
     this.hanhDong.set('update');
     this.selectedId.set(id);
@@ -110,6 +110,7 @@ export class LinhVucHoatDong {
 
   onCreate() {
     this.isOpen.set(true);
+    this.selectedId.set(null);
     this.hanhDong.set('create');
   }
 }

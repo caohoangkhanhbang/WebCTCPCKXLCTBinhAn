@@ -136,38 +136,57 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
 
         public async Task<bool> Update(int id, GiaiPhap data)
         {
+            string tenBang = "giai_phap";
+            string tenCot = "hinh";
+            string fileOld = _fileService.GetFileName(tenBang, tenCot, id);
+            string fileNew = "";
             if (data.file != null && data.file.Length > 0)
             {
-                data.hinh = await _fileService.SaveFileAsync(data.file, $"GiaiPhap/{DateTime.Now:yyyy/MM/dd}");
+                fileNew = data.hinh = await _fileService.SaveFileAsync(data.file, $"GiaiPhap/{DateTime.Now:yyyy/MM/dd}");
             }
             var dataToUpdate = new Dictionary<string, object?>
             {
                 ["noi_dung"] = data.noi_dung,
                 ["giai_phap"] = data.giai_phap,
-                ["hien_thi"] = data.hien_thi,
-                ["hinh"] = data.hinh,
+                ["hien_thi"] = data.hien_thi
             };
+            if (data.hinh != null)
+                dataToUpdate.Add(tenCot, data.hinh);
             var whereConditions = new Dictionary<string, object?>
             {
                 ["id"] = id
             };
-            return await _manipulationDB.UpdateDynamicAsync(
-                "giai_phap",
+            var result = await _manipulationDB.UpdateDynamicAsync(
+                tenBang,
                 dataToUpdate,
                 whereConditions
             );
+            if (!result) deleteFile(fileNew);
+            else deleteFile(fileOld);
+            return result;
         }
 
         public async Task<bool> Delete(int id)
         {
+            string tenBang = "giai_phap";
+            string tenCot = "hinh";
+            string fileOld = _fileService.GetFileName(tenBang, tenCot, id);
             var whereConditions = new Dictionary<string, object?>
             {
                 ["id"] = id
             };
-            return await _manipulationDB.DeleteDynamicAsync(
-                "giai_phap",
+            var result = await _manipulationDB.DeleteDynamicAsync(
+                tenBang,
                 whereConditions
             );
+            if (result) deleteFile(fileOld);
+            return result;
+        }
+
+        public void deleteFile(string fileName)
+        {
+            if (!string.IsNullOrWhiteSpace(fileName))
+                _fileService.DeleteFile(fileName);
         }
     }
 }

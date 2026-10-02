@@ -3,47 +3,51 @@
     <form [formGroup]="formData" (ngSubmit)="onSubmit()" class="cv-container">
         <p class="tieu-de">{{hanhDong() === 'create' ? 'Thêm mới' : hanhDong() === 'view' ? 'Xem chi tiết' : 'Chỉnh
             sửa'}}</p>
-        <div class="input-container">
-            <label for="giai_phap" class="lien-he-tieude">Tên giải pháp *</label>
-            <input type="text" name="giai_phap" id="giai_phap" formControlName="giai_phap" class="lien-he-input"
-                placeholder="vui lòng" />
-            @if(formData.get('giai_phap')?.invalid && formData.get('giai_phap')?.touched){
-            <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
-            }
-        </div>
-        <div class="input-container">
-            <label for="noi_dung" class="lien-he-tieude">Nội dung *</label>
-            <textarea formControlName="noi_dung" class="lien-he-input" id="noi_dung"
-                placeholder="vui lòng nhập đầy đủ thông tin"></textarea>
-            @if(formData.get('noi_dung')?.invalid && formData.get('noi_dung')?.touched){
-            <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
-            }
-        </div>
-        <div class="input-container">
-            <div class="center">
-                @if(imageReview){
-                <img class="image-review" [src]="imageReview" alt="">
-                } @else if(oldImage) {
-                <img class="image-review" [src]="cdnUrl +'/'+ oldImage" alt="">
-                }
-                @if(hanhDong()!== 'view') {
-                <label for="hinh" class="lien-he-tieude">Chọn ảnh</label>
-                <input type="file" id="hinh" accept="image/*" (change)="onFileSelected($event)"
-                    [disabled]="hanhDong() === 'view'" />
-                }
-            </div>
-        </div>
-        <div class="input-container">
-            <div class="center">
-                <label for="hien_thi" class="lien-he-tieude">Hiển thị</label>
-                <input formControlName="hien_thi" type="checkbox" id="hien_thi"
-                    placeholder="vui lòng nhập đầy đủ thông tin">
-                @if(formData.get('hien_thi')?.invalid && formData.get('hien_thi')?.touched){
+        <div class="container-scroll">
+            <div class="input-container">
+                <label for="giai_phap" class="lien-he-tieude">Tên giải pháp <span
+                        class="color-requier">(*)</span></label>
+                <input type="text" name="giai_phap" id="giai_phap" formControlName="giai_phap" class="lien-he-input"
+                    placeholder="vui lòng" />
+                @if(formData.get('giai_phap')?.invalid && formData.get('giai_phap')?.touched){
                 <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
                 }
             </div>
+            <div class="input-container">
+                <label for="noi_dung" class="lien-he-tieude">Nội dung <span class="color-requier">(*)</span></label>
+                <textarea formControlName="noi_dung" class="lien-he-input" id="noi_dung"
+                    placeholder="vui lòng nhập đầy đủ thông tin"></textarea>
+                @if(formData.get('noi_dung')?.invalid && formData.get('noi_dung')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <div class="">
+                    @if(imageReview){
+                    <img class="image-review" [src]="imageReview" alt="">
+                    } @else if(oldImage) {
+                    <img class="image-review" [src]="cdnUrl +'/'+ oldImage" alt="">
+                    }
+                </div>
+                <div class="center-height">
+                    @if(hanhDong()!== 'view') {
+                    <label for="hinh" class="lien-he-tieude margin-right">Chọn ảnh</label>
+                    <input type="file" id="hinh" accept="image/*" (change)="onFileSelected($event)" />
+                    }
+                </div>
+            </div>
+            <div class="input-container">
+                <div class="center-height">
+                    <label for="hien_thi" class="lien-he-tieude margin-right">Hiển thị</label>
+                    <input formControlName="hien_thi" type="checkbox" id="hien_thi"
+                        placeholder="vui lòng nhập đầy đủ thông tin">
+                    @if(formData.get('hien_thi')?.invalid && formData.get('hien_thi')?.touched){
+                    <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                    }
+                </div>
+            </div>
         </div>
-        <div class="center">
+        <div class="center row-reverse">
             @if(hanhDong() !== 'view'){
             <button type="submit" class="button pos">Lưu</button>
             }

@@ -2,6 +2,7 @@ import { Component, effect, inject, input, model, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LinhVucHoatDongService } from '../linh-vuc-hoat-dong-service';
 import { environment } from '../../../../environments/environment.development';
+import { AnnouncementService } from '../../../components/dialog/announcement-service';
 
 
 @Component({
@@ -22,16 +23,22 @@ export class LinhVucHoatDongEdit {
   cdnUrl = environment.cdnUrl;
   oldImage: string | null = null;
   finish = output<void>();
+  thongbao = inject(AnnouncementService);
+
 
   constructor() {
     effect(() => {
       const id = this.id();
+      const open = this.isOpen();
+
       if (id === null) {
         this.resetData();
         return;
       }
 
-      this.service.getById(this.id()).subscribe({
+      if (!open) return;
+
+      this.service.getById(id).subscribe({
         next: response => {
           this.formData.patchValue(
             {
@@ -42,9 +49,19 @@ export class LinhVucHoatDongEdit {
           )
           this.oldImage = response.hinh;
         },
-        error: error => confirm(error)
+        error: error => {
+          this.thongbao.hienThi('Có lỗi xảy ra khi lấy dữ liệu', 'Thông báo');
+          console.error('Error fetching data:', error);
+        }
       })
     });
+
+    effect(()=>{
+      if(this.hanhDong()==='view')
+        this.formData.disable();
+      else
+        this.formData.enable();
+    })
   }
 
   formData = this.fb.group({
@@ -59,10 +76,12 @@ export class LinhVucHoatDongEdit {
       noi_dung: '',
       hien_thi: true
     })
+    this.selectedFile = null;
     this.oldImage = null;
-    this.imageReview = null;
-    this.finish.emit();
-    this.isOpen.set(false);
+    if (this.imageReview) {
+      URL.revokeObjectURL(this.imageReview);
+      this.imageReview = null;
+    }
   }
 
   onFileSelected(event: Event) {
@@ -70,7 +89,7 @@ export class LinhVucHoatDongEdit {
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       if (!file.type.startsWith('image/')) {
-        alert('Vui lòng chọn file hình ảnh');
+        this.thongbao.hienThi('Vui lòng chọn file hình ảnh hợp lệ', 'Thông báo');
         return;
       }
       this.selectedFile = file;
@@ -98,34 +117,31 @@ export class LinhVucHoatDongEdit {
     if (this.hanhDong() === 'create') {
       this.service.insert(data).subscribe({
         next: response => {
-          alert('Thêm mới thành công');
-          this.resetData();
+          this.thongbao.hienThi('Thêm mới thành công', 'Thông báo');
+          this.onClose();
         },
         error: error => {
           console.error('Error creating data:', error);
-          alert('Có lỗi xảy ra khi thêm mới dữ liệu');
+          this.thongbao.hienThi('Có lỗi xảy ra khi thêm mới dữ liệu', 'Thông báo');
         }
       });
     } else if (this.hanhDong() === 'update' && this.id() !== null) {
       this.service.update(this.id()!, data).subscribe({
         next: response => {
-          alert('Cập nhật thành công');
-          this.resetData();
+          this.thongbao.hienThi('Cập nhật thành công', 'Thông báo');
+          this.onClose();
         },
         error: error => {
           console.error('Error updating data:', error);
-          alert('Có lỗi xảy ra khi cập nhật dữ liệu');
+          this.thongbao.hienThi('Có lỗi xảy ra khi cập nhật dữ liệu', 'Thông báo');
         }
       });
     }
   }
 
   onClose() {
-    this.isOpen.set(false);
     this.resetData();
-    if (this.imageReview) {
-      URL.revokeObjectURL(this.imageReview);
-      this.imageReview = null;
-    }
+    this.isOpen.set(false);
+    this.finish.emit();
   }
 }

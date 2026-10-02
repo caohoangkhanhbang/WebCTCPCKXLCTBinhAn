@@ -1,4 +1,19 @@
 /* hiển thị dialog */
+.container-scroll {
+    max-height: 60vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.container-scroll:hover {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(122, 121, 121) transparent;
+}
+
+.row-reverse {
+    flex-direction: row-reverse;
+}
+
 .image-review {
     height: 200px;
     border-radius: 5px;
@@ -28,12 +43,13 @@
 }
 
 .tieu-de {
-    font-size: 20px;
+    font-size: 30px;
     font-family: var(--font-tieude);
-    margin: 10px 0;
+    margin: 20px 0;
     background: linear-gradient(45deg, #00e1ff, #00ff49, #00e1ff);
-    -webkit-background-clip: text;
+    background-clip: text;
     color: transparent;
+    text-align: center;
 }
 
 .input-container {
@@ -41,7 +57,6 @@
 }
 
 .lien-he-tieude {
-    /* margin-right: 20px; */
     font-family: var(--font-tieude);
 }
 
@@ -54,6 +69,12 @@
     background: transparent;
     color: #ffffff;
     font-size: 16px;
+    scrollbar-width: thin;
+}
+
+.lien-he-input:focus {
+    outline: none;
+    border: 2px solid #007bff;
 }
 
 .error-message {
@@ -111,8 +132,6 @@ table {
     overflow-wrap: break-word;
     border-spacing: 1px;
 }
-
-.content-container {}
 
 thead th {
     position: sticky;
@@ -285,6 +304,7 @@ tr:last-child td:last-child {
     margin: 0 2px;
     color: #00a8ff;
     cursor: pointer;
+    border: none;
 }
 
 .nhay-den:hover {
@@ -295,6 +315,19 @@ tr:last-child td:last-child {
     height: 80px;
     object-fit: contain;
     border-radius: 5px;
+}
+
+.center-height {
+    display: flex;
+    align-items: center;
+}
+
+.margin-right {
+    margin-right: 20px;
+}
+
+.color-requier {
+    color: #ff008d;
 }
 
 /* Hết hiển thị bảng */

@@ -48,7 +48,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> updateCacCotMoc(int id, [FromBody] GiaiPhap data)
+        public async Task<IActionResult> updateCacCotMoc(int id, [FromForm] GiaiPhap data)
         {
             var result = await _linhVucHoatDongRepository.Update(id, data);
             if (!result)
