@@ -1,4 +1,6 @@
 /* hiển thị dialog */
+
+
 .container-scroll {
     max-height: 60vh;
     overflow-y: auto;
@@ -17,6 +19,7 @@
 .image-review {
     height: 200px;
     border-radius: 5px;
+    margin: 30px 0;
 }
 
 .overlay {
@@ -75,6 +78,13 @@
 .lien-he-input:focus {
     outline: none;
     border: 2px solid #007bff;
+}
+
+.input-date {
+    background: linear-gradient(90deg, transparent, transparent, transparent, transparent, transparent,
+            transparent,
+            transparent,
+            transparent, #00e1ff88, #00e1ffe9, #0008ff);
 }
 
 .error-message {
