@@ -36,8 +36,14 @@
 }
 
 .duan-content-main {
-    width: 100%;
+    max-width: 100%;
     text-align: justify;
+    font-family: var(--font-bold);
+}
+
+.duan-content-main img {
+    max-width: 100%;
+    height: auto;
 }
 
 .title-general-detail {

@@ -7,6 +7,7 @@ import { computed } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { DatePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-chi-tiet-du-an',
@@ -21,6 +22,15 @@ export class ChiTietDuAn {
     service = inject(ChiTietDuAnServices);
     readonly cdnUrl = environment.cdnUrl;
     id = input.required<string>();
+    private sanitizer = inject(DomSanitizer);
+
+    noiDungHtml = computed<SafeHtml | null>(() => {
+        const html = this.data()?.noi_dung;
+        if (!html) {
+            return null;
+        }
+        return this.sanitizer.bypassSecurityTrustHtml(html);
+    });
 
     data = toSignal(
         toObservable(this.id).pipe(

@@ -23,7 +23,9 @@
             <img class="duan-item-img" width="80%" [src]="cdnUrl + '/' + data()?.hinh" alt="{{data()?.ten_du_an}}" />
         </div>
         <div class="l-8 m-8 c-12">
-            <div class="duan-content-main" [innerHTML]="data()?.noi_dung"></div>
+            <div class="duan-content-main">
+                <div [innerHTML]="noiDungHtml()"></div>
+            </div>
             <div class="duan-content-main-getway">
                 <div class="navigate-duan" routerLink="/du-an">&#10094; {{'PROJECT_DETAILS.BACK_TO_PROJECTS' |
                     translate}}</div>

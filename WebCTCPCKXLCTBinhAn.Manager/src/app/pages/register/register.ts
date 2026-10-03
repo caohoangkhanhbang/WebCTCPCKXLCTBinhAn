@@ -23,7 +23,6 @@ export class RegisterComponent {
       password: this.password
     }).subscribe({
       next: response => {
-        console.log(response);
         alert('Đăng ký thành công');
       },
       error: error => {

@@ -4,10 +4,13 @@ import { DuAnService } from '../du-an-service';
 import { environment } from '../../../../environments/environment.development';
 import { AnnouncementService } from '../../../components/dialog/announcement-service';
 
+import { ViewChild } from '@angular/core';
+import { RichTextEditorComponent } from '../../../components/rich-text-editor/rich-text-editor';
+
 
 @Component({
   selector: 'app-dialog',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RichTextEditorComponent],
   templateUrl: './du-an-edit.html',
   providers: [DuAnService]
 })
@@ -24,18 +27,19 @@ export class DuAnEdit {
   finish = output<void>();
   thongbao = inject(AnnouncementService);
 
+  @ViewChild(RichTextEditorComponent) richTextEditor!: RichTextEditorComponent;
 
   constructor() {
     effect(() => {
       const id = this.id();
       const open = this.isOpen();
 
+      if (!open) return;
+
       if (id === null) {
         this.resetData();
         return;
       }
-
-      if (!open) return;
 
       this.service.getById(id).subscribe({
         next: response => {
@@ -111,17 +115,18 @@ export class DuAnEdit {
     }
   }
 
-  onSubmit() {
-    console.log('Form data before submission:', this.formData.value);
+  async onSubmit() {
     if (this.formData.invalid) {
       this.formData.markAllAsTouched();
       return;
     }
 
+    const noiDung = await this.richTextEditor.prepareContentForSave();
+
     const data = new FormData();
     data.append('ten_du_an', this.formData.get('ten_du_an')?.value ?? '');
     data.append('bo_nghia', this.formData.get('bo_nghia')?.value ?? '');
-    data.append('noi_dung', this.formData.get('noi_dung')?.value ?? '');
+    data.append('noi_dung', noiDung.toString() ?? '');
     data.append('hien_thi', String(this.formData.get('hien_thi')?.value ?? 'false'));
     data.append('hang_muc_thi_cong', this.formData.get('hang_muc_thi_cong')?.value ?? '');
     data.append('chu_dau_tu', this.formData.get('chu_dau_tu')?.value ?? '');
@@ -129,8 +134,6 @@ export class DuAnEdit {
     if (this.selectedFile) {
       data.append('file', this.selectedFile, this.selectedFile.name);
     }
-
-    console.log('Form data to submit:', data);
 
     if (this.hanhDong() === 'create') {
       this.service.insert(data).subscribe({

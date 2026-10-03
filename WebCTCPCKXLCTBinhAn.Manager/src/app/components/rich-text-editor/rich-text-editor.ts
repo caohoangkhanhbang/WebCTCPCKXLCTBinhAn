@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild, forwardRef,
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../environments/environment.development';
 interface PendingImage {
     id: string;
     file: File;
@@ -312,7 +312,35 @@ export class RichTextEditorComponent
         if (ctrl && event.key.toLowerCase() === 'y') { event.preventDefault(); this.redo(); }
     }
 
-    async prepareContentForSave(): Promise<string> { if (!this.editor) { return ''; } const editorElement = this.editor.nativeElement; /* * Tìm ảnh chưa upload. */ const images = Array.from(editorElement.querySelectorAll('img[data-local-image-id]')); /* * Không có ảnh mới. */ if (images.length === 0) { return editorElement.innerHTML; } /* * Upload từng ảnh. */ for (const imageElement of images) { const id = imageElement.getAttribute('data-local-image-id'); if (!id) { continue; } const pending = this.pendingImages.get(id); if (!pending) { continue; } /* * Upload. */ const result = await this.uploadImage(pending.file); /* * Thay Blob URL * bằng URL thật. */ imageElement.setAttribute('src', result.url); /* * Xóa ID tạm. */ imageElement.removeAttribute('data-local-image-id'); /* * Giải phóng Blob URL. */ URL.revokeObjectURL(pending.blobUrl); /* * Xóa khỏi danh sách pending. */ this.pendingImages.delete(id); } /* * Lấy HTML cuối cùng. */ const html = editorElement.innerHTML; /* * Cập nhật FormControl. */ this.onChangeCallback(html); return html; }
+    async prepareContentForSave(): Promise<string> {
+        if (!this.editor) { return ''; }
+        const editorElement = this.editor.nativeElement;
+        /* * Tìm ảnh chưa upload. */
+        const images = Array.from(editorElement.querySelectorAll('img[data-local-image-id]'));
+        /* * Không có ảnh mới. */
+        if (images.length === 0) { return editorElement.innerHTML; }
+        /* * Upload từng ảnh. */
+        for (const imageElement of images) {
+            const id = imageElement.getAttribute('data-local-image-id');
+            if (!id) { continue; }
+            const pending = this.pendingImages.get(id);
+            if (!pending) { continue; } /* * Upload. */
+            const result = await this.uploadImage(pending.file);
+            /* * Thay Blob URL * bằng URL thật. */
+            imageElement.setAttribute('src', result.url);
+            /* * Xóa ID tạm. */
+            imageElement.removeAttribute('data-local-image-id');
+            /* * Giải phóng Blob URL. */
+            URL.revokeObjectURL(pending.blobUrl);
+            /* * Xóa khỏi danh sách pending. */
+            this.pendingImages.delete(id);
+        }
+        /* * Lấy HTML cuối cùng. */
+        const html = editorElement.innerHTML;
+        /* * Cập nhật FormControl. */
+        this.onChangeCallback(html);
+        return html;
+    }
 
     private uploadImage(file: File): Promise<{ url: string }> {
         const formData = new FormData();

@@ -23,8 +23,10 @@
             <div class="input-container">
                 <label for="noi_dung" class="lien-he-tieude">Nội dung chi tiết<span
                         class="color-requier">(*)</span></label>
-                <textarea formControlName="noi_dung" class="lien-he-input" id="noi_dung"
-                    placeholder="vui lòng nhập đầy đủ thông tin"></textarea>
+                <!-- <textarea formControlName="noi_dung" class="lien-he-input" id="noi_dung"
+                    placeholder="vui lòng nhập đầy đủ thông tin"></textarea> -->
+                <app-rich-text-editor formControlName="noi_dung">
+                </app-rich-text-editor>
                 @if(formData.get('noi_dung')?.invalid && formData.get('noi_dung')?.touched){
                 <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
                 }

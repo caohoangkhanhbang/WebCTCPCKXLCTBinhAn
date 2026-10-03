@@ -78,7 +78,6 @@ export class Dialog {
     if (this.mode() === 'create') {
       this.service.insert(data).subscribe({
         next: response => {
-          console.log('mode:', this.mode());
           this.isOpen.set(false);
           this.resetForm();
         },
@@ -94,7 +93,6 @@ export class Dialog {
       }
       this.service.update(id, data).subscribe({
         next: response => {
-          console.log('mode:', this.mode());
           this.isOpen.set(false);
           this.resetForm();
         },
