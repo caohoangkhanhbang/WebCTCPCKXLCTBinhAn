@@ -1,42 +1,19 @@
 <div class="editor-container">
     <div class="toolbar">
-        <button type="button" title="Undo" (mousedown)="$event.preventDefault()" (click)="undo()">
-            ↶
-        </button>
-        <button type="button" title="Redo" (mousedown)="$event.preventDefault()" (click)="redo()">
-            ↷
-        </button>
+        <button type="button" title="Undo" (mousedown)="$event.preventDefault()" (click)="undo()"> ↶ </button>
+        <button type="button" title="Redo" (mousedown)="$event.preventDefault()" (click)="redo()"> ↷ </button>
         <span class="separator"></span>
         <select (change)="formatBlock($event)">
-            <option value="">
-                Normal
-            </option>
-            <option value="h1">
-                H1
-            </option>
-            <option value="h2">
-                H2
-            </option>
-            <option value="h3">
-                H3
-            </option>
-        </select>
-        <select (change)="fontSize($event)">
-            <option value="">
-                Size
-            </option>
-            <option value="1">
-                Small
-            </option>
-            <option value="3">
-                Normal
-            </option>
-            <option value="5">
-                Large
-            </option>
-            <option value="7">
-                Huge
-            </option>
+            <option value=""> Normal </option>
+            <option value="h1"> H1 </option>
+            <option value="h2"> H2 </option>
+            <option value="h3"> H3 </option>
+        </select> <select (change)="fontSize($event)">
+            <option value=""> Size </option>
+            <option value="1"> Small </option>
+            <option value="3"> Normal </option>
+            <option value="5"> Large </option>
+            <option value="7"> Huge </option>
         </select>
         <span class="separator"></span>
         <button type="button" title="Bold" (mousedown)="$event.preventDefault()" (click)="exec('bold')">
@@ -82,41 +59,19 @@
             🖼️
         </button>
         <select title="Image size" (change)="resizeImage($event)">
-            <option value="">
-                Image size
-            </option>
-            <option value="25">
-                25%
-            </option>
-            <option value="50">
-                50%
-            </option>
-            <option value="75">
-                75%
-            </option>
-            <option value="100">
-                100%
-            </option>
+            <option value=""> Image size </option>
+            <option value="25"> 25% </option>
+            <option value="50"> 50% </option>
+            <option value="75"> 75% </option>
+            <option value="100"> 100% </option>
         </select>
-        <input #imageInput type="file" hidden accept="
-                image/jpeg,
-                image/png,
-                image/webp,
-                image/gif,
-                image/svg+xml
-            " multiple (change)="onImageSelected($event)">
+        <input #imageInput type="file" hidden accept=" image/jpeg, image/png, image/webp, image/gif, image/svg+xml"
+            multiple (change)="onImageSelected($event)">
     </div>
     <div #editor class="editor-content" contenteditable="true" spellcheck="true" (input)="onInput()"
         (blur)="onEditorBlur()" (keydown)="onKeyDown($event)" (paste)="onPaste($event)" (dragover)="onDragOver($event)"
-        (drop)="onDrop($event)"></div>
-    <div class="editor-help">
-        Bạn có thể nhập văn bản,
-        <strong>Ctrl + V</strong> để dán
-        text hoặc ảnh,
-        kéo ảnh trực tiếp vào editor,
-        hoặc sử dụng nút 🖼️ để chọn ảnh.
-        <br>
-        Click vào ảnh để chọn kích thước.
+        (drop)="onDrop($event)">
     </div>
-
+    <div class="editor-help"> Bạn có thể nhập văn bản, <strong>Ctrl + V</strong> để dán text hoặc ảnh, kéo ảnh trực tiếp
+        vào editor, hoặc sử dụng nút 🖼️ để chọn ảnh. <br> Click vào ảnh để chọn kích thước. </div>
 </div>

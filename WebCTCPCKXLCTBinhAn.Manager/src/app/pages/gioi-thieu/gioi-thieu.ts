@@ -1,174 +1,115 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { switchMap } from 'rxjs';
-
+import { GioiThieuEdit } from './dialog/gioi-thieu-edit';
 import { GioiThieuService } from './gioi-thieu-service';
-import { Dialog } from './dialog/dialog';
-import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
-
+import { toSignal, toObservable } from '@angular/core/rxjs-interop';
+import { environment } from '../../../environments/environment.development';
+import { distinctUntilChanged, switchMap, debounceTime } from 'rxjs';
+import { AnnouncementService } from '../../components/dialog/announcement-service';
 
 @Component({
   selector: 'app-gioi-thieu',
+  imports: [GioiThieuEdit],
   standalone: true,
-  imports: [Dialog, ConfirmDialog],
   templateUrl: './gioi-thieu.html',
-  styleUrl: './gioi-thieu.css',
   providers: [GioiThieuService]
 })
 export class GioiThieu {
-
-  private readonly service = inject(GioiThieuService);
-  readonly currentPage = signal(1);
-  readonly pageSize = signal(10);
-  readonly searchTerm = signal('');
-  readonly reload = signal(true);
-
-  private readonly query = computed(() => ({
-    page: this.currentPage(),
+  service = inject(GioiThieuService);
+  isOpen = signal<boolean>(false);
+  selectedId = signal<number | null>(null);
+  hanhDong = signal<'create' | 'view' | 'update'>('create');
+  cdnUrl = environment.cdnUrl;
+  page = signal<number>(1);
+  pageSize = signal<number>(10);
+  search = signal<string>('');
+  totalPages = computed(() => this.data()?.TotalPages ?? 1);
+  launch = computed(() => ({
+    page: this.page(),
     pageSize: this.pageSize(),
-    search: this.searchTerm(),
+    search: this.search(),
     reload: this.reload()
   }));
+  reload = signal<number>(0);
+  showThongBao = signal<boolean>(false);
+  message = signal<string>('');
+  buttons = signal<{ label: string, value: string, style: string }[]>([
+    { label: 'Xác nhận', value: 'confirm', style: 'primary' }
+  ]);
+  thongbao = inject(AnnouncementService);
 
-  showDialog = signal<boolean>(false);
-  message = '';
-  buttomsInfo = [{ label: 'Thoát', value: 'thoat', style: 'secondary' }];
-
-
-  readonly data = toSignal(
-    toObservable(this.query).pipe(
-      switchMap(query => {
-        return this.service.list(
-          query.page,
-          query.pageSize,
-          query.search
-        );
-      })),
-    {
-      initialValue: null
-    }
-  );
-
-
-  readonly totalPages = computed(() => {
-
-    return this.data()?.totalPages ?? 1;
-
-  });
-
-  onPageSizeChange(event: Event): void {
+  onSearch(e: Event) {
+    const keyword = (e.target as HTMLInputElement).value;
+    this.search.set(keyword);
+  }
+  onPageSizeChange(event: Event) {
     const select = event.target as HTMLSelectElement;
-    const pageSize = Number(select.value);
-    if (!Number.isFinite(pageSize) || pageSize <= 0) {
-      return;
-    }
-
-    this.pageSize.set(pageSize);
-    this.currentPage.set(1);
+    this.pageSize.set(Number(select.value));
+    this.page.set(1);
+  }
+  goToFirstPage() {
+    if (this.page() === 1) return;
+    this.page.set(1);
+  }
+  goToPreviousPage() {
+    if (this.page() <= 1) return;
+    this.page.update((value) => value - 1);
+  }
+  goToNextPage() {
+    if (this.page() >= this.totalPages()) return;
+    this.page.update(value => value + 1);
+  }
+  goToLastPage() {
+    if (this.page() === this.totalPages()) return;
+    this.page.set(this.totalPages());
   }
 
-  onPageChange(page: number): void {
-    if (page < 1 || page > this.totalPages()) {
-      return;
-    }
-    this.currentPage.set(page);
+  reloadData() {
+    this.reload.update(cong => cong + 1);
+    this.page.set(1);
   }
 
-  goToFirstPage(): void {
-    if (this.currentPage() === 1) {
-      return;
-    }
-    this.currentPage.set(1);
+  columns = [{ name: 'STT' }, { name: 'Thời gian' }, { name: 'Nội dung' }, { name: 'Hiển thị' }, { name: 'Hành động' }];
+
+  data = toSignal<any>(
+    toObservable(this.launch).pipe(
+      debounceTime(300),
+      distinctUntilChanged((truoc, sau) => truoc.page === sau.page && truoc.pageSize === sau.pageSize && truoc.search === sau.search && truoc.reload === sau.reload),
+      switchMap(query =>
+        this.service.getList(query.page, query.pageSize, query.search)
+      )
+    )
+    , { initialValue: null });
+
+  async onDelete(id: number, name: string) {
+    const result = await this.thongbao.hienThi(`"${name}" sẽ bị xóa vĩnh viễn`, 'Thông báo ✌️', [{ label: 'Xóa', value: 'dongy', style: 'maula' }]);
+    if (result !== 'dongy') return;
+    this.service.delete(id).subscribe({
+      next: () => {
+        this.thongbao.hienThi(`Xóa thành công!`);
+        this.reloadData();
+      },
+      error: (err) => {
+        console.error(err);
+        this.thongbao.hienThi(`Xóa thất bại vui lòng liên hệ lập trình viên!!!`);
+      }
+    });
   }
 
-  goToPreviousPage(): void {
-    if (this.currentPage() <= 1) {
-      return;
-    }
-    this.currentPage.update(page => page - 1);
-  }
-
-  goToNextPage(): void {
-    if (this.currentPage() >= this.totalPages()) {
-      return;
-    }
-    this.currentPage.update(page => page + 1);
-  }
-
-  goToLastPage(): void {
-    const lastPage = this.totalPages();
-    if (this.currentPage() === lastPage) {
-      return;
-    }
-    this.currentPage.set(lastPage);
-  }
-
-  onSearch(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.searchTerm.set(input.value.trim());
-    this.currentPage.set(1);
-  }
-
-  isOpen = signal(false);
-  selectedId = signal<number | null>(null);
-  mode = signal<'create' | 'view' | 'edit'>('create');
-
-
-  onView(id: number): void {
+  onEdit(id: number) {
+    this.hanhDong.set('update');
     this.selectedId.set(id);
-    this.mode.set('view');
     this.isOpen.set(true);
   }
 
-  onEdit(id: number | null): void {
+  onView(id: number) {
+    this.hanhDong.set('view');
     this.selectedId.set(id);
-    if (id === null) {
-      this.mode.set('create');
-    }
-    else {
-      this.mode.set('edit');
-    }
     this.isOpen.set(true);
   }
 
-  onDelete(id: number, name: string): void {
-    this.resetDialog();
-    this.showDialog.set(true);
-    this.selectedId.set(id);
-    this.message = `Bạn có chắn chắn muốn xóa '${name}'?`;
+  onCreate() {
+    this.isOpen.set(true);
+    this.selectedId.set(null);
+    this.hanhDong.set('create');
   }
-
-  resetDialog() {
-    this.buttomsInfo = [
-      { label: 'Xóa', value: 'xoa', style: 'primary' },
-      { label: 'Thoát', value: 'thoat', style: 'secondary' }
-    ];
-  }
-
-  handleDialogAction(action: string) {
-    if (action === 'xoa') {
-      this.delete(this.selectedId());
-    }
-    this.showDialog.set(false);
-  }
-
-  delete(id: number | null): void {
-    if (id !== null) {
-      this.service.delete(id).subscribe({
-        next: () => {
-          this.message = 'Xóa thành công!';
-          this.buttomsInfo = [
-            { label: 'Thoát', value: 'thoat', style: 'secondary' }
-          ];
-          this.showDialog.set(true);
-          this.currentPage.set(this.currentPage());
-          this.reload.set(!this.reload());
-        },
-        error: err => {
-          console.error(`Error deleting item with ID ${id}:`, err);
-        }
-      });
-    }
-  }
-
 }

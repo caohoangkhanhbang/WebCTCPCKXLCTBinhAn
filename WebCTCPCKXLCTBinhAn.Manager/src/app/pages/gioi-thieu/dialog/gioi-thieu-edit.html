@@ -1,0 +1,42 @@
+@if(isOpen()){
+<div class="overlay">
+    <form [formGroup]="formData" (ngSubmit)="onSubmit()" class="cv-container">
+        <p class="tieu-de">{{hanhDong() === 'create' ? 'Thêm mới' : hanhDong() === 'view' ? 'Xem chi tiết' : 'Chỉnh
+            sửa'}}</p>
+        <div class="container-scroll">
+            <div class="input-container">
+                <label for="thoi_gian" class="lien-he-tieude">Thời gian<span class="color-requier">(*)</span></label>
+                <input type="text" name="thoi_gian" id="thoi_gian" formControlName="thoi_gian" class="lien-he-input"
+                    placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('thoi_gian')?.invalid && formData.get('thoi_gian')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="noi_dung" class="lien-he-tieude">Nội dung chi tiết<span
+                        class="color-requier">(*)</span></label>
+                <app-rich-text-editor formControlName="noi_dung"></app-rich-text-editor>
+                @if(formData.get('noi_dung')?.invalid && formData.get('noi_dung')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <div class="center-height">
+                    <label for="hien_thi" class="lien-he-tieude margin-right">Hiển thị</label>
+                    <input formControlName="hien_thi" type="checkbox" id="hien_thi"
+                        placeholder="vui lòng nhập đầy đủ thông tin">
+                    @if(formData.get('hien_thi')?.invalid && formData.get('hien_thi')?.touched){
+                    <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="center row-reverse">
+            @if(hanhDong() !== 'view'){
+            <button type="submit" class="button pos">Lưu</button>
+            }
+            <button (click)="onClose()" type="button" class="button neg">Thoát</button>
+        </div>
+    </form>
+</div>
+}

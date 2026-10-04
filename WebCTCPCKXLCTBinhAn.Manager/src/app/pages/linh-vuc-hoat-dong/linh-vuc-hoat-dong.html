@@ -1,4 +1,4 @@
-<div class="">Lĩnh vực hoạt động</div>
+<div class="page-title">Lĩnh vực hoạt động</div>
 <div class="container">
     <div class="search-container">
         <input type="text" placeholder="🔍 Tìm kiếm..." class="search-input" (input)="onSearch($event)" />
@@ -24,7 +24,9 @@
                         <img class="image-list" [src]="cdnUrl + '/' + item.hinh" [alt]="item.giai_phap">
                     </td>
                     <td>
-                        <input readonly type="checkbox" [checked]="item.hien_thi" />
+                        <div class="center-center">
+                            <div class="hien-thi-box" [class.active]="item.hien_thi"></div>
+                        </div>
                     </td>
                     <td>
                         <div class="action">

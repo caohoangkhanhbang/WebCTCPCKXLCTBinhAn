@@ -41,6 +41,12 @@ export const routes: Routes = [
                 canActivate: [authGuard]
             },
             {
+                path: 'tuyen-dung',
+                title: 'Tuyển dụng',
+                loadComponent: () => import('./pages/tuyen-dung/tuyen-dung').then(m => m.TuyenDung),
+                canActivate: [authGuard]
+            },
+            {
                 path: 'register',
                 title: 'Đăng ký',
                 loadComponent: () => import('./pages/register/register').then(m => m.RegisterComponent),

@@ -27,11 +27,11 @@
                         <div class="yeu-cau-cong-viec">
                             <div class="mo-ta">
                                 <p class="tieu-de">{{'CAREERS.JOB_DESCRIPTION' | translate}}:</p>
-                                <div [innerHtml]="item?.mo_ta"></div>
+                                <div [innerHtml]="originalHtml(item?.mo_ta)"></div>
                             </div>
                             <div class="noi-dung">
                                 <p class="tieu-de">{{'CAREERS.REQUIREMENTS' | translate}}: </p>
-                                <div [innerHtml]="item?.noi_dung"></div>
+                                <div [innerHtml]="originalHtml(item?.noi_dung)"></div>
                             </div>
                         </div>
                         <div class="ngay-tuyen">{{'CAREERS.POST_DATE' | translate}}:

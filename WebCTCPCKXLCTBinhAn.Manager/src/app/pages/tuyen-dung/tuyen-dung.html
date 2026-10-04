@@ -1,4 +1,4 @@
-<div class="page-title">Dự án</div>
+<div class="page-title">Tuyển dụng</div>
 <div class="container">
     <div class="search-container">
         <input type="text" placeholder="🔍 Tìm kiếm..." class="search-input" (input)="onSearch($event)" />
@@ -10,7 +10,7 @@
             <thead>
                 <tr>
                     @for(item of columns; track item.name){
-                    <th style="max-width: 200px;">{{item.name}}</th>
+                    <th>{{item.name}}</th>
                     }
                 </tr>
             </thead>
@@ -18,17 +18,16 @@
                 @for(item of data().Items; track $index){
                 <tr>
                     <td>{{ $index + 1 + (data()?.Page - 1) * data()?.PageSize }}</td>
-                    <td (click)="onView(item.id)" class="title">{{item.ten_du_an}}</td>
-                    <td class="title">{{item.bo_nghia}}</td>
-                    <td class="title">
-                        {{item.noi_dung}}
-                    </td>
+                    <td (click)="onView(item.id)" class="title">{{item.ten_cong_viec}}</td>
+                    <td class="title">{{item.mo_ta}}</td>
+                    <td class="title">{{item.noi_dung}}</td>
                     <td>
                         <img class="image-list" [src]="cdnUrl + '/' + item.hinh" [alt]="item.ten_du_an" />
                     </td>
-                    <td class="title">{{item.hang_muc_thi_cong}}</td>
-                    <td class="title">{{item.chu_dau_tu}}</td>
-                    <td class="title">{{item.thoi_gian | date:'dd/MM/yyyy'}}</td>
+                    <td class="title">{{item.dia_diem}}</td>
+                    <td class="title">{{item.ngay_bd_tuyen | date:'dd/MM/yyyy'}}</td>
+                    <td class="title">{{item.ngay_kt_tuyen | date:'dd/MM/yyyy'}}</td>
+                    <td class="title">{{item.luong}}</td>
                     <td>
                         <div class="center-center">
                             <div class="hien-thi-box" [class.active]="item.hien_thi"></div>

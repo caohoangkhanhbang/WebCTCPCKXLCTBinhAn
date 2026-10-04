@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class GioiThieuService {
     private readonly apiUrl = environment.apiUrl+'/gioithieu';
     http = inject(HttpClient);
-    list(page: number, pageSize: number, search: string): Observable<any> {
+    getList(page: number, pageSize: number, search: string): Observable<any> {
         return this.http.get(`${this.apiUrl}/list`, { params: { page, pageSize, search } });
     }
 

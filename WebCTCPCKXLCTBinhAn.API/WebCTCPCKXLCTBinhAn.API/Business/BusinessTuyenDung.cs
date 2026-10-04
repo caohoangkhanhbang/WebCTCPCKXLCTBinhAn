@@ -6,7 +6,7 @@ using WebCTCPCKXLCTBinhAn.API.Services;
 
 namespace WebCTCPCKXLCTBinhAn.API.Business
 {
-    public class BusinessTuyenDung(IConnectionService connectionService, IFileService fileService)
+    public class BusinessTuyenDung(IConnectionService connectionService, IFileService fileService, IConfiguration configuration)
     {
         private readonly IConnectionService _connectionService = connectionService;
         private readonly IFileService _fileService = fileService;
@@ -14,7 +14,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
         public async Task<bool> SubmitUngTuyen(UngTuyenDTO data)
         {
             if (data == null) return false;
-            var fileName = await _fileService.SaveFileAsync(data.file, $"CV/{DateTime.Now:yyyy/MM/dd}");
+            var fileName = await _fileService.SaveFileAsync(data.file, $"{configuration["ThuMucLuuFile:TuyenDung"]}/{DateTime.Now:yyyy/MM/dd}");
             await using var con = new NpgsqlConnection(_connectionService.GetConnectionString());
             string sql = "INSERT INTO ung_tuyen (id_tuyen_dung, ten, email, sdt, filecv, created_date) VALUES (@id_tuyen_dung, @ten, @email, @sdt, @filecv, @created_date)";
             await using var cmd = new NpgsqlCommand(sql, con);

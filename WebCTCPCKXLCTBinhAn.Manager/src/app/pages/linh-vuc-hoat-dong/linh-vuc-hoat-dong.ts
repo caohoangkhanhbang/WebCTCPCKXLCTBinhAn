@@ -1,10 +1,9 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { LinhVucHoatDongEdit } from './linh-vuc-hoat-dong-edit/linh-vuc-hoat-dong-edit';
 import { LinhVucHoatDongService } from './linh-vuc-hoat-dong-service';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { environment } from '../../../environments/environment.development';
 import { distinctUntilChanged, switchMap, debounceTime } from 'rxjs';
-import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
 import { AnnouncementService } from '../../components/dialog/announcement-service';
 
 @Component({
@@ -12,7 +11,7 @@ import { AnnouncementService } from '../../components/dialog/announcement-servic
   imports: [LinhVucHoatDongEdit],
   templateUrl: './linh-vuc-hoat-dong.html',
   styleUrl: './linh-vuc-hoat-dong.css',
-  providers: [LinhVucHoatDongService, ConfirmDialog]
+  providers: [LinhVucHoatDongService]
 })
 export class LinhVucHoatDong {
   service = inject(LinhVucHoatDongService);

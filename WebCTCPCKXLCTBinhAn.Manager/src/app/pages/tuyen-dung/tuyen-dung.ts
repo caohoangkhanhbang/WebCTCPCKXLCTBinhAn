@@ -1,6 +1,6 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
-import { DuAnEdit } from './du-an-edit/du-an-edit';
-import { DuAnService } from './du-an-service';
+import { Component, computed, inject, signal } from '@angular/core';
+import { TuyenDungEdit } from './tuyen-dung-edit/tuyen-dung-edit';
+import { TuyenDungService } from './tuyen-dung-service';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { environment } from '../../../environments/environment.development';
 import { distinctUntilChanged, switchMap, debounceTime } from 'rxjs';
@@ -8,13 +8,14 @@ import { AnnouncementService } from '../../components/dialog/announcement-servic
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-du-an',
-  imports: [DuAnEdit, DatePipe],
-  templateUrl: './du-an.html',
-  providers: [DuAnService]
+  selector: 'app-tuyen-dung',
+  imports: [TuyenDungEdit, DatePipe],
+  standalone: true,
+  templateUrl: './tuyen-dung.html',
+  providers: [TuyenDungService]
 })
-export class DuAn {
-  service = inject(DuAnService);
+export class TuyenDung {
+  service = inject(TuyenDungService);
   isOpen = signal<boolean>(false);
   selectedId = signal<number | null>(null);
   hanhDong = signal<'create' | 'view' | 'update'>('create');
@@ -68,7 +69,7 @@ export class DuAn {
     this.page.set(1);
   }
 
-  columns = [{ name: 'STT' }, { name: 'Tên dự án' }, { name: 'Nội dung ngắn' }, { name: 'Nội dung chi tiết' }, { name: 'Hình ảnh' }, { name: 'Hiển thị' }, { name: 'Hạng mục thi công' }, { name: 'Chủ đầu tư' }, { name: 'thời gian' }, { name: 'Hành động' }];
+  columns = [{ name: 'STT' }, { name: 'Tên công việc' }, { name: 'Mô tả' }, { name: 'Nội dung chi tiết' }, { name: 'Hình ảnh' }, { name: 'Địa điểm' }, { name: 'Ngày bắt đầu tuyển dụng' }, { name: 'Ngày kết thúc tuyển dụng' }, { name: 'Lương' }, { name: 'Hiển thị' }, { name: 'Hành động' }];
 
   data = toSignal<any>(
     toObservable(this.launch).pipe(

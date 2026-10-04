@@ -38,7 +38,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
         }
 
         [HttpPost("insert")]
-        public async Task<IActionResult> insertCacCotMoc([FromBody] CacCotMoc data)
+        public async Task<IActionResult> insertCacCotMoc([FromForm] CacCotMoc data)
         {
             var result = await _cacCotMocRepository.Insert(data);
             if (!result)
@@ -49,7 +49,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> updateCacCotMoc(int id, [FromBody] CacCotMoc data)
+        public async Task<IActionResult> updateCacCotMoc(int id, [FromForm] CacCotMoc data)
         {
             var result = await _cacCotMocRepository.Update(id, data);
             if (!result)

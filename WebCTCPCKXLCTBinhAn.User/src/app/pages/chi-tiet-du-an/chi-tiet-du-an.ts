@@ -22,8 +22,8 @@ export class ChiTietDuAn {
     service = inject(ChiTietDuAnServices);
     readonly cdnUrl = environment.cdnUrl;
     id = input.required<string>();
-    private sanitizer = inject(DomSanitizer);
 
+    private sanitizer = inject(DomSanitizer);
     noiDungHtml = computed<SafeHtml | null>(() => {
         const html = this.data()?.noi_dung;
         if (!html) {

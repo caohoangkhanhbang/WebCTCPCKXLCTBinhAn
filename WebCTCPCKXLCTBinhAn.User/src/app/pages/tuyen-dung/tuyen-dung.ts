@@ -7,6 +7,7 @@ import { TuyenDungServices } from './tuyen-dung-services';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { environment } from '../../../enviroments/enviroment';
 import { DatePipe } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -83,4 +84,11 @@ export class TuyenDung {
   handleDialogAction(action: string) {
     this.showDialog.set(false);
   }
+
+  //Giữ nguyên HTML gốc để hiển thị nội dung
+  private sanitizer = inject(DomSanitizer);
+  originalHtml(html: string | null) {
+    return this.sanitizer.bypassSecurityTrustHtml(html || '');
+  }
+
 }
