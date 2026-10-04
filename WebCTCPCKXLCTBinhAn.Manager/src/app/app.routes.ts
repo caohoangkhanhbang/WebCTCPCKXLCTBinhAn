@@ -47,6 +47,12 @@ export const routes: Routes = [
                 canActivate: [authGuard]
             },
             {
+                path: 'thong-tin-cong-ty',
+                title: 'Thông tin công ty',
+                loadComponent: () => import('./pages/thong-tin-cong-ty/thong-tin-cong-ty').then(m => m.ThongTinCongTy),
+                canActivate: [authGuard]
+            },
+            {
                 path: 'register',
                 title: 'Đăng ký',
                 loadComponent: () => import('./pages/register/register').then(m => m.RegisterComponent),

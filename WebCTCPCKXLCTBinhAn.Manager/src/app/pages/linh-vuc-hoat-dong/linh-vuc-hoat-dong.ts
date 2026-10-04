@@ -10,7 +10,6 @@ import { AnnouncementService } from '../../components/dialog/announcement-servic
   selector: 'app-linh-vuc-hoat-dong',
   imports: [LinhVucHoatDongEdit],
   templateUrl: './linh-vuc-hoat-dong.html',
-  styleUrl: './linh-vuc-hoat-dong.css',
   providers: [LinhVucHoatDongService]
 })
 export class LinhVucHoatDong {
@@ -30,11 +29,11 @@ export class LinhVucHoatDong {
     reload: this.reload()
   }));
   reload = signal<number>(0);
-  showThongBao = signal<boolean>(false);
-  message = signal<string>('');
-  buttons = signal<{ label: string, value: string, style: string }[]>([
-    { label: 'Xác nhận', value: 'confirm', style: 'primary' }
-  ]);
+  // showThongBao = signal<boolean>(false);
+  // message = signal<string>('');
+  // buttons = signal<{ label: string, value: string, style: string }[]>([
+  //   { label: 'Xác nhận', value: 'confirm', style: 'primary' }
+  // ]);
   thongbao = inject(AnnouncementService);
 
   onSearch(e: Event) {

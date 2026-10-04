@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { DuAnEdit } from './du-an-edit/du-an-edit';
 import { DuAnService } from './du-an-service';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
@@ -30,11 +30,11 @@ export class DuAn {
     reload: this.reload()
   }));
   reload = signal<number>(0);
-  showThongBao = signal<boolean>(false);
-  message = signal<string>('');
-  buttons = signal<{ label: string, value: string, style: string }[]>([
-    { label: 'Xác nhận', value: 'confirm', style: 'primary' }
-  ]);
+  // showThongBao = signal<boolean>(false);
+  // message = signal<string>('');
+  // buttons = signal<{ label: string, value: string, style: string }[]>([
+  //   { label: 'Xác nhận', value: 'confirm', style: 'primary' }
+  // ]);
   thongbao = inject(AnnouncementService);
 
   onSearch(e: Event) {

@@ -1,7 +1,7 @@
 /* hiển thị dialog */
 .page-title {
-color: white;
-/* font-size: 30px; */
+    color: white;
+    margin: 20px 0;
 }
 
 .center-center {

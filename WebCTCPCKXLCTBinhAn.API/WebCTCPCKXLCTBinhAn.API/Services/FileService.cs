@@ -62,7 +62,6 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
                 return null;
             if (!Regex.IsMatch(tenBang, @"^[a-zA-Z_][a-zA-Z0-9_]*$") || !Regex.IsMatch(tenCot, @"^[a-zA-Z_][a-zA-Z0-9_]*$"))
                 throw new ArgumentException("Tên bảng hoặc tên cột không hợp lệ.");
-
             string sql = @$"
             select {tenCot} from {tenBang} where id = @id limit 1
             ";

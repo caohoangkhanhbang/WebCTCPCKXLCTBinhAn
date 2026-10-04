@@ -9,7 +9,6 @@ import { AnnouncementService } from '../../../components/dialog/announcement-ser
   selector: 'app-dialog',
   imports: [ReactiveFormsModule],
   templateUrl: './linh-vuc-hoat-dong-edit.html',
-  styleUrl: './linh-vuc-hoat-dong-edit.css',
   providers: [LinhVucHoatDongService]
 })
 export class LinhVucHoatDongEdit {

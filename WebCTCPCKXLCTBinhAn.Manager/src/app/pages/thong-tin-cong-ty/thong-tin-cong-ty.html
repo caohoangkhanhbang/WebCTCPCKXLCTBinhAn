@@ -1,0 +1,216 @@
+<div class="page-title">Thông tin công ty</div>
+
+<div class="container">
+    <form [formGroup]="formData" (ngSubmit)="onSubmit()" class="cv-container">
+        <p class="tieu-de">Thông tin công ty</p>
+        <div class="container-scroll">
+            <div class="input-container">
+                <label for="ten_cty" class="lien-he-tieude">Tên công ty<span class="color-requier">(*)</span></label>
+                <input type="text" name="ten_cty" id="ten_cty" formControlName="ten_cty" class="lien-he-input"
+                    placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('ten_cty')?.invalid && formData.get('ten_cty')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="dia_chi" class="lien-he-tieude">Địa chỉ<span class="color-requier">(*)</span></label>
+                <input type="text" name="dia_chi" id="dia_chi" formControlName="dia_chi" class="lien-he-input"
+                    placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('dia_chi')?.invalid && formData.get('dia_chi')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="email" class="lien-he-tieude">Email<span class="color-requier">(*)</span></label>
+                <input type="text" name="email" id="email" formControlName="email" class="lien-he-input"
+                    placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('email')?.invalid && formData.get('email')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="sdt" class="lien-he-tieude">Số điện thoại<span class="color-requier">(*)</span></label>
+                <input type="number" name="sdt" id="sdt" formControlName="sdt" class="lien-he-input"
+                    placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('sdt')?.invalid && formData.get('sdt')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="ma_so_thue" class="lien-he-tieude">Mã số thuế<span class="color-requier">(*)</span></label>
+                <input type="number" name="ma_so_thue" id="ma_so_thue" formControlName="ma_so_thue"
+                    class="lien-he-input" placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('ma_so_thue')?.invalid && formData.get('ma_so_thue')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="slogan" class="lien-he-tieude">Slogan<span class="color-requier">(*)</span></label>
+                <input type="text" name="slogan" id="slogan" formControlName="slogan" class="lien-he-input"
+                    placeholder="Vui lòng nhập thông tin" min="0" max="999999999" />
+                @if(formData.get('slogan')?.invalid && formData.get('slogan')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="linh_vuc" class="lien-he-tieude">Lĩnh vực<span class="color-requier">(*)</span></label>
+                <input type="text" name="linh_vuc" id="linh_vuc" formControlName="linh_vuc" class="lien-he-input"
+                    placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('linh_vuc')?.invalid && formData.get('linh_vuc')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="nam_thanh_lap" class="lien-he-tieude">Năm thành lập<span
+                        class="color-requier">(*)</span></label>
+                <input type="date" name="nam_thanh_lap" id="nam_thanh_lap" formControlName="nam_thanh_lap"
+                    class="lien-he-input input-date" placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('nam_thanh_lap')?.invalid && formData.get('nam_thanh_lap')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+
+            <div class="input-container">
+                <div>
+                    @if(logoReview){
+                    <img class="image-review" [src]="logoReview" alt="">
+                    } @else if(logoImage) {
+                    <img class="image-review" [src]="cdnUrl +'/'+ logoImage" alt="">
+                    }
+                </div>
+                <div class="center-height">
+                    <label for="logoImage" class="lien-he-tieude margin-right">Chọn ảnh logo công ty<span
+                            class="color-requier">(*)</span></label>
+                    <input type="file" id="logoImage" accept="image/*" (change)="onLogoSelected($event)" />
+                </div>
+            </div>
+            <div class="input-container">
+                <div>
+                    @if(hinhReview){
+                    <img class="image-review" [src]="hinhReview" alt="">
+                    } @else if(hinhImage) {
+                    <img class="image-review" [src]="cdnUrl +'/'+ hinhImage" alt="">
+                    }
+                </div>
+                <div class="center-height">
+                    <label for="hinhImage" class="lien-he-tieude margin-right">Chọn ảnh nền web<span
+                            class="color-requier">(*)</span></label>
+                    <input type="file" id="hinhImage" accept="image/*" (change)="onHinhSelected($event)" />
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="center-height">
+                    <label for="hien_thi" class="lien-he-tieude margin-right">Hiển thị</label>
+                    <input formControlName="hien_thi" type="checkbox" id="hien_thi"
+                        placeholder="vui lòng nhập đầy đủ thông tin">
+                    @if(formData.get('hien_thi')?.invalid && formData.get('hien_thi')?.touched){
+                    <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="center row-reverse">
+            <button type="submit" class="button pos">Lưu</button>
+        </div>
+    </form>
+</div>
+
+<!-- 
+<div class="container">
+    <div class="search-container">
+        <input type="text" placeholder="🔍 Tìm kiếm..." class="search-input" (input)="onSearch($event)" />
+        <div class="nut-them" (click)="onCreate()">Thêm mới</div>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    @for(item of columns; track item.name){
+                    <th style="max-width: 200px;">{{item.name}}</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for(item of data().Items; track $index){
+                <tr>
+                    <td>{{ $index + 1 + (data()?.Page - 1) * data()?.PageSize }}</td>
+                    <td (click)="onView(item.id)" class="title">{{item.ten_du_an}}</td>
+                    <td class="title">{{item.bo_nghia}}</td>
+                    <td class="title">
+                        {{item.noi_dung}}
+                    </td>
+                    <td>
+                        <img class="image-list" [src]="cdnUrl + '/' + item.hinh" [alt]="item.ten_du_an" />
+                    </td>
+                    <td class="title">{{item.hang_muc_thi_cong}}</td>
+                    <td class="title">{{item.chu_dau_tu}}</td>
+                    <td class="title">{{item.thoi_gian | date:'dd/MM/yyyy'}}</td>
+                    <td>
+                        <div class="center-center">
+                            <div class="hien-thi-box" [class.active]="item.hien_thi"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="action">
+                            <div (click)="onView(item.id)" title="Xem chi tiết" class="btn them">
+                                <div class="icon" style="mask: url('/public/resource/icons/xem.svg');"></div>
+                            </div>
+                            <div (click)="onEdit(item.id)" title="Sửa" class="btn sua">
+                                <div class="icon" style="mask: url('/public/resource/icons/sua.svg');"></div>
+                            </div>
+                            <div (click)="onDelete(item.id, item.ten_du_an)" title="Xóa" class="btn xoa">
+                                <div class="icon" style="mask: url('/public/resource/icons/thungrac.svg');"></div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="phan-trang">
+        <div class="so-trang">
+            Số dòng mỗi trang
+            <select class="select-trang" [value]="pageSize()" (change)="onPageSizeChange($event)">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select>
+        </div>
+
+        <div class="thong-tin-dong">
+            Dòng
+            {{ (page() - 1) * pageSize() + 1 }}
+            đến
+            {{ (page() - 1) * pageSize() + data()?.Items.length }}
+            của trang
+            {{ page() }}
+        </div>
+
+        <div class="nut-trang">
+            <button type="button" class="nhay-den" (click)="goToFirstPage()" [disabled]="page() === 1">
+                |&lt;
+            </button>
+            <button type="button" class="nhay-den" (click)="goToPreviousPage()" [disabled]="page() === 1">
+                &lt;
+            </button>
+            <span class="trang-hien-tai">
+                {{data()?.Page}} / {{data()?.TotalPages}}
+            </span>
+            <button type="button" class="nhay-den" (click)="goToNextPage()" [disabled]="page() === totalPages()">
+                &gt;
+            </button>
+            <button type="button" class="nhay-den" (click)="goToLastPage()" [disabled]="page() === totalPages()">
+                &gt;|
+            </button>
+
+        </div>
+
+    </div>
+</div>
+
+<app-dialog [(isOpen)]="isOpen" [id]="selectedId()" [hanhDong]="hanhDong()" (finish)="reloadData()"></app-dialog> -->
