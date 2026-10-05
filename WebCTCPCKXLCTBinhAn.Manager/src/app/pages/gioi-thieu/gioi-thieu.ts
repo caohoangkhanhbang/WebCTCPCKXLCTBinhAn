@@ -30,11 +30,6 @@ export class GioiThieu {
     reload: this.reload()
   }));
   reload = signal<number>(0);
-  // showThongBao = signal<boolean>(false);
-  // message = signal<string>('');
-  // buttons = signal<{ label: string, value: string, style: string }[]>([
-  //   { label: 'Xác nhận', value: 'confirm', style: 'primary' }
-  // ]);
   thongbao = inject(AnnouncementService);
 
   onSearch(e: Event) {

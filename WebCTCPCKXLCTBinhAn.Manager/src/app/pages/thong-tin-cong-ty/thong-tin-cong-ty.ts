@@ -4,7 +4,6 @@ import { environment } from '../../../environments/environment.development';
 import { AnnouncementService } from '../../components/dialog/announcement-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'app-thong-tin-cong-ty',
   imports: [ReactiveFormsModule],
@@ -29,7 +28,6 @@ export class ThongTinCongTy {
   logoImage: string | null = null;
   hinhImage: string | null = null;
   id: number | null = null;
-
 
   constructor() {
     effect(() => {
@@ -131,16 +129,29 @@ export class ThongTinCongTy {
       data.append('hinhFile', this.hinhFile, this.hinhFile.name);
     }
 
-    this.service.update(this.id, data).subscribe({
-      next: response => {
-        this.thongbao.hienThi('Cập nhật thành công', 'Thông báo');
-        this.resetData();
-      },
-      error: error => {
-        console.error('Error updating data:', error);
-        this.thongbao.hienThi('Có lỗi xảy ra khi cập nhật dữ liệu', 'Thông báo');
-      }
-    });
+    if (this.id === null) {
+      this.service.insert(data).subscribe({
+        next: response => {
+          this.thongbao.hienThi('Đã tạo mới thành công', 'Thông báo');
+          this.resetData();
+        },
+        error: error => {
+          console.error('Error inserting data:', error);
+        }
+      });
+    } else {
+
+      this.service.update(this.id, data).subscribe({
+        next: response => {
+          this.thongbao.hienThi('Cập nhật thành công', 'Thông báo');
+          this.resetData();
+        },
+        error: error => {
+          console.error('Error updating data:', error);
+          this.thongbao.hienThi('Có lỗi xảy ra khi cập nhật dữ liệu', 'Thông báo');
+        }
+      });
+    }
   }
 
   onLogoSelected(e: Event) {

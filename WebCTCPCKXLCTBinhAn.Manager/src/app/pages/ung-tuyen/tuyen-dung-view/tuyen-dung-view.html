@@ -1,0 +1,88 @@
+@if(isOpen()){
+<div class="overlay">
+    <form [formGroup]="formData" class="cv-container">
+        <p class="tieu-de">{{hanhDong() === 'create' ? 'Thêm mới' : hanhDong() === 'view' ? 'Xem chi tiết' : 'Chỉnh
+            sửa'}}</p>
+        <div class="container-scroll">
+            <div class="input-container">
+                <label for="ten_cong_viec" class="lien-he-tieude">Tên công việc<span
+                        class="color-requier">(*)</span></label>
+                <input type="text" name="ten_cong_viec" id="ten_cong_viec" formControlName="ten_cong_viec"
+                    class="lien-he-input" placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('ten_cong_viec')?.invalid && formData.get('ten_cong_viec')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="mo_ta" class="lien-he-tieude">Mô tả<span class="color-requier">(*)</span></label>
+                <input type="text" name="mo_ta" id="mo_ta" formControlName="mo_ta" class="lien-he-input"
+                    placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('mo_ta')?.invalid && formData.get('mo_ta')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="noi_dung" class="lien-he-tieude">Nội dung chi tiết<span
+                        class="color-requier">(*)</span></label>
+                <app-rich-text-editor formControlName="noi_dung"></app-rich-text-editor>
+                @if(formData.get('noi_dung')?.invalid && formData.get('noi_dung')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="dia_diem" class="lien-he-tieude">Địa điểm<span class="color-requier">(*)</span></label>
+                <input type="text" name="dia_diem" id="dia_diem" formControlName="dia_diem" class="lien-he-input"
+                    placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('dia_diem')?.invalid && formData.get('dia_diem')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="ngay_bd_tuyen" class="lien-he-tieude">Ngày bắt đầu tuyển dụng<span
+                        class="color-requier">(*)</span></label>
+                <input type="date" name="ngay_bd_tuyen" id="ngay_bd_tuyen" formControlName="ngay_bd_tuyen"
+                    class="lien-he-input input-date" placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('ngay_bd_tuyen')?.invalid && formData.get('ngay_bd_tuyen')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="ngay_kt_tuyen" class="lien-he-tieude">Ngày kết thúc tuyển dụng<span
+                        class="color-requier">(*)</span></label>
+                <input type="date" name="ngay_kt_tuyen" id="ngay_kt_tuyen" formControlName="ngay_kt_tuyen"
+                    class="lien-he-input input-date" placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('ngay_kt_tuyen')?.invalid && formData.get('ngay_kt_tuyen')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <label for="luong" class="lien-he-tieude">Lương<span class="color-requier">(*)</span></label>
+                <input type="text" name="luong" id="luong" formControlName="luong" class="lien-he-input"
+                    placeholder="Vui lòng nhập thông tin" />
+                @if(formData.get('luong')?.invalid && formData.get('luong')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+            <div class="input-container">
+                <img class="image-review" [src]="cdnUrl +'/'+ oldImage" alt="">
+            </div>
+            <div class="input-container">
+                <div class="center-height">
+                    <label for="hien_thi" class="lien-he-tieude margin-right">Hiển thị</label>
+                    <input formControlName="hien_thi" type="checkbox" id="hien_thi"
+                        placeholder="vui lòng nhập đầy đủ thông tin">
+                    @if(formData.get('hien_thi')?.invalid && formData.get('hien_thi')?.touched){
+                    <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="center row-reverse">
+            @if(hanhDong() !== 'view'){
+            <button type="submit" class="button pos">Lưu</button>
+            }
+            <button (click)="onClose()" type="button" class="button neg">Thoát</button>
+        </div>
+    </form>
+</div>
+}
