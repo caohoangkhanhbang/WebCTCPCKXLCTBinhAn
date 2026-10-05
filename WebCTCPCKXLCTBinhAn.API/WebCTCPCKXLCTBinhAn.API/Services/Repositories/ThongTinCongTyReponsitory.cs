@@ -81,8 +81,8 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
 
         public async Task<bool> Update(int id, ThongTinCongTy data, IFormFile? logoFile, IFormFile? hinhFile)
         {
-            string fileLogoOld = _fileService.GetFileName(tenBang, tenCot, id);
-            string fileHinhOld = _fileService.GetFileName(tenBang, tenCot, id);
+            string fileLogoOld = _fileService.GetFileName(tenBang, "logo", id);
+            string fileHinhOld = _fileService.GetFileName(tenBang, "hinh", id);
             string fileLogoNew = "";
             string fileHinhNew = "";
             if (logoFile != null && logoFile.Length > 0)
@@ -105,10 +105,10 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                 ["linh_vuc"] = data.linh_vuc,
                 ["nam_thanh_lap"] = data.nam_thanh_lap
             };
-            if (data.hinh != null)
-                dataToUpdate.Add("hinh", data.hinh);
-            if (data.logo != null)
-                dataToUpdate.Add("logo", data.logo);
+            if (!string.IsNullOrWhiteSpace(fileHinhNew))
+                dataToUpdate.Add("hinh", fileHinhNew);
+            if (!string.IsNullOrWhiteSpace(fileLogoNew))
+                dataToUpdate.Add("logo", fileLogoNew);
             var whereConditions = new Dictionary<string, object?>
             {
                 ["id"] = id
@@ -118,11 +118,19 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                 dataToUpdate,
                 whereConditions
             );
-            if (!result) { deleteFile(fileLogoNew); deleteFile(fileHinhNew); }
+            if (!result)
+            {
+                if (!string.IsNullOrWhiteSpace(fileLogoNew))
+                    deleteFile(fileLogoNew);
+                if (!string.IsNullOrWhiteSpace(fileHinhNew))
+                    deleteFile(fileHinhNew);
+            }
             else
             {
-                deleteFile(fileLogoOld);
-                deleteFile(fileHinhOld);
+                if (!string.IsNullOrWhiteSpace(fileLogoNew))
+                    deleteFile(fileLogoOld);
+                if (!string.IsNullOrWhiteSpace(fileHinhNew))
+                    deleteFile(fileHinhOld);
             }
             return result;
         }

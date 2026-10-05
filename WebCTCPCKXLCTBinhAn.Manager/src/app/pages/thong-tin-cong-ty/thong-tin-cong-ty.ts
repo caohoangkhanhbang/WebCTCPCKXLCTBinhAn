@@ -116,8 +116,6 @@ export class ThongTinCongTy {
     data.append('ten_cty', this.formData.get('ten_cty')?.value ?? '');
     data.append('dia_chi', this.formData.get('dia_chi')?.value ?? '');
     data.append('email', this.formData.get('email')?.value ?? '');
-    data.append('logo', this.formData.get('logo')?.value ?? '');
-    data.append('hinh', this.formData.get('hinh')?.value ?? '');
     data.append('sdt', this.formData.get('sdt')?.value ?? '');
     data.append('ma_so_thue', this.formData.get('ma_so_thue')?.value ?? '');
     data.append('hien_thi', String(this.formData.get('hien_thi')?.value ?? 'false'));
