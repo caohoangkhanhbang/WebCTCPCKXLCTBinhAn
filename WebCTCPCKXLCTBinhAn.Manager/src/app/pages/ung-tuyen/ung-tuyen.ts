@@ -1,20 +1,22 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { DuAnEdit } from './du-an-edit/du-an-edit';
-import { DuAnService } from './du-an-service';
+import { UngTuyenService } from './ung-tuyen-service';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { environment } from '../../../environments/environment.development';
 import { distinctUntilChanged, switchMap, debounceTime } from 'rxjs';
 import { AnnouncementService } from '../../components/dialog/announcement-service';
 import { DatePipe } from '@angular/common';
+import { DomSanitizer } from "@angular/platform-browser";
+import { UngTuyenEdit } from './tuyen-dung-view/tuyen-dung-view';
 
 @Component({
-  selector: 'app-du-an',
-  imports: [DuAnEdit, DatePipe],
-  templateUrl: './du-an.html',
-  providers: [DuAnService]
+  selector: 'app-ung-tuyen',
+  imports: [DatePipe, UngTuyenEdit],
+  standalone: true,
+  templateUrl: './ung-tuyen.html',
+  providers: [UngTuyenService]
 })
-export class DuAn {
-  service = inject(DuAnService);
+export class UngTuyen {
+  service = inject(UngTuyenService);
   isOpen = signal<boolean>(false);
   selectedId = signal<number | null>(null);
   hanhDong = signal<'create' | 'view' | 'update'>('create');
@@ -31,6 +33,8 @@ export class DuAn {
   }));
   reload = signal<number>(0);
   thongbao = inject(AnnouncementService);
+  urlPdf = signal<string | null>(null);
+  sanitizer = inject(DomSanitizer);
 
   onSearch(e: Event) {
     const keyword = (e.target as HTMLInputElement).value;
@@ -63,7 +67,7 @@ export class DuAn {
     this.page.set(1);
   }
 
-  columns = [{ name: 'STT' }, { name: 'Tên dự án' }, { name: 'Nội dung ngắn' }, { name: 'Nội dung chi tiết' }, { name: 'Hình ảnh' }, { name: 'Hiển thị' }, { name: 'Hạng mục thi công' }, { name: 'Chủ đầu tư' }, { name: 'thời gian' }, { name: 'Hành động' }];
+  columns = [{ name: 'STT' }, { name: 'Người ứng tuyển' }, { name: 'Email' }, { name: 'Số điện thoại' }, { name: 'File CV' }, { name: 'Ứng tuyển vào' }, { name: 'Ngày ứng tuyển' }, { name: 'Đã xem CV' }, { name: 'Hành động' }];
 
   data = toSignal<any>(
     toObservable(this.launch).pipe(
@@ -90,10 +94,30 @@ export class DuAn {
     });
   }
 
-  onEdit(id: number) {
-    this.hanhDong.set('update');
+  onViewCongViec(id: number) {
+    this.hanhDong.set('view');
     this.selectedId.set(id);
     this.isOpen.set(true);
+  }
+
+  onViewPDF(url: string) {
+    const urlSanitizer = this.sanitizer.bypassSecurityTrustResourceUrl(`${this.cdnUrl}/${url}`);
+    this.urlPdf.set(urlSanitizer as string);
+  }
+
+
+  onEdit(id: number, data: any) {
+    this.service.update(id, data).subscribe({
+      next: () => {
+        this.thongbao.hienThi(`Cập nhật thành công!`);
+      }
+      ,
+      error: (err) => {
+        console.error(err);
+        this.thongbao.hienThi(`Cập nhật thất bại vui lòng liên hệ lập trình viên!!!`);
+      }
+    });
+    this.reload.update(cong => cong + 1);
   }
 
   onView(id: number) {
@@ -102,9 +126,4 @@ export class DuAn {
     this.isOpen.set(true);
   }
 
-  onCreate() {
-    this.isOpen.set(true);
-    this.selectedId.set(null);
-    this.hanhDong.set('create');
-  }
 }
