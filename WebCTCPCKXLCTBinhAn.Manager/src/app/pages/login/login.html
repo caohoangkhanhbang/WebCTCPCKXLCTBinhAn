@@ -1,42 +1,20 @@
-<div class="login-container">
+<div class="login-container" style="background: url('{{ cdnUrl }}/loginback.jpg') center /cover;">
+    <div class="form-container">
+        <form (ngSubmit)="login()" class="center">
+            <h1 class="center">Đăng nhập</h1>
+            <div class="blur-container">
+                <div> <label>Tên đăng nhập</label> <input placeholder="Vui lòng nhập đầy đủ thông tin"
+                        class="lien-he-input" type="email" name="email" [(ngModel)]="email" required
+                        autocomplete="email">
+                </div>
+                <div> <label>Mật khẩu</label> <input placeholder="Vui lòng nhập mật khẩu" class="lien-he-input"
+                        type="password" name="password" [(ngModel)]="password" required autocomplete="current-password">
+                </div> @if (errorMessage) { <p class="error"> {{ errorMessage }} </p> }
+            </div>
 
-    <h1>Đăng nhập</h1>
-
-    <form (ngSubmit)="login()">
-
-        <div>
-            <label>Email</label>
-
-            <input type="email" name="email" [(ngModel)]="email" required autocomplete="email">
-        </div>
-
-
-        <div>
-            <label>Mật khẩu</label>
-
-            <input type="password" name="password" [(ngModel)]="password" required autocomplete="current-password">
-        </div>
-
-        @if (errorMessage) {
-
-        <p class="error">
-            {{ errorMessage }}
-        </p>
-
-        }
-
-
-        <button type="submit" [disabled]="isLoading">
-
-            @if (isLoading) {
-            Đang đăng nhập...
-            }
-            @else {
-            Đăng nhập
-            }
-
-        </button>
-
-    </form>
-
+            <button class="button" type="submit" [disabled]="isLoading"> @if (isLoading) { Đang đăng nhập... } @else {
+                Đăng nhập }
+            </button>
+        </form>
+    </div>
 </div>

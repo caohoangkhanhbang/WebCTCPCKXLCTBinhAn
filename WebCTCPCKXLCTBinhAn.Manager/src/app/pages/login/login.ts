@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class Login {
   password = '';
   errorMessage = '';
   isLoading = false;
+  cdnUrl = environment.cdnUrl;
 
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
