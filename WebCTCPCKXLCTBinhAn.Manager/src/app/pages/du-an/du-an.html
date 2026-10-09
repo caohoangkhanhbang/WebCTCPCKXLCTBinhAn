@@ -18,7 +18,7 @@
                 @for(item of data().Items; track $index){
                 <tr>
                     <td>{{ $index + 1 + (data()?.Page - 1) * data()?.PageSize }}</td>
-                    <td (click)="onView(item.id)" class="title">{{item.ten_du_an}}</td>
+                    <td (click)="onView(item.id)" class="title cursor-pointer">{{item.ten_du_an}}</td>
                     <td class="title">{{item.bo_nghia}}</td>
                     <td class="title">
                         {{item.noi_dung}}

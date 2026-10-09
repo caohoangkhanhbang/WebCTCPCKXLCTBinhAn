@@ -18,7 +18,7 @@
                 @for(item of data().Items; track $index){
                 <tr>
                     <td>{{ $index + 1 + (data()?.Page - 1) * data()?.PageSize }}</td>
-                    <td (click)="onView(item.id)" class="title">{{item.giai_phap}}</td>
+                    <td (click)="onView(item.id)" class="title cursor-pointer">{{item.giai_phap}}</td>
                     <td class="title">{{item.noi_dung}}</td>
                     <td>
                         <img class="image-list" [src]="cdnUrl + '/' + item.hinh" [alt]="item.giai_phap">

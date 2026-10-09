@@ -19,7 +19,7 @@
                 <tr>
                     <td>{{ $index + 1 + (data()?.Page - 1) * data()?.PageSize }}</td>
                     <td class="content">{{item.thoi_gian}}</td>
-                    <td (click)="onView(item.id)" class="title">{{item.noi_dung}}</td>
+                    <td (click)="onView(item.id)" class="title cursor-pointer">{{item.noi_dung}}</td>
                     <td>
                         <div class="center-center">
                             <div class="hien-thi-box" [class.active]="item.hien_thi"></div>

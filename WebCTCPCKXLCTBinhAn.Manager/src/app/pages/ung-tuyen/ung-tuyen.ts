@@ -13,6 +13,7 @@ import { UngTuyenEdit } from './tuyen-dung-view/tuyen-dung-view';
   imports: [DatePipe, UngTuyenEdit],
   standalone: true,
   templateUrl: './ung-tuyen.html',
+  styleUrl: './ung-tuyen.css',
   providers: [UngTuyenService]
 })
 export class UngTuyen {
@@ -126,4 +127,7 @@ export class UngTuyen {
     this.isOpen.set(true);
   }
 
+  closePDF() {
+    this.urlPdf.set(null);
+  }
 }

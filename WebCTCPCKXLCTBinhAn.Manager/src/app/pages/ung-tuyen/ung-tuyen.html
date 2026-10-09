@@ -20,23 +20,21 @@
                     <td class="title">{{item.ten}}</td>
                     <td class="title">{{item.email}}</td>
                     <td class="title">{{item.sdt}}</td>
-                    <td (click)="onViewPDF(item.filecv)" class="title">{{item.filecv}}</td>
-                    <td (click)="onViewCongViec(item.id_tuyen_dung)" class="title">{{item.ten_cong_viec}}</td>
+                    <td (click)="onViewPDF(item.filecv)" class="title cursor-pointer">{{item.filecv}}</td>
+                    <td (click)="onViewCongViec(item.id_tuyen_dung)" class="title cursor-pointer">{{item.ten_cong_viec}}</td>
                     <td class="title">{{item.created_date | date:'dd/MM/yyyy'}}</td>
                     <td>
                         <div class="center-center">
                             <div class="hien-thi-box" [class.active]="item.da_xem"></div>
                         </div>
                     </td>
-                    <td>
-                        <div class="action">
+                    <td class="action">
+                        <div>
                             <div (click)="onEdit(item.id, { da_xem: true })" title="Đánh dấu là đã xem" class="btn sua">
-                                <div class="icon" style="mask: url('/public/resource/icons/sua.svg');"></div>Đánh dấu là
-                                đã xem
+                                Đánh dấu là đã xem
                             </div>
                             <div (click)="onDelete(item.id, item.ten)" title="Xóa ứng viên" class="btn xoa">
-                                <div class="icon" style="mask: url('/public/resource/icons/thungrac.svg');"></div>Xóa
-                                ứng viên
+                               Xóa ứng viên
                             </div>
                         </div>
 
@@ -91,5 +89,8 @@
 <app-dialog [(isOpen)]="isOpen" [id]="selectedId()" [hanhDong]="hanhDong()" (finish)="reloadData()"></app-dialog>
 
 @if(urlPdf()){
-<iframe [src]="urlPdf()" width="100%" height="600px" frameborder="0"></iframe>
+    <div class="pdf-container">
+        <iframe [src]="urlPdf()" width="100%" height="600px" frameborder="0" class="custom-pdf"></iframe>
+        <button class="close-pdf" (click)="closePDF()">Đóng</button>
+    </div>
 }
