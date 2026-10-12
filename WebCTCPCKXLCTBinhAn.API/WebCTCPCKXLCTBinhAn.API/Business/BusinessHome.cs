@@ -122,7 +122,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
         public async Task<List<CacCotMoc>> GetCacCotMoc()
         {
             List<CacCotMoc> lst = new List<CacCotMoc>();
-            string sql = "SELECT id, thoi_gian, noi_dung FROM cac_cot_moc where hien_thi = true order by id asc";
+            string sql = "SELECT id, thoi_gian, noi_dung FROM cac_cot_moc where hien_thi = true order by id asc limit 5";
             await using var con = new NpgsqlConnection(_connectionService.GetConnectionString());
             await using var cmd = new NpgsqlCommand(sql, con);
             await con.OpenAsync();
@@ -229,19 +229,19 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
             await using var reader = await cmd.ExecuteReaderAsync();
             if (await reader.ReadAsync())
             {
-                    return new ThongTinCongTy
-                    {
-                        id = reader["id"] != DBNull.Value ? Convert.ToInt32(reader["id"]) : 0,
-                        ten_cty = reader["ten_cty"] != DBNull.Value ? reader["ten_cty"].ToString() : string.Empty,
-                        logo = reader["logo"] != DBNull.Value ? reader["logo"].ToString() : string.Empty,
-                        dia_chi = reader["dia_chi"] != DBNull.Value ? reader["dia_chi"].ToString() : string.Empty,
-                        email = reader["email"] != DBNull.Value ? reader["email"].ToString() : string.Empty,
-                        sdt = reader["sdt"] != DBNull.Value ? reader["sdt"].ToString() : string.Empty,
-                        hinh = reader["hinh"] != DBNull.Value ? reader["hinh"].ToString() : string.Empty,
-                        slogan = reader["slogan"] != DBNull.Value ? reader["slogan"].ToString() : string.Empty,
-                        linh_vuc = reader["linh_vuc"] != DBNull.Value ? reader["linh_vuc"].ToString() : string.Empty,
-                        nam_thanh_lap = reader["nam_thanh_lap"] != DBNull.Value ? (DateOnly?)reader["nam_thanh_lap"] : null
-                    };
+                return new ThongTinCongTy
+                {
+                    id = reader["id"] != DBNull.Value ? Convert.ToInt32(reader["id"]) : 0,
+                    ten_cty = reader["ten_cty"] != DBNull.Value ? reader["ten_cty"].ToString() : string.Empty,
+                    logo = reader["logo"] != DBNull.Value ? reader["logo"].ToString() : string.Empty,
+                    dia_chi = reader["dia_chi"] != DBNull.Value ? reader["dia_chi"].ToString() : string.Empty,
+                    email = reader["email"] != DBNull.Value ? reader["email"].ToString() : string.Empty,
+                    sdt = reader["sdt"] != DBNull.Value ? reader["sdt"].ToString() : string.Empty,
+                    hinh = reader["hinh"] != DBNull.Value ? reader["hinh"].ToString() : string.Empty,
+                    slogan = reader["slogan"] != DBNull.Value ? reader["slogan"].ToString() : string.Empty,
+                    linh_vuc = reader["linh_vuc"] != DBNull.Value ? reader["linh_vuc"].ToString() : string.Empty,
+                    nam_thanh_lap = reader["nam_thanh_lap"] != DBNull.Value ? (DateOnly?)reader["nam_thanh_lap"] : null
+                };
             }
             return data;
         }

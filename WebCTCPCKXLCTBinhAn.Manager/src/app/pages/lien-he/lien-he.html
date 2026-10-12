@@ -1,0 +1,87 @@
+<div class="page-title">Liên hệ</div>
+<div class="container">
+    <div class="search-container">
+        <input type="text" placeholder="🔍 Tìm kiếm..." class="search-input" (input)="onSearch($event)" />
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    @for(item of columns; track item.name){
+                    <th>{{item.name}}</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for(item of data().Items; track $index){
+                <tr>
+                    <td>{{ $index + 1 + (data()?.Page - 1) * data()?.PageSize }}</td>
+                    <td class="title">{{item.ten}}</td>
+                    <td class="title">{{item.noi_dung}}</td>
+                    <td class="title">{{item.email}}</td>
+                    <td class="title">{{item.sdt}}</td>
+                    <td class="title">{{item.cccd}}</td>
+                    <td class="title">{{item.created_date | date:'dd/MM/yyyy'}}</td>
+                    <td>
+                        <div class="center-center">
+                            <div class="hien-thi-box" [class.active]="item.da_xem"></div>
+                        </div>
+                    </td>
+                    <td class="action">
+                        <div>
+                            <div (click)="onEdit(item.id, { da_xem: true })" title="Đánh dấu là đã xem" class="btn sua">
+                                Đánh dấu là đã xem
+                            </div>
+                            <div (click)="onDelete(item.id, item.ten)" title="Xóa ứng viên" class="btn xoa">
+                                Xóa ứng viên
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="phan-trang">
+        <div class="so-trang">
+            Số dòng mỗi trang
+            <select class="select-trang" [value]="pageSize()" (change)="onPageSizeChange($event)">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select>
+        </div>
+
+        <div class="thong-tin-dong">
+            Dòng
+            {{ (page() - 1) * pageSize() + 1 }}
+            đến
+            {{ (page() - 1) * pageSize() + data()?.Items.length }}
+            của trang
+            {{ page() }}
+        </div>
+
+        <div class="nut-trang">
+            <button type="button" class="nhay-den" (click)="goToFirstPage()" [disabled]="page() === 1">
+                |&lt;
+            </button>
+            <button type="button" class="nhay-den" (click)="goToPreviousPage()" [disabled]="page() === 1">
+                &lt;
+            </button>
+            <span class="trang-hien-tai">
+                {{data()?.Page}} / {{data()?.TotalPages}}
+            </span>
+            <button type="button" class="nhay-den" (click)="goToNextPage()" [disabled]="page() === totalPages()">
+                &gt;
+            </button>
+            <button type="button" class="nhay-den" (click)="goToLastPage()" [disabled]="page() === totalPages()">
+                &gt;|
+            </button>
+
+        </div>
+
+    </div>
+</div>
