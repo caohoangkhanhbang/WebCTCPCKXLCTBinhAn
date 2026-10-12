@@ -1,0 +1,31 @@
+.pdf-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.105);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+}
+.close-pdf:hover {
+    box-shadow: 0px 0px 52px #e100ff;
+}
+.close-pdf {
+padding: 10px 30px;
+    background: linear-gradient(45deg, #ff00f0, #fc0020);
+    border-radius: 50px;
+    border: none;
+    color: white;
+    margin: 30px;
+    cursor: pointer;
+}
+
+.custom-pdf {
+    border-radius: 12px;
+}
