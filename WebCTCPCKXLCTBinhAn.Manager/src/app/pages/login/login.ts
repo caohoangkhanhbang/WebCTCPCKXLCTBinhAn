@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
@@ -13,30 +13,31 @@ import { environment } from '../../../environments/environment.development';
 export class Login {
   email = '';
   password = '';
-  errorMessage = '';
-  isLoading = false;
+  errorMessage = signal('');
+  isLoading = signal(false);
   cdnUrl = environment.cdnUrl;
 
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
   login(): void {
-    this.errorMessage = '';
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
-        this.isLoading = false;
+        this.isLoading.set(false);
         this.router.navigate(['/dashboard']);
       },
       error: error => {
-        this.isLoading = false;
+        this.isLoading.set(false);
         console.error('Login error:', error);
         if (error.status === 401) {
-          this.errorMessage = "Email hoặc mật khẩu không đúng. Vui lòng thử lại.";
+          this.errorMessage.set("Email hoặc mật khẩu không đúng. Vui lòng thử lại.");
+          this.isLoading.set(false);
         }
         else {
-          this.errorMessage = "Không thể kết nối đến máy chủ. Vui lòng thử lại sau.";
+          this.isLoading.set(false);
+          this.errorMessage.set("Không thể kết nối đến máy chủ. Vui lòng thử lại sau.");
         }
       }
     });
