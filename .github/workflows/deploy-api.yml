@@ -1,5 +1,5 @@
 
-name: Build Binh An API
+name: Build and Deploy Binh An API
 
 on:
   push:
@@ -13,25 +13,24 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: deploy-binh-an-api
+  cancel-in-progress: false
+
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source code
+      - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Install .NET 10 SDK
+      - name: Setup .NET 10
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
 
-      - name: Restore dependencies
-        run: |
-          dotnet restore \
-            WebCTCPCKXLCTBinhAn.API/WebCTCPCKXLCTBinhAn.API/WebCTCPCKXLCTBinhAn.API.csproj
-
-      - name: Publish API for Linux
+      - name: Publish API
         run: |
           dotnet publish \
             WebCTCPCKXLCTBinhAn.API/WebCTCPCKXLCTBinhAn.API/WebCTCPCKXLCTBinhAn.API.csproj \
@@ -40,10 +39,52 @@ jobs:
             --self-contained false \
             -o ./publish
 
-      - name: Save published files
-        uses: actions/upload-artifact@v4
+      - name: Prepare release directory
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          RELEASE_ID: ${{ github.run_number }}
         with:
-          name: binh-an-api-linux
-          path: publish/
-          if-no-files-found: error
-          retention-days: 3
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          envs: RELEASE_ID
+          script: |
+            mkdir -p "/var/www/binh-an-releases/$RELEASE_ID"
+
+      - name: Upload published API
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "publish/*"
+          target: "/var/www/binh-an-releases/${{ github.run_number }}"
+          strip_components: 1
+
+      - name: Activate release and restart API
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          RELEASE_ID: ${{ github.run_number }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          envs: RELEASE_ID
+          script: |
+            set -eu
+
+            RELEASE="/var/www/binh-an-releases/$RELEASE_ID"
+
+            test -f "$RELEASE/WebCTCPCKXLCTBinhAn.API.dll"
+
+            ln -sfn "$RELEASE" /var/www/binh-an-api/current.new
+            mv -Tf /var/www/binh-an-api/current.new \
+              /var/www/binh-an-api/current
+
+            sudo systemctl daemon-reload
+            sudo systemctl enable binh-an-api
+            sudo systemctl restart binh-an-api
+            sleep 3
+            sudo systemctl is-active --quiet binh-an-api
+
+            echo "Deployment completed: $RELEASE_ID"
