@@ -1,0 +1,49 @@
+
+name: Build Binh An API
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'WebCTCPCKXLCTBinhAn.API/**'
+      - '.github/workflows/deploy-api.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Install .NET 10 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: |
+          dotnet restore \
+            WebCTCPCKXLCTBinhAn.API/WebCTCPCKXLCTBinhAn.API/WebCTCPCKXLCTBinhAn.API.csproj
+
+      - name: Publish API for Linux
+        run: |
+          dotnet publish \
+            WebCTCPCKXLCTBinhAn.API/WebCTCPCKXLCTBinhAn.API/WebCTCPCKXLCTBinhAn.API.csproj \
+            -c Release \
+            -r linux-x64 \
+            --self-contained false \
+            -o ./publish
+
+      - name: Save published files
+        uses: actions/upload-artifact@v4
+        with:
+          name: binh-an-api-linux
+          path: publish/
+          if-no-files-found: error
+          retention-days: 3
