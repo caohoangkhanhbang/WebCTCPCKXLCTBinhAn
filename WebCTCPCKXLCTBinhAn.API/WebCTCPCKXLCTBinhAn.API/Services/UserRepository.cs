@@ -3,7 +3,7 @@ using WebCTCPCKXLCTBinhAn.API.Models;
 
 namespace WebCTCPCKXLCTBinhAn.API.Services
 {
-    public class UserRepository(NpgsqlDataSource dataSource):IUserRepository
+    public class UserRepository(NpgsqlDataSource dataSource) : IUserRepository
     {
         private readonly NpgsqlDataSource _dataSource = dataSource;
         public async Task<User?> GetByEmailAsync(string email)

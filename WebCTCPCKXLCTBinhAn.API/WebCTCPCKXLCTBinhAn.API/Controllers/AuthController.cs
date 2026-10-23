@@ -17,7 +17,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
         public async Task<IActionResult> Register(RegisterRequest request)
         {
             var exists = await _userRepository.EmailExistsAsync(request.Email);
-            if(exists)
+            if (exists)
             {
                 return BadRequest(new { message = "Email đã tồn tại" });
             }
@@ -43,60 +43,25 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult>
-    Login(LoginRequest request)
+        public async Task<IActionResult> Login(LoginRequest request)
         {
-            var user =
-                await _userRepository
-                    .GetByEmailAsync(
-                        request.Email);
-
+            var user = await _userRepository.GetByEmailAsync(request.Email);
             if (user == null)
             {
-                return Unauthorized(new
-                {
-                    message =
-                        "Email hoặc mật khẩu không đúng."
-                });
+                return Unauthorized(new { message = "Email hoặc mật khẩu không đúng." });
             }
-
-
-            var validPassword =
-                _passwordService
-                    .VerifyPassword(
-                        user.PasswordHash,
-                        request.Password
-                    );
-
-
+            var validPassword = _passwordService.VerifyPassword(user.PasswordHash, request.Password);
             if (!validPassword)
             {
-                return Unauthorized(new
-                {
-                    message =
-                        "Email hoặc mật khẩu không đúng."
-                });
+                return Unauthorized(new { message = "Email hoặc mật khẩu không đúng." });
             }
-
-
-            var jwt =
-                _jwtService
-                    .GenerateToken(user);
-
-
+            var jwt = _jwtService.GenerateToken(user);
             return Ok(new AuthResponse
             {
-                AccessToken =
-                    jwt.AccessToken,
-
-                ExpiresAt =
-                    jwt.ExpiresAt,
-
-                FullName =
-                    user.FullName,
-
-                Role =
-                    user.Role
+                AccessToken = jwt.AccessToken,
+                ExpiresAt = jwt.ExpiresAt,
+                FullName = user.FullName,
+                Role = user.Role
             });
         }
 

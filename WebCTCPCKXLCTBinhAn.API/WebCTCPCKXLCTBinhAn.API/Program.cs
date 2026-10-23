@@ -46,6 +46,7 @@ builder.Services.AddScoped<ITuyenDungRepository, TuyenDungRepository>();
 builder.Services.AddScoped<IThongTinCongTyReponsitory, ThongTinCongTyReponsitory>();
 builder.Services.AddScoped<IUngTuyenRespository, UngTuyenRespository>();
 builder.Services.AddScoped<ILienHeRepository, LienHeRepository>();
+builder.Services.AddScoped<ISlideHomeRepository, SlideHomeRepository>();
 
 //1. Dòng này giúp giữ nguyên tên thuộc tính (Property) của class như lúc khai báo để truyền api
 builder.Services.AddControllers()

@@ -71,6 +71,18 @@ export const routes: Routes = [
                 canActivate: [authGuard]
             },
             {
+                path: 'slide-home',
+                title: 'Slide trang chủ',
+                loadComponent: () => import('./pages/slide-home/slide-home').then(m => m.SlideHome),
+                canActivate: [authGuard]
+            },
+            {
+                path: 'hinh-nen',
+                title: 'Hình nền trang',
+                loadComponent: () => import('./pages/slide-home/slide-home').then(m => m.SlideHome),
+                canActivate: [authGuard]
+            },
+            {
                 path: 'dashboard',
                 title: 'Dashboard',
                 loadComponent: () => import('./pages/dashboard/dashboard').then(m => m.Dashboard),
