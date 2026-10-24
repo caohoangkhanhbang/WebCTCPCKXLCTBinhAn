@@ -1,0 +1,90 @@
+
+name: Build and Deploy Binh An API
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'WebCTCPCKXLCTBinhAn.API/**'
+      - '.github/workflows/deploy-api.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-binh-an-api
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Publish API
+        run: |
+          dotnet publish \
+            WebCTCPCKXLCTBinhAn.API/WebCTCPCKXLCTBinhAn.API/WebCTCPCKXLCTBinhAn.API.csproj \
+            -c Release \
+            -r linux-x64 \
+            --self-contained false \
+            -o ./publish
+
+      - name: Prepare release directory
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          RELEASE_ID: ${{ github.run_number }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          envs: RELEASE_ID
+          script: |
+            mkdir -p "/var/www/binh-an-releases/$RELEASE_ID"
+
+      - name: Upload published API
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "publish/*"
+          target: "/var/www/binh-an-releases/${{ github.run_number }}"
+          strip_components: 1
+
+      - name: Activate release and restart API
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          RELEASE_ID: ${{ github.run_number }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          envs: RELEASE_ID
+          script: |
+            set -eu
+
+            RELEASE="/var/www/binh-an-releases/$RELEASE_ID"
+
+            test -f "$RELEASE/WebCTCPCKXLCTBinhAn.API.dll"
+
+            ln -sfn "$RELEASE" /var/www/binh-an-api/current.new
+            mv -Tf /var/www/binh-an-api/current.new \
+              /var/www/binh-an-api/current
+
+            sudo systemctl daemon-reload
+            sudo systemctl enable binh-an-api
+            sudo systemctl restart binh-an-api
+            sleep 3
+            sudo systemctl is-active --quiet binh-an-api
+
+            echo "Deployment completed: $RELEASE_ID"
