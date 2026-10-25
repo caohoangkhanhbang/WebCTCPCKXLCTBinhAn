@@ -27,6 +27,7 @@
     object-position: center;
     border-top-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    background: linear-gradient(45deg, #0048ff61, #00000028) center/cover no-repeat;
 }
 
 .card-container {
@@ -238,6 +239,5 @@
     .icon-right,
     .icon-left {
         bottom: 1%;
-
     }
 }

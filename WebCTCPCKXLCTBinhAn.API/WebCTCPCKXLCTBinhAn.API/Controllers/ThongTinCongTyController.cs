@@ -10,7 +10,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
     {
         private readonly IThongTinCongTyReponsitory _thongTinCongTyReponsitory = thongTinCongTyReponsitory;
         [HttpGet("list")]
-        public async Task<IActionResult> getIno()
+        public async Task<IActionResult> getInfo()
         {
             var data = await _thongTinCongTyReponsitory.GetInfo();
             return Ok(data);

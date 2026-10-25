@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { SlideComponent } from '../../components/slide/slide';
 import { SlideDuAn } from '../../components/slide-du-an/slide-du-an';
 import { HomeService } from './home-services';
@@ -7,6 +7,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { environment } from '../../../enviroments/enviroment';
 import { RouterLink } from '@angular/router';
 import { CompanyInfo } from '../../Services/company-info';
+import { MahaHinhNen } from '../../Services/maha-hinh-nen';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { CompanyInfo } from '../../Services/company-info';
   templateUrl: './home.html',
   styleUrl: './home.css',
   standalone: true,
-  providers: [HomeService]
+  providers: [HomeService, MahaHinhNen]
 })
 export class Home {
   service = inject(HomeService);
@@ -25,6 +26,15 @@ export class Home {
   readonly duAn = toSignal(this.service.getDuAn(), { initialValue: [] as any[] });
   readonly giaiPhap = toSignal(this.service.getGiaiPhap(), { initialValue: [] as any[] });
 
-  
+  hinhNenInfo = inject(MahaHinhNen).hinhNen;
+  backgroundPath = computed(() => this.FilterListImage('lĩnh vực hoạt động', 2));
+  backgroundPathGioiThieu = computed(() => this.FilterListImage('nội dung giới thiệu', 4));
+
+  FilterListImage(pageName: string, numberOfImages: number): any[] {
+    return (this.hinhNenInfo() ?? []).filter((item: any) => item.ten_trang.trim().toLowerCase() === pageName.toLowerCase()).slice(-numberOfImages);
+  }
+  CombineUrl(path: string): string {
+    return `${environment.cdnUrl}/` + path;
+  }
 }
 

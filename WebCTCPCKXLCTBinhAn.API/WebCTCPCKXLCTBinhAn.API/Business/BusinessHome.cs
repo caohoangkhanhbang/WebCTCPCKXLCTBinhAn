@@ -246,6 +246,26 @@ namespace WebCTCPCKXLCTBinhAn.API.Business
             return data;
         }
 
-
+        public async Task<List<HinhNen>> GetHinhNen()
+        {
+            List<HinhNen> data = new List<HinhNen>();
+            string sql = "SELECT ten_trang, hinh from hinh_nen hn left join loai_trang lt on hn.id_loai_trang = lt.id where hien_thi=true";
+            await using var con = new NpgsqlConnection(_connectionService.GetConnectionString());
+            await using var cmd = new NpgsqlCommand(sql, con);
+            await con.OpenAsync();
+            await using var reader = await cmd.ExecuteReaderAsync();
+            if (reader.HasRows)
+            {
+                while (await reader.ReadAsync())
+                {
+                    data.Add(new HinhNen
+                    {
+                        ten_trang = reader["ten_trang"] != DBNull.Value ? reader["ten_trang"].ToString() : null,
+                        hinh = reader["hinh"] != DBNull.Value ? reader["hinh"].ToString() : null,
+                    });
+                }
+            }
+            return data;
+        }
     }
 }

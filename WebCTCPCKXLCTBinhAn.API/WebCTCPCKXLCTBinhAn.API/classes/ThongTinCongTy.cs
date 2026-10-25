@@ -14,5 +14,6 @@
         public DateOnly? nam_thanh_lap { get; set; }
         public string ma_so_thue { get; set; }
         public bool? hien_thi { get; set; }
+        public string? html_gioi_thieu { get; set; }
     }
 }

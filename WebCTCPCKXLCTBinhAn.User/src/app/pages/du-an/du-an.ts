@@ -1,4 +1,4 @@
-import { Component, inject, signal } from "@angular/core";
+import { Component, computed, inject, signal } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { DuAnServices } from "./du-an-services";
 import { toSignal } from "@angular/core/rxjs-interop";
@@ -9,13 +9,14 @@ import { switchMap } from "rxjs/internal/operators/switchMap";
 import { ScrollNearEndDirective } from "./scroll-near-end.directive";
 import { tap } from "rxjs/internal/operators/tap";
 import { CompanyInfo } from "../../Services/company-info";
+import { MahaHinhNen } from "../../Services/maha-hinh-nen";
 @Component({
     selector: "app-du-an",
     templateUrl: "./du-an.html",
     styleUrl: "./du-an.css",
     standalone: true,
     imports: [TranslatePipe, RouterLink, ScrollNearEndDirective],
-    providers: [DuAnServices]
+    providers: [DuAnServices, MahaHinhNen]
 })
 
 export class DuAn {
@@ -76,5 +77,13 @@ export class DuAn {
 
     loadMore(): void {
         this.loadData();
+    }
+
+    hinhNenInfo = inject(MahaHinhNen).hinhNen;
+    backgroundPath = computed(() =>
+        this.hinhNenInfo().filter((item: any) => item.ten_trang.trim().toLowerCase() === 'dự án').slice(-1)
+    );
+    CombineUrl(path: string): string {
+        return `${environment.cdnUrl}/` + path;
     }
 }

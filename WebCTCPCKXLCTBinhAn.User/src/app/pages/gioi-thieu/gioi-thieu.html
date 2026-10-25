@@ -1,10 +1,10 @@
 <div class="top-image"
-    style="background-image: url(https://tech.cornell.edu/wp-content/uploads/2018/06/TECH_20170717_002_1440_1080_s_c1.jpg);">
+    [style.background-image]="backgroundPath()?.[0]?.hinh ? 'url(' + CombineUrl(backgroundPath()[0]?.hinh) + ')' : ''">
     <h1 class="top-image-title">{{thongTinCty()?.ten_cty}}</h1>
-    <h1 class="top-image-title-modified ">{{thongTinCty()?.slogan}}</h1>
+    <h1 class="top-image-title-modified ">{{thongTinCty()?.slogan }}</h1>
 </div>
-<!-- các cột mốc phát triển -->
-<div class="cot-moc-container">
+<div class="cot-moc-container"
+    [style.background-image]="backgroundPath()?.[1]?.hinh ? 'url(' + CombineUrl(backgroundPath()[1]?.hinh) + ')' : ''">
     <div class="grid wide">
         <div class="row">
             <div class="l-12 m-12 c-12 cot-moc-title">
@@ -34,4 +34,3 @@
         </div>
     </div>
 </div>
-<!-- hết các cột mốc phát triển -->
