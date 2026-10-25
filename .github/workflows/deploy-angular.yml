@@ -1,0 +1,88 @@
+
+name: Deploy Angular to Oracle Cloud
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "WebCTCPCKXLCTBinhAn.User/**"
+      - ".github/workflows/deploy-angular.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: WebCTCPCKXLCTBinhAn.User/package-lock.json
+
+      - name: Install dependencies
+        working-directory: WebCTCPCKXLCTBinhAn.User
+        run: npm ci
+
+      - name: Build Angular
+        working-directory: WebCTCPCKXLCTBinhAn.User
+        run: npm run build -- --configuration production
+
+      - name: Package Angular build
+        shell: bash
+        run: |
+          set -e
+          INDEX_FILE="$(find WebCTCPCKXLCTBinhAn.User/dist \
+            -type f -name index.html -print -quit)"
+
+          if [ -z "$INDEX_FILE" ]; then
+            echo "ERROR: Không tìm thấy index.html trong thư mục dist."
+            exit 1
+          fi
+
+          BUILD_DIR="$(dirname "$INDEX_FILE")"
+          tar -czf angular-dist.tar.gz -C "$BUILD_DIR" .
+
+      - name: Upload build to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "angular-dist.tar.gz"
+          target: "/tmp/"
+
+      - name: Activate Angular release
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          RELEASE_ID: ${{ github.run_number }}
+          ARCHIVE: angular-dist.tar.gz
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          envs: RELEASE_ID,ARCHIVE
+          script: |
+            set -eu
+
+            BASE="/var/www/binh-an-user"
+            RELEASE_DIR="$BASE/releases/$RELEASE_ID"
+
+            mkdir -p "$RELEASE_DIR"
+            tar -xzf "/tmp/$ARCHIVE" -C "$RELEASE_DIR"
+            rm -f "/tmp/$ARCHIVE"
+
+            test -f "$RELEASE_DIR/index.html"
+
+            ln -sfn "$RELEASE_DIR" "$BASE/current"
+
+            echo "Angular release $RELEASE_ID deployed."
+            ls -l "$BASE/current/index.html"
