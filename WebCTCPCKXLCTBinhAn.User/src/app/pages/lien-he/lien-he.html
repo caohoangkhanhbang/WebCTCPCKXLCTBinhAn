@@ -1,4 +1,5 @@
-<div class="lien-he-container">
+<div class="lien-he-container"
+    [style.background-image]="backgroundPath()?.[0]?.hinh ? 'url(' + CombineUrl(backgroundPath()[0]?.hinh) + ')' : ''">
     <form [formGroup]="data" (ngSubmit)="onSubmit()" class="lien-he-form">
         <h2 class="lien-he-title">{{'MAIN_LAYOUT.NAV.CONTACT' | translate}}</h2>
         <div class="input-container">
@@ -43,5 +44,6 @@
 </div>
 
 @if(showDialog()){
-    <app-confirm-dialog [message]="message" [buttons]="buttomsInfo" (action)="handleDialogAction($event)"></app-confirm-dialog>
+<app-confirm-dialog [message]="message" [buttons]="buttomsInfo"
+    (action)="handleDialogAction($event)"></app-confirm-dialog>
 }

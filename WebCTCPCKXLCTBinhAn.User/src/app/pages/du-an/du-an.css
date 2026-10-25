@@ -50,3 +50,11 @@
     align-items: center;
     margin-top: 20px;
 }
+
+.style-no-project {
+    min-height: 20vh;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-family: var(--font-dacbiet);
+}

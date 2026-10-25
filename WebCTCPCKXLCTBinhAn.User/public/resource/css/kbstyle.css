@@ -74,6 +74,10 @@
     background: linear-gradient(45deg, #ffffff26, #ffffff30);
 }
 
+.header-search::placeholder {
+    color: white;
+}
+
 .header-search:focus {
     outline: none;
 }
@@ -112,16 +116,8 @@
     display: flex;
 }
 
-
-
-.company-logo {}
-
 .company-logo-ba {
-    background: url('../images/logoCHKB.png') no-repeat center/contain;
+    background: #0100ff no-repeat center/contain;
     width: 200px;
     padding-top: 100px;
-}
-
-.footer {
-    /* background: url(); */
 }

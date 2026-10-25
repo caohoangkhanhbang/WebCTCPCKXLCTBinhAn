@@ -1,5 +1,6 @@
 <div class="du-an-ct-container">
-    <div class="du-an-ct-top" [style.background-image]="'url(' + cdnUrl + '/' + data()?.hinh + ')'">
+    <div class="du-an-ct-top"
+        [style.background-image]="backgroundPath()?.[0]?.hinh ? 'url(' + CombineUrl(backgroundPath()[0]?.hinh) + ')' : ''">
         <div class="grid wide">
             <div class="du-an-ct-content">
                 <div class="title-general">{{'PROJECT_DETAILS.PROJECT' | translate}}</div>

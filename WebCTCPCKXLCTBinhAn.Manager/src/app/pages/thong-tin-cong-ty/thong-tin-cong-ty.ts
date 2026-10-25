@@ -1,12 +1,13 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, ViewChild } from '@angular/core';
 import { ThongTinCongTyService } from './thong-tin-cong-ty-service';
 import { environment } from '../../../environments/environment.development';
 import { AnnouncementService } from '../../components/dialog/announcement-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RichTextEditorComponent } from '../../components/rich-text-editor/rich-text-editor';
 
 @Component({
   selector: 'app-thong-tin-cong-ty',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RichTextEditorComponent],
   templateUrl: './thong-tin-cong-ty.html',
   providers: [ThongTinCongTyService],
   styleUrl: './thong-tin-cong-ty.css'
@@ -29,6 +30,8 @@ export class ThongTinCongTy {
   hinhImage: string | null = null;
   id: number | null = null;
 
+  @ViewChild(RichTextEditorComponent) richTextEditor!: RichTextEditorComponent;
+  
   constructor() {
     effect(() => {
       this.reload();
@@ -47,7 +50,8 @@ export class ThongTinCongTy {
               hinh: response.hinh,
               slogan: response.slogan,
               linh_vuc: response.linh_vuc,
-              nam_thanh_lap: response.nam_thanh_lap
+              nam_thanh_lap: response.nam_thanh_lap,
+              html_gioi_thieu: response.html_gioi_thieu
             }
           )
           this.logoImage = response.logo;
@@ -74,6 +78,7 @@ export class ThongTinCongTy {
     slogan: ['', [Validators.required]],
     linh_vuc: ['', [Validators.required]],
     nam_thanh_lap: [new Date().toISOString().split('T')[0], [Validators.required]],
+    html_gioi_thieu: ['', [Validators.required]]
   });
 
   resetData() {
@@ -88,7 +93,8 @@ export class ThongTinCongTy {
       hinh: '',
       slogan: '',
       linh_vuc: '',
-      nam_thanh_lap: new Date().toISOString().split('T')[0]
+      nam_thanh_lap: new Date().toISOString().split('T')[0],
+      html_gioi_thieu: ''
     })
     this.LogoFile = null;
     this.hinhFile = null;
@@ -111,6 +117,7 @@ export class ThongTinCongTy {
     }
 
     const data = new FormData();
+    const noiDung = await this.richTextEditor.prepareContentForSave();
     data.append('ten_cty', this.formData.get('ten_cty')?.value ?? '');
     data.append('dia_chi', this.formData.get('dia_chi')?.value ?? '');
     data.append('email', this.formData.get('email')?.value ?? '');
@@ -120,6 +127,7 @@ export class ThongTinCongTy {
     data.append('slogan', this.formData.get('slogan')?.value ?? '');
     data.append('linh_vuc', this.formData.get('linh_vuc')?.value ?? '');
     data.append('nam_thanh_lap', this.formData.get('nam_thanh_lap')?.value ?? '');
+    data.append('html_gioi_thieu', noiDung.toString() ?? '');
 
     if (this.LogoFile) {
       data.append('logoFile', this.LogoFile, this.LogoFile.name);

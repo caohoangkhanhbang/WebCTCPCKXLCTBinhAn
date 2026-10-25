@@ -1,17 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { HomeService } from '../home/home-services';
 import { environment } from '../../../enviroments/enviroment';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CompanyInfo } from '../../Services/company-info';
 import { RouterLink } from '@angular/router';
+import { MahaHinhNen } from '../../Services/maha-hinh-nen';
 
 @Component({
   selector: 'app-linh-vuc-hoat-dong',
   imports: [TranslatePipe, RouterLink],
   templateUrl: './linh-vuc-hoat-dong.html',
   styleUrl: './linh-vuc-hoat-dong.css',
-  providers: [HomeService]
+  providers: [HomeService, MahaHinhNen]
 
 })
 export class LinhVucHoatDong {
@@ -21,5 +22,11 @@ export class LinhVucHoatDong {
   thongTinCty = this.companyInfo.thongTinCty;
 
   readonly giaiPhap = toSignal(this.service.getGiaiPhap(), { initialValue: [] as any[] });
-
+  hinhNenInfo = inject(MahaHinhNen).hinhNen;
+  backgroundPath = computed(() =>
+    this.hinhNenInfo().filter((item: any) => item.ten_trang.trim().toLowerCase() === 'lĩnh vực hoạt động').slice(-1)
+  );
+  CombineUrl(path: string): string {
+    return `${environment.cdnUrl}/` + path;
+  }
 }

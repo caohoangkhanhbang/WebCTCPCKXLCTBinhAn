@@ -12,7 +12,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
         private readonly IFileService _fileService = fileService;
         private readonly string tenBang = "thong_tin_cty";
         private readonly string tenCot = "hinh";
-        private readonly string dsCot = " id, ten_cty, logo, dia_chi, email, sdt, ma_so_thue, hien_thi, hinh, slogan, linh_vuc, nam_thanh_lap ";
+        private readonly string dsCot = " id, ten_cty, logo, dia_chi, email, sdt, ma_so_thue, hien_thi, hinh, slogan, linh_vuc, nam_thanh_lap, html_gioi_thieu ";
 
         public async Task<ThongTinCongTy?> GetInfo()
         {
@@ -44,7 +44,8 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                 hinh = dataReader["hinh"] != DBNull.Value ? dataReader.GetString(8) : null,
                 slogan = dataReader["slogan"] != DBNull.Value ? dataReader.GetString(9) : null,
                 linh_vuc = dataReader["linh_vuc"] != DBNull.Value ? dataReader.GetString(10) : null,
-                nam_thanh_lap = dataReader["nam_thanh_lap"] != DBNull.Value ? DateOnly.FromDateTime(dataReader.GetDateTime(11)) : null
+                nam_thanh_lap = dataReader["nam_thanh_lap"] != DBNull.Value ? DateOnly.FromDateTime(dataReader.GetDateTime(11)) : null,
+                html_gioi_thieu = dataReader["html_gioi_thieu"] != DBNull.Value ? dataReader.GetString(12) : null,
             };
         }
 
@@ -71,7 +72,8 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                 ["hinh"] = data.hinh,
                 ["slogan"] = data.slogan,
                 ["linh_vuc"] = data.linh_vuc,
-                ["nam_thanh_lap"] = data.nam_thanh_lap
+                ["nam_thanh_lap"] = data.nam_thanh_lap,
+                ["html_gioi_thieu"] = data.html_gioi_thieu
             };
             return await _manipulationDB.InsertDynamicAsync(
                 tenBang,
@@ -103,7 +105,8 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                 ["hien_thi"] = data.hien_thi,
                 ["slogan"] = data.slogan,
                 ["linh_vuc"] = data.linh_vuc,
-                ["nam_thanh_lap"] = data.nam_thanh_lap
+                ["nam_thanh_lap"] = data.nam_thanh_lap,
+                ["html_gioi_thieu"] = data.html_gioi_thieu
             };
             if (!string.IsNullOrWhiteSpace(fileHinhNew))
                 dataToUpdate.Add("hinh", fileHinhNew);

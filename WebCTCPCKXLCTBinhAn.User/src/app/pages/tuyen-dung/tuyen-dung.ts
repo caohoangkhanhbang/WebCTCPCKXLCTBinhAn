@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { TranslatePipe } from "@ngx-translate/core";
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
@@ -8,6 +8,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { environment } from '../../../enviroments/enviroment';
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
+import { MahaHinhNen } from '../../Services/maha-hinh-nen';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   imports: [TranslatePipe, ReactiveFormsModule, ConfirmDialog, DatePipe],
   templateUrl: './tuyen-dung.html',
   styleUrl: './tuyen-dung.css',
-  providers: [TuyenDungServices]
+  providers: [TuyenDungServices, MahaHinhNen]
 })
 export class TuyenDung {
   chooseFile = signal<boolean>(false);
@@ -89,6 +90,14 @@ export class TuyenDung {
   private sanitizer = inject(DomSanitizer);
   originalHtml(html: string | null) {
     return this.sanitizer.bypassSecurityTrustHtml(html || '');
+  }
+
+  hinhNenInfo = inject(MahaHinhNen).hinhNen;
+  backgroundPath = computed(() =>
+    this.hinhNenInfo().filter((item: any) => item.ten_trang.trim().toLowerCase() === 'tuyển dụng').slice(-2)
+  );
+  CombineUrl(path: string): string {
+    return `${environment.cdnUrl}/` + path;
   }
 
 }

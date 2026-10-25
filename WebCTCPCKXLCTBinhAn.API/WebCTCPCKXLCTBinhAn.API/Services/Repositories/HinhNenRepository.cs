@@ -79,7 +79,6 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                     ten_trang = dataReader["ten_trang"] != DBNull.Value ? dataReader.GetString(2) : null,
                     hinh = dataReader["hinh"] != DBNull.Value ? dataReader.GetString(3) : null,
                     hien_thi = dataReader["hien_thi"] != DBNull.Value ? dataReader.GetBoolean(4) : (bool?)null,
-
                 });
             }
             result.TotalPages = (int)Math.Ceiling((double)result.TotalItems / pageSize);

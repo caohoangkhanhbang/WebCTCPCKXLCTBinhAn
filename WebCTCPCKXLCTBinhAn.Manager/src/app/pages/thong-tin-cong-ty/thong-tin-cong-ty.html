@@ -98,6 +98,13 @@
                     <input type="file" id="hinhImage" accept="image/*" (change)="onHinhSelected($event)" />
                 </div>
             </div>
+            <div class="input-container">
+                <label for="html_gioi_thieu" class="lien-he-tieude">Mã code html giới thiệu công ty<span class="color-requier">(*)</span></label>
+                <app-rich-text-editor formControlName="html_gioi_thieu"></app-rich-text-editor>
+                @if(formData.get('html_gioi_thieu')?.invalid && formData.get('html_gioi_thieu')?.touched){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
 
             <div class="input-container">
                 <div class="center-height">

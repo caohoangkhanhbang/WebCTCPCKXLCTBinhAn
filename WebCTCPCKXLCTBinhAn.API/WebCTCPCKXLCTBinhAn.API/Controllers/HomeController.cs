@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
 using WebCTCPCKXLCTBinhAn.API.Business;
-using WebCTCPCKXLCTBinhAn.API.classes;
-using WebCTCPCKXLCTBinhAn.API.Services;
 
 namespace WebCTCPCKXLCTBinhAn.API.Controllers
 {
@@ -76,6 +74,11 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
             return Ok(data);
         }
 
-
+        [HttpGet("hinh-nen")]
+        public async Task<IActionResult> GetHinhNen()
+        {
+            var data = await _businessHome.GetHinhNen();
+            return Ok(data);
+        }
     }
 }

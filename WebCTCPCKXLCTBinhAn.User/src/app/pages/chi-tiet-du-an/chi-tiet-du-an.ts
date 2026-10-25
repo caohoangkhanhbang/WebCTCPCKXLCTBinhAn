@@ -8,13 +8,14 @@ import { RouterLink } from "@angular/router";
 import { DatePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { MahaHinhNen } from '../../Services/maha-hinh-nen';
 
 @Component({
     selector: 'app-chi-tiet-du-an',
     templateUrl: './chi-tiet-du-an.html',
     standalone: true,
     styleUrl: './chi-tiet-du-an.css',
-    providers: [ChiTietDuAnServices],
+    providers: [ChiTietDuAnServices, MahaHinhNen],
     imports: [RouterLink, DatePipe, TranslatePipe]
 })
 
@@ -46,5 +47,13 @@ export class ChiTietDuAn {
     readonly zaloShareUrl = computed(() =>
         `https://sp.zalo.me/share_inline?url=${encodeURIComponent(this.shareUrl())}`
     );
+
+    hinhNenInfo = inject(MahaHinhNen).hinhNen;
+    backgroundPath = computed(() =>
+        this.hinhNenInfo().filter((item: any) => item.ten_trang.trim().toLowerCase() === 'chi tiết dự án').slice(-2)
+    );
+    CombineUrl(path: string): string {
+        return `${environment.cdnUrl}/` + path;
+    }
 
 }

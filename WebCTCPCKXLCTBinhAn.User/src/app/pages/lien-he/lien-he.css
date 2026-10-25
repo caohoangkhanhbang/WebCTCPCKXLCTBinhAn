@@ -1,5 +1,5 @@
 .lien-he-container {
-    background: url(https://cdn.pixabay.com/photo/2023/03/03/20/15/science-fiction-7828391_1280.jpg) no-repeat center / cover;
+    background: linear-gradient(45deg, #c700ff, #00ffef) no-repeat center / cover;
     width: 100%;
     min-height: 100vh;
     display: flex;
@@ -75,7 +75,6 @@
 
 .lien-he-button:hover {
     background: linear-gradient(90deg, #ff0000, #ff00f1);
-
 }
 
 .error-message {

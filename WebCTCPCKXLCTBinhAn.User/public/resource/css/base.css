@@ -164,8 +164,8 @@ html {
 /* >= 740px*/
 @media (min-width: 46.25em) {
     .row {
-        margin-left: -8px;
-        margin-right: -8px;
+        /* margin-left: -8px;
+        margin-right: -8px; */
     }
 
     .col {
@@ -476,8 +476,8 @@ html {
 /* 1113px */
 @media (min-width: 69.5625em) {
     .row {
-        margin-left: -12px;
-        margin-right: -12px;
+        /* margin-left: -12px;
+        margin-right: -12px; */
     }
 
     .row.sm-gutter {

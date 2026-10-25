@@ -1,5 +1,5 @@
 <div class="top-image"
-    style="background-image: url(https://tech.cornell.edu/wp-content/uploads/2018/06/TECH_20170717_002_1440_1080_s_c1.jpg);">
+    [style.background-image]="backgroundPath()?.[0]?.hinh ? 'url(' + CombineUrl(backgroundPath()[0]?.hinh) + ')' : ''">
     <h1 class="top-image-title">{{'PROJECTS.TITLE' | translate}}</h1>
     <h1 class="top-image-title-modified ">{{thongTinCty()?.ten_cty}}</h1>
 </div>
@@ -9,10 +9,8 @@
             <div class="nangluc-top l-12 m-12 c-12">
                 <div class=" title">{{'PROJECTS.TITLE' | translate}}</div>
             </div>
-
             <div class="nangluc-bottom l-12 m-12 c-12">
                 <div class="row">
-
                     @for(item of data(); track item.id){
                     <div class="col l-3 m-3 c-12">
                         <div class="nangluc-item ">
@@ -42,19 +40,16 @@
                     <div class="col l-12 m-12 c-12">
                         <div class="nangluc-item ">
                             <div class="nangluc-item-conten">
-                                <h2 class="nangluc-title text-truncate-2">{{'PROJECTS.NO_PROJECTS' | translate}}</h2>
+                                <h2 class="nangluc-title text-truncate-2 style-no-project">{{'PROJECTS.NO_PROJECTS' | translate}}</h2>
                             </div>
                         </div>
                     </div>
                     }
 
                     @if(hasNextPage()) {
-                        <div
-                        class="loading-centinel"
-                        appScrollNearEnd
-                        (nearEnd)="loadMore()">
+                    <div class="loading-centinel" appScrollNearEnd (nearEnd)="loadMore()">
                         @if(loading()){
-                            Loading...
+                        Loading...
                         }</div>
                     }
                 </div>
@@ -63,4 +58,3 @@
         </div>
     </div>
 </div>
-<!-- Hết Phần content -->
