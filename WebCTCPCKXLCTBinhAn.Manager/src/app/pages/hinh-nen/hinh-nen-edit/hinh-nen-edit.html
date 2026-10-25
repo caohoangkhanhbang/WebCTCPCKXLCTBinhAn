@@ -1,0 +1,84 @@
+@if(isOpen()){
+<div class="overlay">
+    <form [formGroup]="formData" (ngSubmit)="onSubmit()" class="cv-container">
+        <p class="tieu-de">{{hanhDong() === 'create' ? 'Thêm mới' : hanhDong() === 'view' ? 'Xem chi tiết' : 'Chỉnh
+            sửa'}}</p>
+        <div class="container-scroll">
+            <div class="input-container">
+                <label for="id_loai_trang" class="lien-he-tieude">Chọn trang chứa ảnh<span
+                        class="color-requier">(*)</span></label>
+                <select class="combobox" id="id_loai_trang" name="id_loai_trang" (change)="onLoaiTrangChange($event)"
+                    [disabled]="hanhDong() === 'view'">
+                    <option value="">Chọn trang</option>
+                    @for (item of loaiTrangList(); track item.id) {
+                    <option [value]="item.id" [selected]="item.id === idLoaiTrangNew()">
+                        {{item.ten_trang}}</option>
+                    }
+                </select>
+                @if(!idLoaiTrangNew()){
+                <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                }
+            </div>
+
+            @if(hanhDong() !== 'create') {
+            <div class="input-container">
+                <div>
+                    @if(imageReview){
+                    <img class="image-review" [src]="imageReview" alt="">
+                    } @else if(oldImage) {
+                    <img class="image-review" [src]="cdnUrl +'/'+ oldImage" alt="">
+                    <!--Lỗi do không đổi state thì không hiện hình và lỗi khi view hoặc update bị binding sai-->
+                    }
+                </div>
+                <div class="center-height">
+                    @if(hanhDong()!== 'view') {
+                    <label for="hinh" class="lien-he-tieude margin-right">Chọn ảnh<span
+                            class="color-requier">(*)</span></label>
+                    <input class="file-input" type="file" id="hinh" accept="image/*"
+                        (change)="onFileSelected($event)" />
+                    }
+                </div>
+            </div>
+            }
+
+            @if(hanhDong() === 'create') {
+            <div class="center-height">
+                @if(hanhDong()!== 'view') {
+                <label for="hinh" class="lien-he-tieude margin-right">Chọn ảnh<span
+                        class="color-requier">(*)</span></label>
+                <input class="file-input" type="file" id="hinh" accept="image/*" multiple
+                    (change)="onCreateFileSelected($event)" />
+                }
+            </div>
+            <div class="container-list-image">
+                @for(image of listImageReview; track image){
+                <div class="item-image">
+                    <img class="image-review" [src]="image" alt="image">
+                    <div title="Xóa ảnh" (click)="removeImage($index)" class="nut-xoa-anh">X</div>
+                </div>
+                }
+                @if(listSelectedFile!=null && listSelectedFile.length === 0) {<div class="error-message">Vui lòng chọn
+                    ảnh</div>}
+            </div>
+            }
+
+            <div class="input-container">
+                <div class="center-height">
+                    <label for="hien_thi" class="lien-he-tieude margin-right">Hiển thị</label>
+                    <input formControlName="hien_thi" type="checkbox" id="hien_thi"
+                        placeholder="vui lòng nhập đầy đủ thông tin">
+                    @if(formData.get('hien_thi')?.invalid && formData.get('hien_thi')?.touched){
+                    <div class="error-message">vui lòng nhập đầy đủ thông tin</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="center row-reverse">
+            @if(hanhDong() !== 'view'){
+            <button type="submit" class="button pos">Lưu</button>
+            }
+            <button (click)="onClose()" type="button" class="button neg">Thoát</button>
+        </div>
+    </form>
+</div>
+}

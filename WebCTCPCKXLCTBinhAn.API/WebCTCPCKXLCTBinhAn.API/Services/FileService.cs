@@ -71,6 +71,29 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
             return result?.ToString() ?? "";
         }
 
+        public List<string> GetListFileName(string tenBang, string tenCot, int id)
+        {
+            List<string> fileNames = new List<string>();
+            if (string.IsNullOrWhiteSpace(tenBang) || string.IsNullOrWhiteSpace(tenCot) || id == null)
+                return null;
+            if (!Regex.IsMatch(tenBang, @"^[a-zA-Z_][a-zA-Z0-9_]*$") || !Regex.IsMatch(tenCot, @"^[a-zA-Z_][a-zA-Z0-9_]*$"))
+                throw new ArgumentException("Tên bảng hoặc tên cột không hợp lệ.");
+            string sql = @$"
+            select {tenCot} from {tenBang} where id = @id
+            ";
+            var cmd = dataSource.CreateCommand(sql);
+            cmd.Parameters.AddWithValue("id", id);
+            var result = cmd.ExecuteReader();
+            if (result != null)
+            {
+                while (result.Read())
+                {
+                    fileNames.Add(result.GetString(0));
+                }
+            }
+            return fileNames;
+        }
+
         private async Task<bool> IsDangerousFileContentAsync(IFormFile file)
         {
             // Đọc 4 byte đầu tiên để kiểm tra signature của file thực thi (Executable/Script)

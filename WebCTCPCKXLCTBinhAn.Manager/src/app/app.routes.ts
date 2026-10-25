@@ -79,7 +79,7 @@ export const routes: Routes = [
             {
                 path: 'hinh-nen',
                 title: 'Hình nền trang',
-                loadComponent: () => import('./pages/slide-home/slide-home').then(m => m.SlideHome),
+                loadComponent: () => import('./pages/hinh-nen/hinh-nen').then(m => m.HinhNen),
                 canActivate: [authGuard]
             },
             {

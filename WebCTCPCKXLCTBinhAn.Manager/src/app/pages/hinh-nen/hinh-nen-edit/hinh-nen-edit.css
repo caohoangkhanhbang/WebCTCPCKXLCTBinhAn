@@ -1,0 +1,63 @@
+.container-list-image {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.item-image {
+    position: relative;
+}
+
+.nut-xoa-anh {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #ff00004f;
+    color: white;
+    padding: 2px 8px;
+    cursor: pointer;
+    border: 1px solid #990000;
+    border-radius: 22px;
+}
+
+.nut-xoa-anh:hover {
+    background-color: #ff0000;
+}
+
+.combobox {
+    padding: 10px;
+    border-radius: 20px;
+    margin: 5px 0px;
+    background: transparent;
+    color: #fffc00;
+    width: 100%;
+}
+
+.combobox:active {
+    outline: none;
+    border: 1px solid #fffc00;
+}
+
+.combobox option {
+    background-color: #000000;
+    color: #fffc00;
+}
+
+
+
+.file-input::file-selector-button {
+    background: linear-gradient(to right, #00ff15, #00eeff);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+.file-input::file-selector-button:hover {
+    background: linear-gradient(to right, #ff0000, #ff009d);
+    color: #000;
+}

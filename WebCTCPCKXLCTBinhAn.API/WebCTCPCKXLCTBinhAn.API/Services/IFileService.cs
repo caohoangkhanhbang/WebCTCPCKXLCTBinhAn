@@ -5,5 +5,6 @@
         Task<string> SaveFileAsync(IFormFile file, string subFolder = "");
         void DeleteFile(string filePath);
         string GetFileName(string tenBang, string tenCot, int id);
+        List<string> GetListFileName(string tenBang, string tenCot, int id);
     }
 }
