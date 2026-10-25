@@ -25,5 +25,4 @@ export class GioiThieuService {
     delete(id: number): Observable<any> {
         return this.http.delete(`${this.apiUrl}/delete/${id}`);
     }
-
 }

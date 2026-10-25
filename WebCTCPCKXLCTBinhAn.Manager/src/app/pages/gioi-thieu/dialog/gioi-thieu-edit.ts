@@ -6,7 +6,6 @@ import { AnnouncementService } from '../../../components/dialog/announcement-ser
 import { ViewChild } from '@angular/core';
 import { RichTextEditorComponent } from '../../../components/rich-text-editor/rich-text-editor';
 
-
 @Component({
   selector: 'app-dialog',
   imports: [ReactiveFormsModule, RichTextEditorComponent],

@@ -24,5 +24,4 @@ export class DuAnService {
     delete(id: number) {
         return this.http.delete(`${this.apiUrl}/delete/${id}`);
     }
-
 }

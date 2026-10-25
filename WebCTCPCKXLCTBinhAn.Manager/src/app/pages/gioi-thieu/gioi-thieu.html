@@ -4,7 +4,6 @@
         <input type="text" placeholder="🔍 Tìm kiếm..." class="search-input" (input)="onSearch($event)" />
         <div class="nut-them" (click)="onCreate()">Thêm mới</div>
     </div>
-
     <div class="table-container">
         <table>
             <thead>
@@ -37,11 +36,9 @@
                                 <div class="icon" style="mask: url('/public/resource/icons/thungrac.svg');"></div>
                             </div>
                         </div>
-
                     </td>
                 </tr>
                 }
-
             </tbody>
         </table>
     </div>
@@ -54,7 +51,6 @@
                 <option value="50">50</option>
             </select>
         </div>
-
         <div class="thong-tin-dong">
             Dòng
             {{ (page() - 1) * pageSize() + 1 }}
@@ -63,7 +59,6 @@
             của trang
             {{ page() }}
         </div>
-
         <div class="nut-trang">
             <button type="button" class="nhay-den" (click)="goToFirstPage()" [disabled]="page() === 1">
                 |&lt;
@@ -80,9 +75,7 @@
             <button type="button" class="nhay-den" (click)="goToLastPage()" [disabled]="page() === totalPages()">
                 &gt;|
             </button>
-
         </div>
-
     </div>
 </div>
 
