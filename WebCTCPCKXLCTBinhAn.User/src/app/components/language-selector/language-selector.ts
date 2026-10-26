@@ -1,7 +1,5 @@
 import { ChangeDetectorRef, Component, inject, OnInit, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-// import { FormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'app-language-selector',

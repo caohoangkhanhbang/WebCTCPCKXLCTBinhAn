@@ -1,4 +1,4 @@
-<div class="trang-tri"
+<div class="trang-tri top-image-title "
     [style.background-image]="backgroundPath()?.[0]?.hinh ? 'url(' + CombineUrl(backgroundPath()[0]?.hinh) + ')' : ''">
     {{'CAREERS.CAREER_OPPOTUNITIES' | translate}}
 </div>
@@ -47,7 +47,7 @@
             }
             @empty {
             <div class="col l-6 m-12 c-12">
-                <h1>{{'CAREERS.NO_INFO' | translate}}</h1>
+                <h1 class="careers-no-info">{{'CAREERS.NO_INFO' | translate}}</h1>
             </div>
             }
         </div>

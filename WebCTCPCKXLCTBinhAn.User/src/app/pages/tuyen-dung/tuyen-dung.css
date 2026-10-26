@@ -2,7 +2,6 @@
     background: linear-gradient(45deg, #00e1ff, #00ff49, #00e1ff);
     color: white;
     width: 100%;
-    font-size: 69px;
     font-family: var(--font-tieude);
     display: flex;
     align-items: center;
@@ -10,6 +9,12 @@
     height: 248px;
     position: relative;
     background-size: cover;
+}
+
+.careers-no-info {
+    margin: 20px;
+    font-weight: 200;
+    font-family: var(--font-dacbiet);
 }
 
 .tuyen-dung-container {

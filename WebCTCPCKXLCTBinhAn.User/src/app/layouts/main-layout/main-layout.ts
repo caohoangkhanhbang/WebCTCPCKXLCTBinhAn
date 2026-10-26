@@ -27,7 +27,8 @@ export class MainLayout {
     }
 
     closeMenuOnSelect(event: MouseEvent) {
-        const isMobile = window.innerWidth <= 768;
+        // const isMobile = window.innerWidth <= 768;
+        const isMobile = window.innerWidth <= 1024;
         if (!isMobile) return;
         const target = event.target as HTMLElement;
         if (target.tagName === 'A') {

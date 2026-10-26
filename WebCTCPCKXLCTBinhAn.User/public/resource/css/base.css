@@ -301,14 +301,14 @@ html {
 /* tablet 740px - 1023px*/
 @media (min-width: 46.25em) and (max-width: 63.9375em) {
     .wide {
-        width: 644px;
+        /* width: 644px; */
     }
 }
 
 /* pc low 1024px - 1239px*/
 @media (min-width: 64em) and (max-width: 77.4375em) {
     .wide {
-        width: 984px;
+        /* width: 984px; */
     }
 
     .wide.row {

@@ -11,8 +11,6 @@
     height: 390px;
     bottom: 0;
     right: 0;
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 .gradient-a,
@@ -139,8 +137,9 @@
 }
 
 .title {
-    font-size: 45px;
+    font-size: 35px;
     font-weight: bold;
+    padding: 10px 0;
 }
 
 
@@ -353,43 +352,6 @@
     color: black;
 }
 
-/* responsive */
-
-/* 1113px */
-@media (min-width: 69.5625em) {}
-
-/* pc low 1024px - 1239px*/
-@media (min-width: 64em) and (max-width: 77.4375em) {}
-
-/* tablet 740px - 1023px*/
-@media (min-width: 46.25em) and (max-width: 63.9375em) {}
-
-/* <= 740px*/
-@media (max-width: 46.25em) {
-    .time-stream-container::before {
-        left: 10px;
-    }
-
-    .l-6:nth-child(odd) .cot-moc-item-title::before {
-        right: auto;
-        left: -50px;
-    }
-
-    .l-6:nth-child(even) .cot-moc-item-title::before {
-        left: -49px;
-        right: 0px;
-    }
-
-    .l-6:nth-child(odd) .cot-moc-item-title {
-        margin-left: 50px;
-        text-align: left;
-    }
-
-    .cot-moc-item-title {
-        margin: 10px 0;
-    }
-}
-
 /* hết responsive */
 
 .top-image {
@@ -416,4 +378,54 @@
     font-size: 17px;
     font-weight: 300;
     padding: 10px;
+}
+
+/* responsive */
+
+/* 1113px */
+@media (min-width: 69.5625em) {}
+
+/* pc low 1024px - 1239px*/
+@media (min-width: 64em) and (max-width: 77.4375em) {}
+
+/* tablet 740px - 1023px*/
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .top-image-title {
+        font-size: 45px;
+    }
+}
+
+/* <= 740px*/
+@media (max-width: 46.25em) {
+    .time-stream-container::before {
+        left: 10px;
+    }
+
+    .l-6:nth-child(odd) .cot-moc-item-title::before {
+        right: auto;
+        left: -50px;
+    }
+
+    .l-6:nth-child(even) .cot-moc-item-title::before {
+        left: -49px;
+        right: 0px;
+    }
+
+    .l-6:nth-child(odd) .cot-moc-item-title {
+        margin-left: 50px;
+        text-align: left;
+    }
+
+    .cot-moc-item-title {
+        margin: 10px 0;
+    }
+
+    .top-image-title {
+        padding: 10px;
+        font-size: 25px;
+    }
+
+    .trang-tri {
+        width: 100vw;
+    }
 }
