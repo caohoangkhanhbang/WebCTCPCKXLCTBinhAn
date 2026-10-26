@@ -69,11 +69,10 @@ builder.Services.AddCors(options =>
 //1. Cấu hình thư mục lưu ảnh tải lên bên ngoài thư mục chứa code 
 //var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "uploads-folder");
 
-
 var uploadsFolderPath = Path.GetFullPath(
     Path.Combine(
         Directory.GetCurrentDirectory(),
-        builder.Configuration["ThuMucLuuFile:DiaChi"] ?? "../uploads-folder"
+        builder.Configuration["ThuMucLuuFile:DiaChi"] ?? "/var/www/binh-an-api/uploads-folder"
     )
 );
 

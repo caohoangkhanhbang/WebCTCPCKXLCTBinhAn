@@ -25,11 +25,9 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
                 throw new InvalidOperationException("Phát hiện nội dung file bất thường hoặc có nguy cơ chứa mã độc.");
 
             var fileName = $"{Guid.NewGuid()}{extension}";
-            //var baseFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "uploads-folder");
-            var baseFolderPath = thuMucLuuFile;
             var folderPath = string.IsNullOrWhiteSpace(subFolder)
-                ? baseFolderPath
-                : Path.Combine(baseFolderPath, subFolder);
+                ? thuMucLuuFile
+                : Path.Combine(thuMucLuuFile, subFolder);
 
             if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
@@ -50,8 +48,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
         {
             if (string.IsNullOrWhiteSpace(fileName))
                 return;
-            var baseFolderPath = Path.Combine(Directory.GetCurrentDirectory(), thuMucLuuFile);
-            var fullPath = Path.Combine(baseFolderPath, fileName);
+            var fullPath = Path.Combine(thuMucLuuFile, fileName);
             if (File.Exists(fullPath))
                 File.Delete(fullPath);
         }
