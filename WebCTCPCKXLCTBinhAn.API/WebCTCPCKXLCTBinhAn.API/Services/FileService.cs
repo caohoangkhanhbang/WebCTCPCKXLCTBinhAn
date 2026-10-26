@@ -26,7 +26,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Services
 
             var fileName = $"{Guid.NewGuid()}{extension}";
             //var baseFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "uploads-folder");
-            var baseFolderPath = Path.Combine(Directory.GetCurrentDirectory(), thuMucLuuFile);
+            var baseFolderPath = thuMucLuuFile;
             var folderPath = string.IsNullOrWhiteSpace(subFolder)
                 ? baseFolderPath
                 : Path.Combine(baseFolderPath, subFolder);

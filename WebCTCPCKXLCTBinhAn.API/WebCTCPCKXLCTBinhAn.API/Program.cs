@@ -67,9 +67,17 @@ builder.Services.AddCors(options =>
 });
 
 //1. Cấu hình thư mục lưu ảnh tải lên bên ngoài thư mục chứa code 
-var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "uploads-folder");
+//var uploadsFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "..", "uploads-folder");
 
-//1. Tự động tạo thư mục nếu chưa tồn tại
+
+var uploadsFolderPath = Path.GetFullPath(
+    Path.Combine(
+        Directory.GetCurrentDirectory(),
+        builder.Configuration["ThuMucLuuFile:DiaChi"] ?? "../uploads-folder"
+    )
+);
+
+////1. Tự động tạo thư mục nếu chưa tồn tại
 if (!Directory.Exists(uploadsFolderPath))
 {
     Directory.CreateDirectory(uploadsFolderPath);
