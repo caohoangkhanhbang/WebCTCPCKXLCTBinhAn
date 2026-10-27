@@ -43,6 +43,12 @@
     color: white;
 }
 
+.button-xem-them:hover {
+    background: linear-gradient(90deg, #ff0000, #ff00d9, #00e3ff);
+    transition: all 0.2s linear;
+    transform: scale(1.01);
+}
+
 .loading-centinel {
     height: 60px;
     display: flex;
@@ -57,4 +63,14 @@
     display: flex;
     justify-content: center;
     font-family: var(--font-dacbiet);
+}
+
+.nangluc-title {
+    color: #000000;
+    font-family: var(--font-dacbiet);
+}
+
+.nangluc-content {
+    color: black;
+    font-weight: 100;
 }
