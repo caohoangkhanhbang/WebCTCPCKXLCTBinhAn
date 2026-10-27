@@ -16,5 +16,6 @@
         public DateOnly? thoi_gian { get; set; }
         public IFormFile? file { get; set; }
         public bool? hien_thi { get; set; }
+        public int? loai_du_an { get; set; }
     }
 }

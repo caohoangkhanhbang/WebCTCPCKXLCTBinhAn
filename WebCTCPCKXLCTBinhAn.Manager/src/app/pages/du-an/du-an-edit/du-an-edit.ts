@@ -51,7 +51,8 @@ export class DuAnEdit {
               hien_thi: response.hien_thi,
               hang_muc_thi_cong: response.hang_muc_thi_cong,
               chu_dau_tu: response.chu_dau_tu,
-              thoi_gian: response.thoi_gian
+              thoi_gian: response.thoi_gian,
+              loai_du_an: response.loai_du_an
             }
           )
           this.oldImage = response.hinh;
@@ -79,6 +80,7 @@ export class DuAnEdit {
     hang_muc_thi_cong: ['', [Validators.required]],
     chu_dau_tu: ['', [Validators.required]],
     thoi_gian: [new Date().toISOString().split('T')[0], [Validators.required]],
+    loai_du_an: [false]
   });
 
   resetData() {
@@ -89,7 +91,8 @@ export class DuAnEdit {
       hien_thi: true,
       hang_muc_thi_cong: '',
       chu_dau_tu: '',
-      thoi_gian: new Date().toISOString().split('T')[0]
+      thoi_gian: new Date().toISOString().split('T')[0],
+      loai_du_an: false
     })
     this.selectedFile = null;
     this.oldImage = null;
@@ -131,6 +134,7 @@ export class DuAnEdit {
     data.append('hang_muc_thi_cong', this.formData.get('hang_muc_thi_cong')?.value ?? '');
     data.append('chu_dau_tu', this.formData.get('chu_dau_tu')?.value ?? '');
     data.append('thoi_gian', this.formData.get('thoi_gian')?.value ?? '');
+    data.append('loai_du_an', String(this.formData.get('loai_du_an')?.value === true ? '1' : '0'));
     if (this.selectedFile) {
       data.append('file', this.selectedFile, this.selectedFile.name);
     }

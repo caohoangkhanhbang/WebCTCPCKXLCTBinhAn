@@ -63,7 +63,7 @@ export class DuAn {
     this.page.set(1);
   }
 
-  columns = [{ name: 'STT' }, { name: 'Tên dự án' }, { name: 'Nội dung ngắn' }, { name: 'Nội dung chi tiết' }, { name: 'Hình ảnh' }, { name: 'Hiển thị' }, { name: 'Hạng mục thi công' }, { name: 'Chủ đầu tư' }, { name: 'thời gian' }, { name: 'Hành động' }];
+  columns = [{ name: 'STT' }, { name: 'Tên dự án' }, { name: 'Nội dung ngắn' }, { name: 'Nội dung chi tiết' }, { name: 'Hình ảnh' }, { name: 'Hạng mục thi công' }, { name: 'Chủ đầu tư' }, { name: 'thời gian' }, { name: 'Loại dự án' }, { name: 'Hiển thị' }, { name: 'Hành động' }];
 
   data = toSignal<any>(
     toObservable(this.launch).pipe(

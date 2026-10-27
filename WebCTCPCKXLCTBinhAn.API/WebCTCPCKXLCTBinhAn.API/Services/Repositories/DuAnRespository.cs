@@ -13,7 +13,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
         private readonly IFileService _fileService = fileService;
         private readonly string tenBang = "du_an";
         private readonly string tenCot = "hinh";
-        private readonly string dsCot = " id, ten_du_an, bo_nghia, noi_dung, hinh, hien_thi, hang_muc_thi_cong, chu_dau_tu, thoi_gian ";
+        private readonly string dsCot = " id, ten_du_an, bo_nghia, noi_dung, hinh, hien_thi, hang_muc_thi_cong, chu_dau_tu, thoi_gian, loai_du_an ";
 
         public async Task<PaginationResponse<DuAn>> GetPagedAsync(int page, int pageSize, string? search = "")
         {
@@ -86,7 +86,8 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                     hien_thi = dataReader["hien_thi"] != DBNull.Value ? dataReader.GetBoolean(5) : (bool?)null,
                     hang_muc_thi_cong = dataReader["hang_muc_thi_cong"] != DBNull.Value ? dataReader.GetString(6) : null,
                     chu_dau_tu = dataReader["chu_dau_tu"] != DBNull.Value ? dataReader.GetString(7) : null,
-                    thoi_gian = dataReader["thoi_gian"] != DBNull.Value ? DateOnly.FromDateTime(dataReader.GetDateTime(8)) : (DateOnly?)null
+                    thoi_gian = dataReader["thoi_gian"] != DBNull.Value ? DateOnly.FromDateTime(dataReader.GetDateTime(8)) : (DateOnly?)null,
+                    loai_du_an = dataReader["loai_du_an"] != DBNull.Value ? dataReader.GetInt32(9) : (int?)null
                 });
             }
             result.TotalPages = (int)Math.Ceiling((double)result.TotalItems / pageSize);
@@ -121,7 +122,8 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                 hien_thi = dataReader["hien_thi"] != DBNull.Value ? dataReader.GetBoolean(5) : (bool?)null,
                 hang_muc_thi_cong = dataReader["hang_muc_thi_cong"] != DBNull.Value ? dataReader.GetString(6) : null,
                 chu_dau_tu = dataReader["chu_dau_tu"] != DBNull.Value ? dataReader.GetString(7) : null,
-                thoi_gian = dataReader["thoi_gian"] != DBNull.Value ? DateOnly.FromDateTime(dataReader.GetDateTime(8)) : (DateOnly?)null
+                thoi_gian = dataReader["thoi_gian"] != DBNull.Value ? DateOnly.FromDateTime(dataReader.GetDateTime(8)) : (DateOnly?)null,
+                loai_du_an = dataReader["loai_du_an"] != DBNull.Value ? dataReader.GetInt32(9) : (int?)null
             };
         }
 
@@ -142,6 +144,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                 ["hang_muc_thi_cong"] = data.hang_muc_thi_cong,
                 ["chu_dau_tu"] = data.chu_dau_tu,
                 ["thoi_gian"] = data.thoi_gian,
+                ["loai_du_an"] = data.loai_du_an,
                 ["created_date"] = DateOnly.FromDateTime(DateTime.UtcNow)
             };
             return await _manipulationDB.InsertDynamicAsync(
@@ -166,7 +169,8 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                 ["hien_thi"] = data.hien_thi,
                 ["hang_muc_thi_cong"] = data.hang_muc_thi_cong,
                 ["chu_dau_tu"] = data.chu_dau_tu,
-                ["thoi_gian"] = data.thoi_gian
+                ["thoi_gian"] = data.thoi_gian,
+                ["loai_du_an"] = data.loai_du_an
             };
             if (data.hinh != null)
                 dataToUpdate.Add(tenCot, data.hinh);
