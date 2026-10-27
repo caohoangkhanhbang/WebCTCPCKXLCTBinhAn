@@ -162,7 +162,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Services.Repositories
                 whereConditions
             );
             if (!result) deleteFile(fileNew);
-            else deleteFile(fileOld);
+            else if (!string.IsNullOrEmpty(fileNew)) deleteFile(fileOld);
             return result;
         }
 

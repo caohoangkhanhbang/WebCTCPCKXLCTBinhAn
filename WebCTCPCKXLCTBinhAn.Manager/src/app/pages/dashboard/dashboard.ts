@@ -15,7 +15,9 @@ export class Dashboard implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    console.log('Một sản phẩm của CHKB ToT');
+  }
 
   loadProfile(): void {
     this.authService.getProfile().subscribe({

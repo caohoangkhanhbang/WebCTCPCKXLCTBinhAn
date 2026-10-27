@@ -1,4 +1,4 @@
-<div class="login-container" style="background: url('{{ cdnUrl }}/loginback.jpg') center /cover;">
+<div class="login-container" style="background: url('{{ cdnUrl }}/{{companyInfo()?.hinh}}') center /cover;">
     <div class="form-container">
         <form (ngSubmit)="login()" class="center">
             <h1 class="center">Đăng nhập</h1>
@@ -12,7 +12,8 @@
                 </div> @if (errorMessage()) { <p class="error-message"> {{ errorMessage() }} </p> }
             </div>
 
-            <button class="button" type="submit" [disabled]="isLoading()"> @if (isLoading()) { Đang đăng nhập... } @else {
+            <button class="button" type="submit" [disabled]="isLoading()"> @if (isLoading()) { Đang đăng nhập... } @else
+                {
                 Đăng nhập }
             </button>
         </form>

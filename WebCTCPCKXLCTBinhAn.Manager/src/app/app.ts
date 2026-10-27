@@ -9,5 +9,5 @@ import { KBAnouncement } from './components/dialog/announcement-host/kbdialog-ho
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('WebCTCPCKXLCTBinhAn.Manager');
+  protected readonly title = signal('Điều hành Giao diện CTCPCKXLCTBinhAn');
 }

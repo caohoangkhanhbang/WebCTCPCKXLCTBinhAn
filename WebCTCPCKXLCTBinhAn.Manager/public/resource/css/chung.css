@@ -1,10 +1,15 @@
+* {
+    font-weight: 500;
+}
+
 /* hiển thị dialog */
 .cursor-pointer {
     cursor: pointer;
 }
+
 .page-title {
     color: white;
-    margin: 20px 0;
+    text-align: center;
 }
 
 .center-center {
@@ -306,7 +311,7 @@ tr:last-child td:last-child {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(45deg, #0000003b, #66666633);
+    background: linear-gradient(45deg, #00000014, #66666633);
     backdrop-filter: blur(var(--blur));
 }
 
@@ -319,7 +324,7 @@ tr:last-child td:last-child {
 .select-trang {
     border: none;
     border-radius: 19px;
-    padding: 4px 10px;
+    padding: 2px 10px;
     background: linear-gradient(45deg, #2200ff, #00efff);
     color: #000000bd;
     margin: 0 4px;
@@ -364,3 +369,25 @@ tr:last-child td:last-child {
 }
 
 /* Hết hiển thị bảng */
+
+@media (max-width: 46.25em) {
+    .phan-trang {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .cv-container {
+        padding: 10px;
+    }
+
+    .ten-cong-ty,
+    .user-name {
+        font-size: 6px;
+    }
+
+    .logo {
+        height: 43px;
+        width: 43px;
+    }
+
+}

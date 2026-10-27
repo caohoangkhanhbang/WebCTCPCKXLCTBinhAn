@@ -8,5 +8,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('WebCTCPCKXLCTBinhAn.User');
+  protected readonly title = signal('CÔNG TY CỔ PHẦN CƠ KHÍ XÂY LẮP CÔNG TRÌNH BÌNH AN');
 }

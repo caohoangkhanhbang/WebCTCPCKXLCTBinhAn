@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { environment } from '../../../environments/environment.development';
+import { CompanyInfo } from '../../core/services/company-info';
 
 @Component({
   selector: 'app-login',
@@ -42,5 +43,7 @@ export class Login {
       }
     });
   }
+
+  companyInfo = inject(CompanyInfo).thongTinCty;
 }
 

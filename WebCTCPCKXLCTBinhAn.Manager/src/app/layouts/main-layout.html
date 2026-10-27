@@ -3,7 +3,14 @@
         <div class="row">
             <div class="l-12 m-12 c-12">
                 <div class="menu-top">
-                    <div class="ten-cong-ty">
+                    <div class="hamburger" (click)="toggleMenu()">
+                        @if (isOpenMenu()) {
+                        &#10005;
+                        } @else {
+                        &#9776;
+                        }
+                    </div>
+                    <div class="ten-cong-ty" routerLink="/tong-quan">
                         <div class="logo"
                             style="background: url('/public/resource/images/logoBinhAn.jpg') no-repeat center / contain;">
                         </div>Công ty Cổ Phần Cơ Khí Xây Lắp Công Trình Bình An
@@ -17,9 +24,8 @@
                 </div>
             </div>
 
-            <div class="l-2 m-2 c-12">
-
-                <div class="menu">
+            <div class="l-2 m-12 c-12">
+                <div class="menu" [class.open-menu]="isOpenMenu()" (click)="toggleMenu()">
                     <div class="menu-item" routerLink="/tong-quan">
                         <div class="icon"
                             style="mask: url('/public/resource/icons/tongquan.svg') no-repeat center / contain;"></div>
@@ -78,12 +84,12 @@
                 </div>
             </div>
 
-            <div class="l-10 m-10 c-12">
+            <div class="l-10 m-12 c-12">
                 <div class="l-12 m-12 c-12 content-container">
                     <div class="maha-content"><router-outlet></router-outlet></div>
-                    <div class="trangtri"></div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="trangtri"></div>
 </div>

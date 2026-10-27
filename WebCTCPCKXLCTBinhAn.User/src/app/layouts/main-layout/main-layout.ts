@@ -40,6 +40,7 @@ export class MainLayout {
         const item = this.giaiPhap();
         const chunkSize = 7;
         const result = [];
+        console.log('Một sản phẩm của CHKB ToT');
         for (let i = 0; i < item.length; i += chunkSize) {
             result.push(item.slice(i, i + chunkSize));
         }

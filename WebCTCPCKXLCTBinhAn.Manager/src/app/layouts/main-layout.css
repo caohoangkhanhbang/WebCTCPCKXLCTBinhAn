@@ -1,11 +1,52 @@
 .maha-container {
     position: relative;
     background: black;
+    overflow: hidden;
+    /* tránh đè giao diện của lớp position absolute */
+    isolation: isolate;
 }
 
-.maha-content ::ng-deep>* {
-    position: relative;
-    z-index: 10;
+.trangtri {
+    position: absolute;
+    left: 50%;
+    bottom: -25%;
+    width: 50vh;
+    height: 50vh;
+    background: linear-gradient(45deg,
+            #ff00bf,
+            #7b00ff,
+            #0900ff,
+            #00c8ff,
+            #00ff95,
+            #ff00d9,
+                #ff8800,
+            #ff0000);
+
+    /* background-size: 200% 200%; */
+    animation: gradientMove 12s ease-in-out infinite;
+    border-radius: 17% 83% 49% 51% / 75% 43% 57% 25%;
+    filter: blur(20px);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+        border-radius: 58% 42% 79% 21% / 32% 52% 48% 68%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+        border-radius: 58% 42% 15% 85% / 32% 13% 87% 68%;
+        filter: blur(200px);
+    }
+
+    100% {
+        background-position: 0% 50%;
+        border-radius: 58% 42% 79% 21% / 32% 52% 48% 68%;
+    }
 }
 
 .menu-item {
@@ -30,12 +71,13 @@
 .menu-top {
     height: 8vh;
     backdrop-filter: blur(10px);
-    background: #fff;
+    background: linear-gradient(45deg, #0043ff96, #00ecff00);
+    color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    box-shadow: 0px 1px 6px #c2c2c2;
+    box-shadow: 0px 1px 6px #00fffc;
 }
 
 .user-info {
@@ -53,32 +95,43 @@
 
 .menu {
     padding: 10px;
-    min-height: 88vh;
     background: linear-gradient(45deg, #f8f8f841, #070b1b28);
     box-shadow: 1px 0px 6px #383838;
     color: white;
     border: 3px solid #3d3d3d;
     width: 98%;
-    margin: 14px auto;
+    margin: 5px;
     border-radius: 9px;
+    height: 100%;
+    max-height: 91vh;
+    overflow-y: auto;
+}
+
+.menu::-webkit-scrollbar {
+    width: 0px;
+}
+
+.menu:hover::-webkit-scrollbar {
+    width: 4px;
+}
+
+.menu::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+
+.menu::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg,
+            #033eff 0%,
+            #00aaff 50%,
+            #00ffea 100%);
+    border-radius: 10px;
+    border: 1px solid #ffffff20;
 }
 
 .content-container {
     min-height: 92vh;
     padding: 10px;
-    position: relative;
-}
-
-.trangtri {
-    position: absolute;
-    right: 50%;
-    top: 50%;
-    width: 50vh;
-    height: 50vh;
-    background: linear-gradient(45deg, #0030ff, #00ff65);
-    z-index: 1;
-    filter: blur(119px);
-    transform: translate(-50%, -50%);
 }
 
 .maha-content {
@@ -102,6 +155,38 @@
 }
 
 .logo {
-    height: 48px;
-    width: 48px;
+    height: 43px;
+    width: 43px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.hamburger {
+    display: none;
+}
+
+
+@media (max-width: 63.9375em) {
+    .hamburger {
+        display: block;
+        font-size: 20px;
+        transition: all 1s linear;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .open-menu {
+        display: block;
+        transition: all 5s linear;
+        min-height: 10vh;
+    }
+}
+
+@media (max-width: 46.25em) {
+
+    .menu-top {
+        padding: 0 10px;
+    }
 }
