@@ -381,6 +381,16 @@
     padding: 10px;
 }
 
+.nangluc-title {
+    color: #000000;
+    font-family: var(--font-dacbiet);
+}
+
+.nangluc-content {
+    color: black;
+    font-weight: 100;
+}
+
 /* responsive */
 
 /* 1113px */

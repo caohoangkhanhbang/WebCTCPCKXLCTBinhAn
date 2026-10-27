@@ -64,13 +64,3 @@
     justify-content: center;
     font-family: var(--font-dacbiet);
 }
-
-.nangluc-title {
-    color: #000000;
-    font-family: var(--font-dacbiet);
-}
-
-.nangluc-content {
-    color: black;
-    font-weight: 100;
-}
