@@ -83,3 +83,9 @@
     font-size: 14px;
     margin-top: 5px;
 }
+
+@media (max-width: 46.25em) {
+    .lien-he-form {
+        padding: 20px;
+    }
+}

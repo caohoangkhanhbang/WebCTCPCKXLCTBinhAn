@@ -14,6 +14,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
         private readonly BusinessDuAn _businessDuAn = businessDuAn;
         private readonly IDuAnRepository _duAnRepository = duAnRepository;
 
+        [AllowAnonymous]
         [HttpGet("get-du-an")]
         public async Task<IActionResult> GetDuAn([FromQuery] string? query, [FromQuery] int? lastId, [FromQuery] int pageSize = 10)
         {
