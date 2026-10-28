@@ -98,9 +98,6 @@
     font-weight: bold;
 }
 
-
-
-
 .card-container .card-item:nth-child(odd) {
     clip-path: polygon(0 0, 100% 5%, 100% 95%, 0 100%);
 }
@@ -132,7 +129,6 @@
 }
 
 .nangluc-container {
-    background: #faf4ec;
     padding: 50px 0;
 }
 
@@ -142,11 +138,6 @@
     padding: 10px 0;
     font-family: var(--font-dacbiet);
 }
-
-
-
-
-
 
 .logo-footer {
     margin: 10px;
