@@ -19,7 +19,13 @@
                         <div class="user-name">Xin chào</div>
                         <img class="user-avatar"
                             src="https://yt3.ggpht.com/2pT2QXQe7Ss_mWFkppcui6t_sLDL5pjVOdB8RWojf-S17IWQRXOeKNJwYZkMNx6viDpW62oMAJg=s48-c-k-c0x00ffffff-no-rj"
-                            alt="">
+                            alt="" (click)="toggleMenuProfile()">
+
+                        <div class="profile-setting-container" [class.open]="isOpenMenuProfile()">
+                            <div class="profile-setting-item" (click)="logout()">
+                                Đăng xuất
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,14 +66,13 @@
                     </div>
                     <div class="menu-item" routerLink="/ung-tuyen">
                         <div class="icon"
-                            style="mask: url('/public/resource/icons/tuyendung.svg') no-repeat center / contain;">
+                            style="mask: url('/public/resource/icons/duan.svg') no-repeat center / contain;">
                         </div>
                         Ứng tuyển việc làm
                     </div>
                     <div class="menu-item" routerLink="/slide-home">
                         <div class="icon"
-                            style="mask: url('/public/resource/icons/tuyendung.svg') no-repeat center / contain;">
-                        </div>
+                            style="mask: url('/public/resource/icons/tongquan.svg') no-repeat center / contain;"></div>
                         Slide trang chủ
                     </div>
                     <div class="menu-item" routerLink="/thong-tin-cong-ty">
@@ -77,7 +82,7 @@
                     </div>
                     <div class="menu-item" routerLink="/hinh-nen">
                         <div class="icon"
-                            style="mask: url('/public/resource/icons/tuyendung.svg') no-repeat center / contain;">
+                            style="mask: url('/public/resource/icons/linhvuc.svg') no-repeat center / contain;">
                         </div>
                         Hình nền trang
                     </div>

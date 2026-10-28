@@ -10,10 +10,10 @@ export interface RegisterRequest {
 }
 
 export interface AuthResponse {
-    accessToken: string;
-    expiresAt: string;
-    fullName: string;
-    role: string;
+    AccessToken: string;
+    ExpiresAt: string;
+    FullName: string;
+    Role: string;
 }
 
 export interface ProfileResponse {
