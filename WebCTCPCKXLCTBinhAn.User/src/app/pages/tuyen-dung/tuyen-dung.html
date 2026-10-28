@@ -81,7 +81,7 @@
                 <div class="error-message">{{'CONTACT.PLACEHOLDER' | translate}}</div>
                 }
             </div>
-            <input type="file" id="cvInput" accept=".pdf" (change)="onFileSelected($event)" />
+            <input class="file-input" type="file" id="cvInput" accept=".pdf" (change)="onFileSelected($event)" />
             <div class="center">
                 <button type="submit" class="button pos">{{'CAREERS.APPLY' | translate}}</button>
                 <button (click)="chooseFile.set(false)" type="button" class="button neg">{{'CAREERS.CANCEL' |

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebCTCPCKXLCTBinhAn.API.Business;
 using WebCTCPCKXLCTBinhAn.API.classes;
 using WebCTCPCKXLCTBinhAn.API.Services.IRepositorise;
@@ -7,12 +8,14 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class GioiThieuController(BusinessGioiThieu businessGioiThieu, ICacCotMocRepository cacCotMocRepository) : Controller
     {
         private readonly BusinessGioiThieu _businessGioiThieu = businessGioiThieu;
         private readonly ICacCotMocRepository _cacCotMocRepository = cacCotMocRepository;
 
         [HttpGet("cac-cot-moc")]
+        [AllowAnonymous]
         public async Task<IActionResult> getGioiThieu()
         {
             var data = await _businessGioiThieu.getGioiThieu();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebCTCPCKXLCTBinhAn.API.Business;
 using WebCTCPCKXLCTBinhAn.API.classes;
 using WebCTCPCKXLCTBinhAn.API.DTOs;
@@ -8,11 +9,13 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class TuyenDungController(BusinessTuyenDung businessTuyenDung, ITuyenDungRepository tuyenDungRepository) : Controller
     {
         private readonly BusinessTuyenDung _businessTuyenDung = businessTuyenDung;
         private readonly ITuyenDungRepository _tuyenDungRepository = tuyenDungRepository;
 
+        [AllowAnonymous]
         [HttpPost("post-ung-tuyen")]
         public async Task<IActionResult> SubmitTuyenDung([FromForm] UngTuyenDTO data)
         {
@@ -20,6 +23,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetTuyenDung()
         {

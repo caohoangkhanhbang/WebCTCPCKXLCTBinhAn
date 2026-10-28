@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 //Cấu hình xác thực
 using System.Text;
+using System.Threading.RateLimiting;
 using WebCTCPCKXLCTBinhAn.API.Business;
 using WebCTCPCKXLCTBinhAn.API.Services;
 using WebCTCPCKXLCTBinhAn.API.Services.IRepositorise;
@@ -132,6 +133,23 @@ builder.Services
             };
     });
 
+//Giới hạn 5 lần đăng nhập trong 1 phút để tránh spam của 1 địa chỉ IP
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    options.AddPolicy("LoginLimit", httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.Connection.RemoteIpAddress?.ToString()
+                          ?? "unknown",
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 5,
+                Window = TimeSpan.FromMinutes(1),
+                QueueLimit = 0,
+                AutoReplenishment = true
+            }));
+});
 
 builder.Services
     .AddAuthorization();
@@ -146,7 +164,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 

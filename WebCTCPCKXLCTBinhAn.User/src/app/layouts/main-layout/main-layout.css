@@ -31,8 +31,6 @@ hr {
         padding: 0 10px;
     }
 
-
-
     .chantrang-lien-he {
         margin-top: 10px;
     }
@@ -64,7 +62,7 @@ hr {
         font-size: 24px;
     }
 
-    .open {
+    .open .header-between {
         display: block;
         top: 159%;
     }
@@ -77,11 +75,13 @@ hr {
         0% {
             opacity: 0;
             transform: perspective(400px) rotateX(90deg) rotateY(0deg);
+            filter: blur(0px);
         }
 
         100% {
             opacity: 1;
             transform: perspective(400px) rotateX(0deg) rotateY(360deg);
+            filter: blur(50px);
         }
     }
 

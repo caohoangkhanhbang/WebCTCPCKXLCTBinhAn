@@ -40,8 +40,8 @@
 }
 
 .logo-header {
-    /* width: 43px; */
     height: 43px;
+    border-radius: 4px;
 }
 
 .header {
@@ -68,10 +68,11 @@
     width: 300px;
     height: 40px;
     border-radius: 20px;
-    border: 1px solid #ffffff;
+    border: 1px solid #fff6f652;
     padding: 0 17px;
     padding-right: 40px;
-    background: linear-gradient(45deg, #ffffff26, #ffffff30);
+    background: linear-gradient(45deg, #00000010, transparent);
+    color: white;
 }
 
 .header-search::placeholder {
@@ -120,4 +121,25 @@
     background: #0100ff no-repeat center/contain;
     width: 200px;
     padding-top: 100px;
+}
+
+.file-input {
+    width: 100%;
+}
+
+.file-input::file-selector-button {
+    background: linear-gradient(to right, #00ff15, #00eeff);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+.file-input::file-selector-button:hover {
+    background: linear-gradient(to right, #ff0000, #ff009d);
+    color: #000;
 }

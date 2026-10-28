@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebCTCPCKXLCTBinhAn.API.Business;
 using WebCTCPCKXLCTBinhAn.API.classes;
 using WebCTCPCKXLCTBinhAn.API.Services.IRepositorise;
@@ -7,10 +8,13 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class LienHeController(BussinessLienHe bussinessLienHe, ILienHeRepository lienHeRepository) : Controller
     {
         private readonly BussinessLienHe _bussinessLienHe = bussinessLienHe;
         private readonly ILienHeRepository _lienHeRepository = lienHeRepository;
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> SubmitLienHe([FromBody] LienHe data)
         {

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using WebCTCPCKXLCTBinhAn.API.DTOs;
 using WebCTCPCKXLCTBinhAn.API.Models;
 using WebCTCPCKXLCTBinhAn.API.Services;
@@ -14,6 +16,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
         private readonly IJwtService _jwtService = jwtService;
 
         [HttpPost("register")]
+        [Authorize]
         public async Task<IActionResult> Register(RegisterRequest request)
         {
             var exists = await _userRepository.EmailExistsAsync(request.Email);
@@ -43,6 +46,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
         }
 
         [HttpPost("login")]
+        [EnableRateLimiting("LoginLimit")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
             var user = await _userRepository.GetByEmailAsync(request.Email);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebCTCPCKXLCTBinhAn.API.classes;
 using WebCTCPCKXLCTBinhAn.API.Services.IRepositorise;
 
@@ -6,6 +7,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class HinhNenController(IHinhNenRepository hinhNenRepository) : Controller
     {
         private readonly IHinhNenRepository _hinhNenRepository = hinhNenRepository;

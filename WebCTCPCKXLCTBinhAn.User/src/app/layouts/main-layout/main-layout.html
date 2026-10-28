@@ -11,16 +11,16 @@
             &#9776;
             }
         </div>
-        @if(isOpenMenu()) {
-        <ul class="header-between open" (click)="closeMenuOnSelect($event)">
-            <li><a routerLink="/">{{'HEADER.HOME' | translate}}</a></li>
-            <li><a routerLink="/gioi-thieu">{{'HEADER.ABOUT_US' | translate}}</a></li>
-            <li><a routerLink="/linh-vuc-hoat-dong">{{'HEADER.CORE_SERVICES' | translate}}</a></li>
-            <li><a routerLink="/du-an">{{'HEADER.PROJECTS' | translate}}</a></li>
-            <li><a routerLink="/lien-he">{{'HEADER.CONTACT' | translate}}</a></li>
-            <li><a routerLink="/tuyen-dung">{{'HEADER.CAREERS' | translate}}</a></li>
-        </ul>
-        }
+        <div (class.open)="isOpenMenu()" (click)="toogleMenu()">
+            <ul class="header-between">
+                <li><a routerLink="/">{{'HEADER.HOME' | translate}}</a></li>
+                <li><a routerLink="/gioi-thieu">{{'HEADER.ABOUT_US' | translate}}</a></li>
+                <li><a routerLink="/linh-vuc-hoat-dong">{{'HEADER.CORE_SERVICES' | translate}}</a></li>
+                <li><a routerLink="/du-an">{{'HEADER.PROJECTS' | translate}}</a></li>
+                <li><a routerLink="/lien-he">{{'HEADER.CONTACT' | translate}}</a></li>
+                <li><a routerLink="/tuyen-dung">{{'HEADER.CAREERS' | translate}}</a></li>
+            </ul>
+        </div>
     </div>
     <div class="header-right">
         <input class="header-search" type="text" placeholder="{{'MAIN_LAYOUT.SEARCH_PLACEHOLDER' | translate}}"

@@ -380,9 +380,12 @@ tr:last-child td:last-child {
         padding: 10px;
     }
 
-    .ten-cong-ty,
-    .user-name {
+    .ten-cong-ty {
         font-size: 6px;
+    }
+
+    .user-name {
+        display: none;
     }
 
     .logo {

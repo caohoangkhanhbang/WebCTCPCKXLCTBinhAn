@@ -19,7 +19,7 @@
             #00c8ff,
             #00ff95,
             #ff00d9,
-                #ff8800,
+            #ff8800,
             #ff0000);
 
     /* background-size: 200% 200%; */
@@ -83,6 +83,7 @@
 .user-info {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .user-avatar {
@@ -165,6 +166,31 @@
     display: none;
 }
 
+.profile-setting-container {
+    position: absolute;
+    top: 8vh;
+    right: 0;
+    padding: 10px;
+    color: white;
+    background: linear-gradient(45deg,#1b0202, #001aff, #1b0202);
+    border-radius: 20px;
+    display: none;
+}
+
+.open {
+    display: inline-flex;
+}
+
+.profile-setting-item {
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.profile-setting-item:hover {
+    background: linear-gradient(45deg, #ff006f, #c700ff);
+    border-radius: 5px;
+    color: white;
+}
 
 @media (max-width: 63.9375em) {
     .hamburger {
