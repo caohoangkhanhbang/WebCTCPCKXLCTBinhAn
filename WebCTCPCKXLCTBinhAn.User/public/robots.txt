@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cokhicongtrinhbinhan.duckdns.org/sitemap.xml
