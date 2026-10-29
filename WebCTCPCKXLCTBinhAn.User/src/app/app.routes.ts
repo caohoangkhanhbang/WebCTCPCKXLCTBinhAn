@@ -8,7 +8,7 @@ export const routes: Routes = [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             {
                 path: 'home',
-                title: 'Trang chủ',
+                title: 'CÔNG TY CỔ PHẦN CƠ KHÍ XÂY LẮP CÔNG TRÌNH BÌNH AN',
                 loadComponent: () => import('./pages/home/home').then(m => m.Home)
             },
             {
