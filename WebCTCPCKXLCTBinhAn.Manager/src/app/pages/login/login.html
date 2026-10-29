@@ -1,11 +1,11 @@
 <div class="login-container" style="background: url('{{ cdnUrl }}/{{companyInfo()?.hinh}}') center /cover;">
     <div class="form-container">
         <form (ngSubmit)="login()" class="center">
+            <div class="logo" [style.background-image]="'url(' + cdnUrl + '/' + companyInfo()?.logo + ')'"></div>
             <h1 class="center">Đăng nhập</h1>
             <div class="blur-container">
-                <div> <label>Tên đăng nhập</label> <input placeholder="Vui lòng nhập đầy đủ thông tin"
-                        class="lien-he-input" type="email" name="email" [(ngModel)]="email" required
-                        autocomplete="email">
+                <div> <label>Tên đăng nhập</label> <input placeholder="Vui lòng nhập tên đăng nhập"
+                        class="lien-he-input" type="text" name="email" [(ngModel)]="email" required>
                 </div>
                 <div> <label>Mật khẩu</label> <input placeholder="Vui lòng nhập mật khẩu" class="lien-he-input"
                         type="password" name="password" [(ngModel)]="password" required autocomplete="current-password">

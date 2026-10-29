@@ -6,9 +6,9 @@
        flex-direction: column;
        justify-content: center;
        align-items: center;
-    }
-    
-    .form-container {
+   }
+
+   .form-container {
        max-width: 90vw;
        padding: 70px 40px;
        border: 2px solid #ffffff2b;
@@ -31,6 +31,8 @@
        background: linear-gradient(45deg, #00fdff, #0800ff7f, #00ffffe6);
        cursor: pointer;
        width: 100%;
+       color: white;
+       padding: 15px 20px;
    }
 
    .button:hover {
@@ -40,7 +42,17 @@
    .lien-he-input::-webkit-input-placeholder {
        color: rgba(122, 175, 255, 0.41);
    }
-   
-   .blur-container {
-    margin: 20px;
+
+   .logo {
+       width: 70px;
+       height: 70px;
+       margin-bottom: 20px;
+       border-radius: 5px;
+   }
+
+   @media (max-width: 46.25em) {
+       .form-container {
+           max-width: 98vw;
+           padding: 50px 20px;
+       }
    }

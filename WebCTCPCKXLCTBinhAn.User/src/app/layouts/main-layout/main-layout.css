@@ -17,6 +17,10 @@ hr {
     display: flex;
 }
 
+.header-left {
+    display: flex;
+    align-items: center;
+}
 
 
 /* tablet */

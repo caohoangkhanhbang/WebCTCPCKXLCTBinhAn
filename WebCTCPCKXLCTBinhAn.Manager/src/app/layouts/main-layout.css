@@ -148,6 +148,9 @@
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
 }
 
 .ten-cong-ty {
@@ -160,6 +163,7 @@
     width: 43px;
     border-radius: 5px;
     margin-right: 10px;
+    background: linear-gradient(90deg, rgb(255, 0, 0), rgb(255, 0, 221)) no-repeat center / contain;
 }
 
 .hamburger {
@@ -168,11 +172,11 @@
 
 .profile-setting-container {
     position: absolute;
-    top: 8vh;
+    top: 5vh;
     right: 0;
     padding: 10px;
     color: white;
-    background: linear-gradient(45deg,#1b0202, #001aff, #1b0202);
+    background: linear-gradient(45deg, #1b0202, #001aff, #1b0202);
     border-radius: 20px;
     display: none;
 }

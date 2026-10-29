@@ -4,4 +4,5 @@ export const environment = {
     cdnUrl: 'https://localhost:7153/cdn',
     // apiUrl: 'https://cokhicongtrinhbinhan.duckdns.org/api',
     // cdnUrl: 'https://cokhicongtrinhbinhan.duckdns.org/cdn',
+    staticUrl: '/public',
 };

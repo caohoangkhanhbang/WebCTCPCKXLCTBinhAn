@@ -17,6 +17,7 @@ export class Login {
   errorMessage = signal('');
   isLoading = signal(false);
   cdnUrl = environment.cdnUrl;
+  companyInfo = inject(CompanyInfo).thongTinCty;
 
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
@@ -24,6 +25,11 @@ export class Login {
   login(): void {
     this.isLoading.set(true);
 
+    if(!this.email || !this.password) {
+      this.errorMessage.set("Vui lòng nhập đầy đủ thông tin đăng nhập.");
+      this.isLoading.set(false);
+      return;
+    }
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
         this.isLoading.set(false);
@@ -43,7 +49,5 @@ export class Login {
       }
     });
   }
-
-  companyInfo = inject(CompanyInfo).thongTinCty;
 }
 

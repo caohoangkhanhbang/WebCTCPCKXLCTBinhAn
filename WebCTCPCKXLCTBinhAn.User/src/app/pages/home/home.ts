@@ -8,6 +8,7 @@ import { environment } from '../../../enviroments/enviroment';
 import { RouterLink } from '@angular/router';
 import { CompanyInfo } from '../../Services/company-info';
 import { MahaHinhNen } from '../../Services/maha-hinh-nen';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -36,5 +37,14 @@ export class Home {
   CombineUrl(path: string): string {
     return `${environment.cdnUrl}/` + path;
   }
+
+  private sanitizer = inject(DomSanitizer);
+  noiDungHtml = computed<SafeHtml | null>(() => {
+    const html = this.thongTinCty()?.html_gioi_thieu;
+    if (!html) {
+      return null;
+    }
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  });
 }
 

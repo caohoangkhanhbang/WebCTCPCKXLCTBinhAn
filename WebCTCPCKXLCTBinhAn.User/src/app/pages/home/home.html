@@ -31,15 +31,15 @@
 <!-- Phần giới thiệu -->
 <div class="gioi-thieu-container">
     <div class="grid wide">
-        <div class="row">
-            <div class="col l-6 m-6 c-12">
+        <div class="row gioi-thieu-row">
+            <div class="col l-6 m-12 c-12">
                 <div class="gioi-thieu-content">
                     <h3 class="font-bold" style="font-size:30px; font-style: italic;">{{'HOME.INTRODUCTION' |
                         translate}}</h3><br />
-                    <div [innerHTML]="thongTinCty()?.html_gioi_thieu"></div>
+                    <div [innerHTML]="noiDungHtml()"></div>
                 </div>
             </div>
-            <div class="col l-6 m-6 c-12">
+            <div class="col l-6 m-12 c-12">
                 <div class="row">
                     <div class="col l-6 c-6 m-6">
                         <div class="gioi-thieu-image" style="margin-top:25%">
@@ -152,7 +152,8 @@
     <div class="grid wide">
         <div class="row">
             <div class="l-12 m-12 c-12 cot-moc-title">
-                <h4 style="margin-bottom: 20px; line-height: 1.5;">{{'ABOUT_US.BRIEF_HISTORY' | translate}} {{thongTinCty()?.ten_cty}}
+                <h4 style="margin-bottom: 20px; line-height: 1.5;">{{'ABOUT_US.BRIEF_HISTORY' | translate}}
+                    {{thongTinCty()?.ten_cty}}
                 </h4>
                 <h1>{{'ABOUT_US.DEVELOPMENT_MILESTONES' | translate}}</h1>
             </div>

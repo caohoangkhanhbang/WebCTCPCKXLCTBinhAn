@@ -21,6 +21,7 @@ namespace WebCTCPCKXLCTBinhAn.API.Controllers
             var data = await _businessDuAn.GetDuAn(query, lastId, pageSize);
             return Ok(data);
         }
+        [AllowAnonymous]
         [HttpGet("get-du-an/{id}")]
         public async Task<IActionResult> GetDuAnChiTiet([FromRoute] int id)
         {

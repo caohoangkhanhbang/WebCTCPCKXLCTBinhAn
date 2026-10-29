@@ -219,6 +219,17 @@
 }
 
 /* hết phần slide */
+/* tablet */
+@media (max-width: 77.4375em) {
+    .gioi-thieu-row {
+        flex-direction: column-reverse;
+        gap: 100px;
+    }
+
+    .gioi-thieu-container {
+        padding: 30px;
+    }
+}
 
 /* mobile */
 @media (max-width: 46.25em) {
@@ -257,5 +268,13 @@
         font-weight: 100;
         font-size: 16px;
         text-align: justify;
+    }
+
+    .gioi-thieu-image-item {
+        height: 20vh;
+    }
+
+    .gioi-thieu-row {
+        gap: 40px
     }
 }
