@@ -19,7 +19,6 @@ export class MainLayout {
     isOpenMenuProfile = signal<boolean>(false);
     authService = inject(AuthService);
     readonly cdnUrl = environment.cdnUrl;
-    readonly staticUrl = environment.staticUrl;
     companyInfo = inject(CompanyInfo).thongTinCty;
 
     toggleMenu() {
