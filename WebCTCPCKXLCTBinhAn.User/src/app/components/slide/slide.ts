@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
 import { SlideService } from './slide-service';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Slide } from './slide-model';
@@ -24,6 +24,7 @@ export class SlideComponent implements OnInit, OnDestroy {
 
   private service = inject(SlideService);
   private subscription?: Subscription;
+  private cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     this.getData();
@@ -54,6 +55,7 @@ export class SlideComponent implements OnInit, OnDestroy {
     this.stopAutoPlay();
     this.autoPlayTimer = setInterval(() => {
       this.nextSlide();
+      this.cdr.markForCheck();
     }, this.AUTO_PLAY_INTERVAL);
   }
 
