@@ -4,7 +4,7 @@
             <div class=""></div>
             <div class="content">Tổng số dự án
                 <br />
-                120
+                {{soDuAn()}}
             </div>
         </div>
 
@@ -12,7 +12,7 @@
             <div class=""></div>
             <div class="content">Lĩnh vực hoạt động
                 <br />
-                120
+                {{soLinhVuc()}}
             </div>
         </div>
 
@@ -20,7 +20,7 @@
             <div class=""></div>
             <div class="content">Tổng số thông tin liên hệ
                 <br />
-                120
+                {{soNguoiLienHe()}}
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             <div class=""></div>
             <div class="content">Tổng số ứng viên ứng tuyển
                 <br />
-                120
+                {{soUngVien()}}
             </div>
         </div>
     </div>
@@ -64,7 +64,7 @@
 
         <div class="announcement-table">
             <h2>Danh sách ứng viên ứng tuyển việc làm</h2>
-            <table class="table-decoration" [style.display]="lienHeData().length > 0 ? 'inline-block' : ''">
+            <table class="table-decoration" [style.display]="ungTuyenData().length > 0 ? 'inline-block' : ''">
                 <thead>
                     <tr>
                         @for(item of ungTuyenColumns; track item.name){
@@ -73,19 +73,19 @@
                     <tr>
                 </thead>
                 <tbody>
-                @for(item of ungTuyenData(); track $index){
-                <tr>
-                    <td>{{$index}}</td>
-                    <td>{{item.ten}}</td>
-                    <td>{{item.ten_cong_viec}}</td>
-                    <td>{{item.created_date | date:'dd/MM/yyyy'}}</td>
-                </tr>
-                }
-                @empty{
-                <tr>
-                    <h2 class="no-data">Chưa có dữ liệu</h2>
-                </tr>
-                }
+                    @for(item of ungTuyenData(); track $index){
+                    <tr>
+                        <td>{{$index}}</td>
+                        <td>{{item.ten}}</td>
+                        <td>{{item.ten_cong_viec}}</td>
+                        <td>{{item.created_date | date:'dd/MM/yyyy'}}</td>
+                    </tr>
+                    }
+                    @empty{
+                    <tr>
+                        <h2 class="no-data">Chưa có dữ liệu</h2>
+                    </tr>
+                    }
                 </tbody>
             </table>
         </div>
