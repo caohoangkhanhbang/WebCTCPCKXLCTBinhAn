@@ -6,6 +6,8 @@ import { ConfirmDialog } from '../../components/confirm-dialog/confirm-dialog';
 import { DialogButton } from '../../components/confirm-dialog/confirm-dialog-model';
 import { environment } from '../../../enviroments/enviroment';
 import { MahaHinhNen } from '../../Services/maha-hinh-nen';
+import { KBWaitingService } from '../../components/waiting/kbwaiting-service';
+import { finalize } from 'rxjs/internal/operators/finalize';
 
 @Component({
   selector: 'app-lien-he',
@@ -30,13 +32,19 @@ export class LienHe {
   buttomsInfo: DialogButton[] = [
     { label: 'CONTACT.CONFIRM', value: 'confirm', style: 'primary' }
   ];
+  choDoi = inject(KBWaitingService);
 
   onSubmit() {
     if (this.data.invalid) {
       this.data.markAllAsTouched();
       return;
     }
-    this.services.submitLienHe(this.data.value).subscribe({
+    this.choDoi.Mo();
+    this.services.submitLienHe(this.data.value).pipe(
+      finalize(() => {
+        this.choDoi.Tat();
+      })
+    ).subscribe({
       next: () => {
         this.showDialog.set(true);
         this.clearForm();

@@ -109,7 +109,7 @@
     border-radius: 15px;
     color: white;
     background: linear-gradient(45deg, #000000d4, #00000054);
-    min-width: 500px;
+    min-width: 50vw;
 }
 
 .center {
@@ -163,4 +163,11 @@
 .yeu-cau-cong-viec:hover {
     scrollbar-width: thin;
     scrollbar-color: #fff transparent;
+}
+
+@media (max-width: 768px) {
+    .cv-container {
+        max-width: 95%;
+        padding: 20px;
+    }
 }

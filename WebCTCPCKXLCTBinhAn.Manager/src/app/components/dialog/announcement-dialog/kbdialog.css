@@ -90,3 +90,9 @@
     color: #00faff;
     margin: 20px 0;
 }
+
+@media (max-width: 46.25em) {
+    .dialog-box {
+        width: 90%;
+    }
+}

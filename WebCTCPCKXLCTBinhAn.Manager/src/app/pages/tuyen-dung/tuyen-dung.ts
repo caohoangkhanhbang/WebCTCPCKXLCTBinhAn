@@ -6,7 +6,8 @@ import { environment } from '../../../environments/environment.development';
 import { distinctUntilChanged, switchMap, debounceTime } from 'rxjs';
 import { AnnouncementService } from '../../components/dialog/announcement-service';
 import { DatePipe } from '@angular/common';
-
+import { KBWaitingService } from '../../components/waiting/kbwaiting-service';
+import { finalize } from 'rxjs';
 @Component({
   selector: 'app-tuyen-dung',
   imports: [TuyenDungEdit, DatePipe],
@@ -37,7 +38,7 @@ export class TuyenDung {
     { label: 'Xác nhận', value: 'confirm', style: 'primary' }
   ]);
   thongbao = inject(AnnouncementService);
-
+choDoi = inject(KBWaitingService);
   onSearch(e: Event) {
     const keyword = (e.target as HTMLInputElement).value;
     this.search.set(keyword);
@@ -84,7 +85,10 @@ export class TuyenDung {
   async onDelete(id: number, name: string) {
     const result = await this.thongbao.hienThi(`"${name}" sẽ bị xóa vĩnh viễn`, 'Thông báo ✌️', [{ label: 'Xóa', value: 'dongy', style: 'maula' }]);
     if (result !== 'dongy') return;
-    this.service.delete(id).subscribe({
+    this.choDoi.Mo();
+    this.service.delete(id).pipe(
+      finalize(() => { this.choDoi.Tat(); })
+    ).subscribe({
       next: () => {
         this.thongbao.hienThi(`Xóa thành công!`);
         this.reloadData();

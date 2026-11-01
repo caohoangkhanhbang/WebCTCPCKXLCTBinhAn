@@ -7,7 +7,8 @@ import { AnnouncementService } from '../../components/dialog/announcement-servic
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from "@angular/platform-browser";
 import { UngTuyenEdit } from './tuyen-dung-view/tuyen-dung-view';
-
+import { KBWaitingService } from '../../components/waiting/kbwaiting-service';
+import { finalize } from 'rxjs';
 @Component({
   selector: 'app-ung-tuyen',
   imports: [DatePipe, UngTuyenEdit],
@@ -36,7 +37,7 @@ export class UngTuyen {
   thongbao = inject(AnnouncementService);
   urlPdf = signal<string | null>(null);
   sanitizer = inject(DomSanitizer);
-
+  choDoi = inject(KBWaitingService);
   onSearch(e: Event) {
     const keyword = (e.target as HTMLInputElement).value;
     this.search.set(keyword);
@@ -108,16 +109,18 @@ export class UngTuyen {
 
 
   onEdit(id: number, data: any) {
-    this.service.update(id, data).subscribe({
-      next: () => {
-        this.thongbao.hienThi(`Cập nhật thành công!`);
-      }
-      ,
-      error: (err) => {
-        console.error(err);
-        this.thongbao.hienThi(`Cập nhật thất bại vui lòng liên hệ lập trình viên!!!`);
-      }
-    });
+    this.choDoi.Mo();
+    this.service.update(id, data).pipe(
+      finalize(() => { this.choDoi.Tat(); })).subscribe({
+        next: () => {
+          this.thongbao.hienThi(`Cập nhật thành công!`);
+        }
+        ,
+        error: (err) => {
+          console.error(err);
+          this.thongbao.hienThi(`Cập nhật thất bại vui lòng liên hệ lập trình viên!!!`);
+        }
+      });
     this.reload.update(cong => cong + 1);
   }
 

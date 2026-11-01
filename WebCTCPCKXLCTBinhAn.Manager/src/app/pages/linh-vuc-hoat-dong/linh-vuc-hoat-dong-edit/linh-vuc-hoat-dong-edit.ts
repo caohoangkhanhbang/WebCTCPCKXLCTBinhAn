@@ -3,7 +3,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LinhVucHoatDongService } from '../linh-vuc-hoat-dong-service';
 import { environment } from '../../../../environments/environment.development';
 import { AnnouncementService } from '../../../components/dialog/announcement-service';
-
+import { KBWaitingService } from '../../../components/waiting/kbwaiting-service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-dialog',
@@ -23,7 +24,7 @@ export class LinhVucHoatDongEdit {
   oldImage: string | null = null;
   finish = output<void>();
   thongbao = inject(AnnouncementService);
-
+  choDoi = inject(KBWaitingService);
 
   constructor() {
     effect(() => {
@@ -55,8 +56,8 @@ export class LinhVucHoatDongEdit {
       })
     });
 
-    effect(()=>{
-      if(this.hanhDong()==='view')
+    effect(() => {
+      if (this.hanhDong() === 'view')
         this.formData.disable();
       else
         this.formData.enable();
@@ -114,7 +115,12 @@ export class LinhVucHoatDongEdit {
     data.append('hien_thi', String(this.formData.get('hien_thi')?.value ?? 'false'));
 
     if (this.hanhDong() === 'create') {
-      this.service.insert(data).subscribe({
+      this.choDoi.Mo();
+      this.service.insert(data).pipe(
+        finalize(() => {
+          this.choDoi.Tat();
+        })
+      ).subscribe({
         next: response => {
           this.thongbao.hienThi('Thêm mới thành công', 'Thông báo');
           this.onClose();
@@ -125,7 +131,12 @@ export class LinhVucHoatDongEdit {
         }
       });
     } else if (this.hanhDong() === 'update' && this.id() !== null) {
-      this.service.update(this.id()!, data).subscribe({
+      this.choDoi.Mo();
+      this.service.update(this.id()!, data).pipe(
+        finalize(() => {
+          this.choDoi.Tat();
+        })
+      ).subscribe({
         next: response => {
           this.thongbao.hienThi('Cập nhật thành công', 'Thông báo');
           this.onClose();

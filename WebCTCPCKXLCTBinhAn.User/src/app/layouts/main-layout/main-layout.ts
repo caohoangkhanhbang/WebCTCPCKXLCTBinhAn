@@ -20,7 +20,7 @@ export class MainLayout {
     companyInfo = inject(CompanyInfo);
     thongTinCty = this.companyInfo.thongTinCty;
     giaiPhap = toSignal(this.service.getGiaiPhap(), { initialValue: [] as any[] });
-    isOpenMenu = signal<boolean>(true);
+    isOpenMenu = signal<boolean>(false);
 
     toogleMenu(): void {
         this.isOpenMenu.update(prev => !prev);

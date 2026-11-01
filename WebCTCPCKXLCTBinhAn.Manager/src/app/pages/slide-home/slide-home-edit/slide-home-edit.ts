@@ -3,8 +3,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SlideHomeService } from '../slide-home-service';
 import { environment } from '../../../../environments/environment.development';
 import { AnnouncementService } from '../../../components/dialog/announcement-service';
-
-import { ViewChild } from '@angular/core';
+import { KBWaitingService } from '../../../components/waiting/kbwaiting-service';
+import { finalize } from 'rxjs';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class SlideHomeEdit {
   oldImage: string | null = null;
   finish = output<void>();
   thongbao = inject(AnnouncementService);
-
+  choDoi = inject(KBWaitingService);
   constructor() {
     effect(() => {
       const id = this.id();
@@ -115,7 +115,12 @@ export class SlideHomeEdit {
     }
 
     if (this.hanhDong() === 'create') {
-      this.service.insert(data).subscribe({
+      this.choDoi.Mo();
+      this.service.insert(data).pipe(
+        finalize(() => {
+          this.choDoi.Tat();
+        })
+      ).subscribe({
         next: response => {
           this.thongbao.hienThi('Thêm mới thành công', 'Thông báo');
           this.onClose();
@@ -126,7 +131,12 @@ export class SlideHomeEdit {
         }
       });
     } else if (this.hanhDong() === 'update' && this.id() !== null) {
-      this.service.update(this.id()!, data).subscribe({
+      this.choDoi.Mo();
+      this.service.update(this.id()!, data).pipe(
+        finalize(() => {
+          this.choDoi.Tat();
+        })
+      ).subscribe({
         next: response => {
           this.thongbao.hienThi('Cập nhật thành công', 'Thông báo');
           this.onClose();

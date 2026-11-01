@@ -4,7 +4,8 @@ import { environment } from '../../../environments/environment.development';
 import { AnnouncementService } from '../../components/dialog/announcement-service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RichTextEditorComponent } from '../../components/rich-text-editor/rich-text-editor';
-
+import { KBWaitingService } from '../../components/waiting/kbwaiting-service';
+import { finalize } from 'rxjs';
 @Component({
   selector: 'app-thong-tin-cong-ty',
   imports: [ReactiveFormsModule, RichTextEditorComponent],
@@ -29,9 +30,9 @@ export class ThongTinCongTy {
   logoImage: string | null = null;
   hinhImage: string | null = null;
   id: number | null = null;
-
+  choDoi = inject(KBWaitingService);
   @ViewChild(RichTextEditorComponent) richTextEditor!: RichTextEditorComponent;
-  
+
   constructor() {
     effect(() => {
       this.reload();
@@ -138,7 +139,10 @@ export class ThongTinCongTy {
     }
 
     if (this.id === null) {
-      this.service.insert(data).subscribe({
+      this.choDoi.Mo();
+      this.service.insert(data).pipe(
+        finalize(() => { this.choDoi.Tat(); })
+      ).subscribe({
         next: response => {
           this.thongbao.hienThi('Đã tạo mới thành công', 'Thông báo');
           this.resetData();
@@ -148,8 +152,10 @@ export class ThongTinCongTy {
         }
       });
     } else {
-
-      this.service.update(this.id, data).subscribe({
+      this.choDoi.Mo();
+      this.service.update(this.id, data).pipe(
+        finalize(() => { this.choDoi.Tat(); })
+      ).subscribe({
         next: response => {
           this.thongbao.hienThi('Cập nhật thành công', 'Thông báo');
           this.resetData();

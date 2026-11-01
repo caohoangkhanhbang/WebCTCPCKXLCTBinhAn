@@ -9,6 +9,8 @@ import { environment } from '../../../enviroments/enviroment';
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MahaHinhNen } from '../../Services/maha-hinh-nen';
+import { KBWaitingService } from '../../components/waiting/kbwaiting-service';
+import { finalize } from 'rxjs';
 
 
 @Component({
@@ -32,6 +34,7 @@ export class TuyenDung {
   cdnUrl = environment.cdnUrl;
 
   tinTuyenDung = toSignal(this.services.GetTuyenDung(), { initialValue: [] });
+  choDoi = inject(KBWaitingService);
 
   UngTuyen(id: number) {
     this.idCongViec.set(id);
@@ -67,7 +70,12 @@ export class TuyenDung {
     formData.append('sdt', this.data.get('sdt')?.value || "");
     formData.append('file', this.selectedFile, this.selectedFile.name);
 
-    this.services.submitUngTuyen(formData).subscribe({
+    this.choDoi.Mo();
+    this.services.submitUngTuyen(formData).pipe(
+      finalize(() => {
+        this.choDoi.Tat();
+      })
+    ).subscribe({
       next: () => {
         this.message = 'CAREERS.SUCCESS';
         this.buttomsInfo = [

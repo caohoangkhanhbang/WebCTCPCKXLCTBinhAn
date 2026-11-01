@@ -3,7 +3,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DuAnService } from '../du-an-service';
 import { environment } from '../../../../environments/environment.development';
 import { AnnouncementService } from '../../../components/dialog/announcement-service';
-
+import { KBWaitingService } from '../../../components/waiting/kbwaiting-service';
+import { finalize } from 'rxjs';
 import { ViewChild } from '@angular/core';
 import { RichTextEditorComponent } from '../../../components/rich-text-editor/rich-text-editor';
 
@@ -26,7 +27,7 @@ export class DuAnEdit {
   oldImage: string | null = null;
   finish = output<void>();
   thongbao = inject(AnnouncementService);
-
+  choDoi = inject(KBWaitingService);
   @ViewChild(RichTextEditorComponent) richTextEditor!: RichTextEditorComponent;
 
   constructor() {
@@ -140,27 +141,31 @@ export class DuAnEdit {
     }
 
     if (this.hanhDong() === 'create') {
-      this.service.insert(data).subscribe({
-        next: response => {
-          this.thongbao.hienThi('Thêm mới thành công', 'Thông báo');
-          this.onClose();
-        },
-        error: error => {
-          console.error('Error creating data:', error);
-          this.thongbao.hienThi('Có lỗi xảy ra khi thêm mới dữ liệu', 'Thông báo');
-        }
-      });
+      this.choDoi.Mo();
+      this.service.insert(data).pipe(
+        finalize(() => { this.choDoi.Tat(); })).subscribe({
+          next: response => {
+            this.thongbao.hienThi('Thêm mới thành công', 'Thông báo');
+            this.onClose();
+          },
+          error: error => {
+            console.error('Error creating data:', error);
+            this.thongbao.hienThi('Có lỗi xảy ra khi thêm mới dữ liệu', 'Thông báo');
+          }
+        });
     } else if (this.hanhDong() === 'update' && this.id() !== null) {
-      this.service.update(this.id()!, data).subscribe({
-        next: response => {
-          this.thongbao.hienThi('Cập nhật thành công', 'Thông báo');
-          this.onClose();
-        },
-        error: error => {
-          console.error('Error updating data:', error);
-          this.thongbao.hienThi('Có lỗi xảy ra khi cập nhật dữ liệu', 'Thông báo');
-        }
-      });
+      this.choDoi.Mo();
+      this.service.update(this.id()!, data).pipe(
+        finalize(() => { this.choDoi.Tat(); })).subscribe({
+          next: response => {
+            this.thongbao.hienThi('Cập nhật thành công', 'Thông báo');
+            this.onClose();
+          },
+          error: error => {
+            console.error('Error updating data:', error);
+            this.thongbao.hienThi('Có lỗi xảy ra khi cập nhật dữ liệu', 'Thông báo');
+          }
+        });
     }
   }
 

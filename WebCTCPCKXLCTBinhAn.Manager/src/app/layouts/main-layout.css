@@ -92,6 +92,7 @@
     object-fit: cover;
     object-position: center;
     margin: 0 5px;
+    cursor: pointer;
 }
 
 .menu {
@@ -191,9 +192,10 @@
 }
 
 .profile-setting-item:hover {
-    background: linear-gradient(45deg, #ff006f, #c700ff);
-    border-radius: 5px;
+    background: linear-gradient(45deg, #ff00f2, #ff0000, #ff00f2);
+    border-radius: 50px;
     color: white;
+    cursor: pointer;
 }
 
 @media (max-width: 63.9375em) {

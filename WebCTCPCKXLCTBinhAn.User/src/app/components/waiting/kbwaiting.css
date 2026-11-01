@@ -1,0 +1,71 @@
+.preparing-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.light-bar {
+    max-width: 52vw;
+    height: 1vh;
+    background: linear-gradient(90deg, #00fffd, #4d00ff, #00fffd, #4d00ff, #00fffd);
+    background-size: 200% 200%;
+    border-radius: 50px;
+    margin: 20px 0;
+    animation: slideGlow 3s cubic-bezier(0.4, 0, 0.2, 1) forwards infinite;
+}
+
+@keyframes slideGlow {
+    0% {
+        background-position: 100% 0;
+        width: 0;
+        opacity: 0;
+        /* transform: rotate(0deg); */
+    }
+
+    100% {
+        background-position: 0% 0;
+        width: 100%;
+        opacity: 1;
+        /* transform: rotate(360deg); */
+    }
+}
+
+/* sóng sin */
+.content {
+    display: inline-flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+}
+
+.content span {
+    display: inline-block;
+    white-space: pre;
+    animation: songSin 2s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes songSin {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+/* hết sóng sin */

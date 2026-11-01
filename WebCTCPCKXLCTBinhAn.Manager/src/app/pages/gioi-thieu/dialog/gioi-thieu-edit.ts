@@ -5,6 +5,8 @@ import { environment } from '../../../../environments/environment.development';
 import { AnnouncementService } from '../../../components/dialog/announcement-service';
 import { ViewChild } from '@angular/core';
 import { RichTextEditorComponent } from '../../../components/rich-text-editor/rich-text-editor';
+import { KBWaitingService } from '../../../components/waiting/kbwaiting-service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-dialog',
@@ -21,6 +23,7 @@ export class GioiThieuEdit {
   cdnUrl = environment.cdnUrl;
   finish = output<void>();
   thongbao = inject(AnnouncementService);
+  choDoi = inject(KBWaitingService);
 
   @ViewChild(RichTextEditorComponent) richTextEditor!: RichTextEditorComponent;
 
@@ -70,7 +73,7 @@ export class GioiThieuEdit {
       noi_dung: '',
       thoi_gian: '',
       hien_thi: true
-    });   
+    });
   }
 
   async onSubmit() {
@@ -87,7 +90,12 @@ export class GioiThieuEdit {
     data.append('hien_thi', String(this.formData.get('hien_thi')?.value ?? 'false'));
 
     if (this.hanhDong() === 'create') {
-      this.service.insert(data).subscribe({
+      this.choDoi.Mo();
+      this.service.insert(data).pipe(
+        finalize(() => {
+          this.choDoi.Tat();
+        })
+      ).subscribe({
         next: response => {
           this.thongbao.hienThi('Thêm mới thành công', 'Thông báo');
           this.onClose();
@@ -98,7 +106,12 @@ export class GioiThieuEdit {
         }
       });
     } else if (this.hanhDong() === 'update' && this.id() !== null) {
-      this.service.update(this.id()!, data).subscribe({
+      this.choDoi.Mo();
+      this.service.update(this.id()!, data).pipe(
+        finalize(() => {
+          this.choDoi.Tat();
+        })
+      ).subscribe({
         next: response => {
           this.thongbao.hienThi('Cập nhật thành công', 'Thông báo');
           this.onClose();

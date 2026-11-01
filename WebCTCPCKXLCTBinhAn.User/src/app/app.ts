@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { KBWaitingHost } from './components/waiting/kbwaiting-host';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, KBWaitingHost],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

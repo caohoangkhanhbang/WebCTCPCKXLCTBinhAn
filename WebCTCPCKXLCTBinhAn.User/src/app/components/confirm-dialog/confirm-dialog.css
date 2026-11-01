@@ -78,9 +78,15 @@
 }
 
 .btn-secondary {
-    background: linear-gradient(45deg, #00e5ff,#00ff0d, #00e5ff);
+    background: linear-gradient(45deg, #00e5ff, #00ff0d, #00e5ff);
 }
 
 .btn-danger {
-    background: linear-gradient(45deg,#ff0000, #d100ff, #ff0000);
+    background: linear-gradient(45deg, #ff0000, #d100ff, #ff0000);
+}
+
+@media (max-width: 46.25em) {
+    .dialog-box {
+        width: 90%;
+    }
 }
