@@ -163,10 +163,16 @@
     border-radius: 5px;
     margin: 0px 50px 50px 50px;
     backdrop-filter: blur(5px);
+    font-family: var(--font-bold);
+}
+
+.cot-moc-title-h1 {
+    font-family: var(--font-dacbiet);
 }
 
 .cot-moc-item-title {
     position: relative;
+    font-family: var(--font-bold);
 }
 
 .l-6:nth-child(odd) .cot-moc-item-title {
@@ -359,6 +365,7 @@
     position: relative;
     overflow: hidden;
     background: linear-gradient(45deg, #0100ff, #000000) no-repeat center/cover;
+    text-shadow: 1px 1px 29px black;
 }
 
 .top-image-title {

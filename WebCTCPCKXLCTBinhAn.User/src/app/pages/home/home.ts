@@ -28,7 +28,7 @@ export class Home {
   readonly giaiPhap = toSignal(this.service.getGiaiPhap(), { initialValue: [] as any[] });
 
   hinhNenInfo = inject(MahaHinhNen).hinhNen;
-  backgroundPath = computed(() => this.FilterListImage('lĩnh vực hoạt động', 2));
+  backgroundPath = computed(() => this.FilterListImage('trang chủ', 1));
   backgroundPathGioiThieu = computed(() => this.FilterListImage('nội dung giới thiệu', 4));
 
   FilterListImage(pageName: string, numberOfImages: number): any[] {

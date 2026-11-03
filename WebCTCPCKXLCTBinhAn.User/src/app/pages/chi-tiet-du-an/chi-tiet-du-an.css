@@ -39,6 +39,26 @@
     max-width: 100%;
     text-align: justify;
     font-family: var(--font-bold);
+    overflow: auto;
+}
+
+.duan-content-main::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.duan-content-main:hover::-webkit-scrollbar {
+    width: 2px;
+    height: 4px;
+}
+
+.duan-content-main::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: linear-gradient(45deg, #2b00ff, #00fff2);
+}
+
+.duan-content-main::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 .duan-content-main img {

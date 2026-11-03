@@ -204,7 +204,7 @@
 .slide-glogan {
     font-size: 22px;
     margin: 15px 0;
-
+    font-family: var(--font-dacbiet);
 }
 
 .slide-sumary {}

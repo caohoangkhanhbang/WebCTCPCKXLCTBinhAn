@@ -148,14 +148,14 @@
 
 <!-- các cột mốc phát triển -->
 <div class="cot-moc-container"
-    [style.background-image]="backgroundPath()?.[1]?.hinh ? 'url(' + CombineUrl(backgroundPath()[1]?.hinh) + ')' : ''">
+    [style.background-image]="backgroundPath()?.[0]?.hinh ? 'url(' + CombineUrl(backgroundPath()[0]?.hinh) + ')' : ''">
     <div class="grid wide">
         <div class="row">
             <div class="l-12 m-12 c-12 cot-moc-title">
                 <h4 style="margin-bottom: 20px; line-height: 1.5;">{{'ABOUT_US.BRIEF_HISTORY' | translate}}
                     {{thongTinCty()?.ten_cty}}
                 </h4>
-                <h1>{{'ABOUT_US.DEVELOPMENT_MILESTONES' | translate}}</h1>
+                <h1 class="cot-moc-title-h1">{{'ABOUT_US.DEVELOPMENT_MILESTONES' | translate}}</h1>
             </div>
             <div class="time-stream-container row">
                 @for(item of cacCotMoc(); track item.id || $index; let i = $index){
